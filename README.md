@@ -1,10 +1,10 @@
 # MultiNEAs
 
 [![version](https://img.shields.io/pypi/v/multineas?color=blue)](https://pypi.org/project/multineas/)
-<!-- [![downloads](https://img.shields.io/pypi/dw/multineas)](https://pypi.org/project/multineas/) -->
 [![license](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://github.com/seap-udea/MultiNEAs/blob/master/LICENSE)
 [![pythonver](https://img.shields.io/pypi/pyversions/multineas)](https://pypi.org/project/multineas/)
 [![Powered by SpiceyPy](https://img.shields.io/badge/Powered%20by-SpiceyPy-blue)](https://github.com/AndrewAnnex/SpiceyPy)
+<!-- [![downloads](https://img.shields.io/pypi/dw/multineas)](https://pypi.org/project/multineas/) -->
 
 <p></p>
 <div align="center">
@@ -121,7 +121,7 @@ For a detailed list of changes and new features, see [WHATSNEW.md](WHATSNEW.md).
 
 ## File attribution
 
-Most of this file was vibe coded by the authors using Gemini 3.5 in Antigravity.
+Most of this file was vibe coded by the authors using Gemini 3 Pro in Antigravity.
 
 ---
 

@@ -80,4 +80,4 @@ When you're ready to publish:
 
 ## Attribution
 
-Most of this file was vibe coded by the authors using Gemini 3.5 in Antigravity.
+Most of this file was vibe coded by the authors using Gemini 3 Pro in Antigravity.
