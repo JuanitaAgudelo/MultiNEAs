@@ -61,6 +61,7 @@ setuptools.setup(
         'numpy>=1.20.0',
         'scipy>=1.7.0',
         'matplotlib>=3.3.0',
+        'spiceypy>=5.0.0',
     ],
     
     python_requires='>=3.8',

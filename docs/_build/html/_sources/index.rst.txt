@@ -5,6 +5,8 @@
    :hidden:
 
    multimin
+   plot
+   util
 
 ------------
 

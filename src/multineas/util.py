@@ -1,7 +1,7 @@
 import numpy as np
 import math
 from time import time
-# import scipy.spatial.transform as spy # FIXME: spy is used but not defined in original code
+import spiceypy as spy
 
 class Util(object):
     """
@@ -29,21 +29,76 @@ class Util(object):
     DTIME=-1
     DUTIME=[]
     
-    #Lambda methods
-    """
-    This set of routines allows the conversion from a finite interval [0,s] to an unbound one [-inf,inf]
+    @staticmethod
+    def f2u(x,s):
+        """
+        Convert from a finite interval [0,s] to an unbound one [-inf,inf].
+        
+        Parameters
+        ----------
+        x : float or array_like
+            Value in the interval [0,s].
+        s : float 
+            Scale (upper limit of the interval).
+            
+        Returns
+        -------
+        u : float or array_like
+            Unbound value.
+        """
+        return Util.log((x/s)/(1-(x/s)))
 
-    Examples
-    --------
-    >>> scales = [0, 0, 10, 10, 1]
-    >>> minparams = [0.0, 0.0, 1, 1, 0.7]
-    >>> uparams = Util.tIF(minparams, scales, Util.f2u)
-    >>> print(uparams)
-    [0.0, 0.0, -2.197224577336219, -2.197224577336219, 0.8472978603872034]
-    """
-    f2u=lambda x,s:Util.log((x/s)/(1-(x/s)))
-    u2f=lambda t,s:s/(1+Util.exp(-t))
-    tIF=lambda p,s,f:[f(p[i],s[i]) if s[i]>0 else p[i] for i in range(len(p))]
+    @staticmethod
+    def u2f(t,s):
+        """
+        Convert from an unbound interval [-inf,inf] to a finite one [0,s].
+        
+        Parameters
+        ----------
+        t : float or array_like
+            Unbound value.
+        s : float
+            Scale (upper limit of the interval).
+            
+        Returns
+        -------
+        x : float or array_like
+            Value in the interval [0,s].
+        """
+        return s/(1+Util.exp(-t))
+
+    @staticmethod
+    def tIF(p,s,f):
+        """
+        Transform a set of parameters using a transformation function f and scales s.
+        
+        This routine allows the conversion from a finite interval [0,s] to an unbound one [-inf,inf]
+        (using f=Util.f2u) or vice versa (using f=Util.u2f).
+        
+        Parameters
+        ----------
+        p : list or array_like
+            Parameters to transform.
+        s : list or array_like
+            Scales for each parameter. If s[i] > 0, the transformation is applied. 
+            If s[i] == 0, the parameter is unchanged.
+        f : function
+            Transformation function (e.g. Util.f2u or Util.u2f).
+            
+        Returns
+        -------
+        tp : list
+            Transformed parameters.
+            
+        Examples
+        --------
+        >>> scales = [0, 0, 10, 10, 1]
+        >>> minparams = [0.0, 0.0, 1, 1, 0.7]
+        >>> uparams = Util.tIF(minparams, scales, Util.f2u)
+        >>> print(uparams)
+        [0.0, 0.0, -2.197224577336219, -2.197224577336219, 0.8472978603872034]
+        """
+        return [f(p[i],s[i]) if s[i]>0 else p[i] for i in range(len(p))]
 
     def errorMsg(error,msg):
         """
