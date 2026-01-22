@@ -6,22 +6,20 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Utilities &mdash; MultiNEAs 0.2.15 documentation</title>
+  <title>Utilities &mdash; MultiNEAs 0.2.16 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=d5b904a0"></script>
+      <script src="_static/documentation_options.js?v=e2418eca"></script>
       <script src="_static/doctools.js?v=fd6eb6e6"></script>
       <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Tutorials and Examples" href="examples.html" />
-    <link rel="prev" title="Plotting Utilities" href="plot.html" /> 
+    <link rel="search" title="Search" href="search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -43,13 +41,42 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="multimin.html">Multimin: Multi-dimensional Minimization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="plot.html">Plotting Utilities</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Utilities</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html">Tutorials and Examples</a></li>
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Utilities</a><ul>
+<li><a class="reference internal" href="#multineas.util.Stats"><code class="docutils literal notranslate"><span class="pre">Stats</span></code></a><ul>
+<li><a class="reference internal" href="#multineas.util.Stats.calc_correlations_from_covariances"><code class="docutils literal notranslate"><span class="pre">Stats.calc_correlations_from_covariances()</span></code></a></li>
+<li><a class="reference internal" href="#multineas.util.Stats.calc_covariance_from_correlations"><code class="docutils literal notranslate"><span class="pre">Stats.calc_covariance_from_correlations()</span></code></a></li>
+<li><a class="reference internal" href="#multineas.util.Stats.calc_covariance_from_rotation"><code class="docutils literal notranslate"><span class="pre">Stats.calc_covariance_from_rotation()</span></code></a></li>
+<li><a class="reference internal" href="#multineas.util.Stats.flatten_symmetric_matrix"><code class="docutils literal notranslate"><span class="pre">Stats.flatten_symmetric_matrix()</span></code></a></li>
+<li><a class="reference internal" href="#multineas.util.Stats.gen_index"><code class="docutils literal notranslate"><span class="pre">Stats.gen_index()</span></code></a></li>
+<li><a class="reference internal" href="#multineas.util.Stats.phi"><code class="docutils literal notranslate"><span class="pre">Stats.phi</span></code></a></li>
+<li><a class="reference internal" href="#multineas.util.Stats.set_matrix_off_diagonal"><code class="docutils literal notranslate"><span class="pre">Stats.set_matrix_off_diagonal()</span></code></a></li>
+<li><a class="reference internal" href="#multineas.util.Stats.unflatten_symmetric_matrix"><code class="docutils literal notranslate"><span class="pre">Stats.unflatten_symmetric_matrix()</span></code></a></li>
 </ul>
-
+</li>
+<li><a class="reference internal" href="#multineas.util.Util"><code class="docutils literal notranslate"><span class="pre">Util</span></code></a><ul>
+<li><a class="reference internal" href="#multineas.util.Util.DTIME"><code class="docutils literal notranslate"><span class="pre">Util.DTIME</span></code></a></li>
+<li><a class="reference internal" href="#multineas.util.Util.DUTIME"><code class="docutils literal notranslate"><span class="pre">Util.DUTIME</span></code></a></li>
+<li><a class="reference internal" href="#multineas.util.Util.TIME"><code class="docutils literal notranslate"><span class="pre">Util.TIME</span></code></a></li>
+<li><a class="reference internal" href="#multineas.util.Util.TIMESTART"><code class="docutils literal notranslate"><span class="pre">Util.TIMESTART</span></code></a></li>
+<li><a class="reference internal" href="#multineas.util.Util.cos"><code class="docutils literal notranslate"><span class="pre">Util.cos</span></code></a></li>
+<li><a class="reference internal" href="#multineas.util.Util.el_time"><code class="docutils literal notranslate"><span class="pre">Util.el_time()</span></code></a></li>
+<li><a class="reference internal" href="#multineas.util.Util.error_msg"><code class="docutils literal notranslate"><span class="pre">Util.error_msg()</span></code></a></li>
+<li><a class="reference internal" href="#multineas.util.Util.exp"><code class="docutils literal notranslate"><span class="pre">Util.exp</span></code></a></li>
+<li><a class="reference internal" href="#multineas.util.Util.f2u"><code class="docutils literal notranslate"><span class="pre">Util.f2u()</span></code></a></li>
+<li><a class="reference internal" href="#multineas.util.Util.get_data"><code class="docutils literal notranslate"><span class="pre">Util.get_data()</span></code></a></li>
+<li><a class="reference internal" href="#multineas.util.Util.log"><code class="docutils literal notranslate"><span class="pre">Util.log</span></code></a></li>
+<li><a class="reference internal" href="#multineas.util.Util.mantisa_exp"><code class="docutils literal notranslate"><span class="pre">Util.mantisa_exp()</span></code></a></li>
+<li><a class="reference internal" href="#multineas.util.Util.sin"><code class="docutils literal notranslate"><span class="pre">Util.sin</span></code></a></li>
+<li><a class="reference internal" href="#multineas.util.Util.t_if"><code class="docutils literal notranslate"><span class="pre">Util.t_if()</span></code></a></li>
+<li><a class="reference internal" href="#multineas.util.Util.u2f"><code class="docutils literal notranslate"><span class="pre">Util.u2f()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
         </div>
       </div>
     </nav>
@@ -316,12 +343,12 @@ NOTE: It should be normalized, ie. sum(probs)=1</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="multineas.util.Util.TIME">
-<span class="sig-name descname"><span class="pre">TIME</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1769071853.271198</span></span><a class="headerlink" href="#multineas.util.Util.TIME" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">TIME</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1769071951.528853</span></span><a class="headerlink" href="#multineas.util.Util.TIME" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="multineas.util.Util.TIMESTART">
-<span class="sig-name descname"><span class="pre">TIMESTART</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1769071853.271198</span></span><a class="headerlink" href="#multineas.util.Util.TIMESTART" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">TIMESTART</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1769071951.528853</span></span><a class="headerlink" href="#multineas.util.Util.TIMESTART" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -514,10 +541,7 @@ If s[i] == 0, the parameter is unchanged.</p></li>
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="plot.html" class="btn btn-neutral float-left" title="Plotting Utilities" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="examples.html" class="btn btn-neutral float-right" title="Tutorials and Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+          <footer>
 
   <hr/>
 

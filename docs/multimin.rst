@@ -1,4 +1,4 @@
-Multimin: Multi-dimensional Minimization
+Multi-dimensional Minimization
 ========================================
 
 .. automodule:: multineas.multimin
