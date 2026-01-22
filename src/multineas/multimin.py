@@ -75,6 +75,10 @@ class ComposedMultiVariateNormal(object):
     >>> params = [0.1, 0.9, 0, 0, 1, 1, 1, 0.2, 0.2, 1, 1, 0, 0, 1]
     >>> MND2 = ComposedMultiVariateNormal(params=params, Nvars=2)        
     >>> print(MND2)
+
+    Attribution
+    -----------
+    [HC] This class was developed by a human.
     """
     
     #Control behavior

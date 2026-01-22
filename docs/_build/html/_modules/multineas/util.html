@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>multineas.util &#8212; MultiNEAs 0.2.2 documentation</title>
+    <title>multineas.util &#8212; MultiNEAs 0.2.4 documentation</title>
   
   
   
@@ -37,7 +37,7 @@
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../_static/documentation_options.js?v=000c92bf"></script>
+    <script src="../../_static/documentation_options.js?v=6ffd866b"></script>
     <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -108,7 +108,7 @@
   
   
   
-    <p class="title logo__title">MultiNEAs 0.2.2 documentation</p>
+    <p class="title logo__title">MultiNEAs 0.2.4 documentation</p>
   
 </a></div>
     
@@ -368,9 +368,9 @@
     
     <span class="c1">#Stores the time of start of the script when gravray is imported</span>
     <span class="n">TIMESTART</span><span class="o">=</span><span class="n">time</span><span class="p">()</span>
-    <span class="c1">#Stores the time of the last call of elTime</span>
+    <span class="c1">#Stores the time of the last call of el_time</span>
     <span class="n">TIME</span><span class="o">=</span><span class="n">time</span><span class="p">()</span>
-    <span class="c1">#Stores the duration between elTime consecutive calls </span>
+    <span class="c1">#Stores the duration between el_time consecutive calls </span>
     <span class="n">DTIME</span><span class="o">=-</span><span class="mi">1</span>
     <span class="n">DTIME</span><span class="o">=-</span><span class="mi">1</span>
     <span class="n">DUTIME</span><span class="o">=</span><span class="p">[]</span>
@@ -444,10 +444,10 @@
         <span class="k">return</span> <span class="n">s</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">Util</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span><span class="p">))</span></div>
 
 
-<div class="viewcode-block" id="Util.tIF">
-<a class="viewcode-back" href="../../util.html#multineas.util.Util.tIF">[docs]</a>
+<div class="viewcode-block" id="Util.t_if">
+<a class="viewcode-back" href="../../util.html#multineas.util.Util.t_if">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">tIF</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">s</span><span class="p">,</span><span class="n">f</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">t_if</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">s</span><span class="p">,</span><span class="n">f</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Transform a set of parameters using a transformation function f and scales s.</span>
 <span class="sd">        </span>
@@ -473,16 +473,16 @@
 <span class="sd">        --------</span>
 <span class="sd">        &gt;&gt;&gt; scales = [0, 0, 10, 10, 1]</span>
 <span class="sd">        &gt;&gt;&gt; minparams = [0.0, 0.0, 1, 1, 0.7]</span>
-<span class="sd">        &gt;&gt;&gt; uparams = Util.tIF(minparams, scales, Util.f2u)</span>
+<span class="sd">        &gt;&gt;&gt; uparams = Util.t_if(minparams, scales, Util.f2u)</span>
 <span class="sd">        &gt;&gt;&gt; print(uparams)</span>
 <span class="sd">        [0.0, 0.0, -2.197224577336219, -2.197224577336219, 0.8472978603872034]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">[</span><span class="n">f</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span> <span class="k">else</span> <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">))]</span></div>
 
 
-<div class="viewcode-block" id="Util.errorMsg">
-<a class="viewcode-back" href="../../util.html#multineas.util.Util.errorMsg">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">errorMsg</span><span class="p">(</span><span class="n">error</span><span class="p">,</span><span class="n">msg</span><span class="p">):</span>
+<div class="viewcode-block" id="Util.error_msg">
+<a class="viewcode-back" href="../../util.html#multineas.util.Util.error_msg">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">error_msg</span><span class="p">(</span><span class="n">error</span><span class="p">,</span><span class="n">msg</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Add a custom message msg to an error handle.</span>
 
@@ -496,15 +496,15 @@
         <span class="n">error</span><span class="o">.</span><span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">error</span><span class="o">.</span><span class="n">args</span> <span class="k">if</span> <span class="n">error</span><span class="o">.</span><span class="n">args</span> <span class="k">else</span> <span class="nb">tuple</span><span class="p">())</span><span class="o">+</span><span class="p">(</span><span class="n">msg</span><span class="p">,)</span></div>
 
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_tUnit</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_t_unit</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">unit</span><span class="p">,</span><span class="n">base</span> <span class="ow">in</span> <span class="nb">dict</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="mi">86400</span><span class="p">,</span><span class="n">h</span><span class="o">=</span><span class="mi">3600</span><span class="p">,</span><span class="nb">min</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mf">1e0</span><span class="p">,</span><span class="n">ms</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span><span class="n">us</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span><span class="n">ns</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">tu</span><span class="o">=</span><span class="n">t</span><span class="o">/</span><span class="n">base</span>
             <span class="k">if</span> <span class="n">tu</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">:</span><span class="k">break</span>
         <span class="k">return</span> <span class="n">tu</span><span class="p">,</span><span class="n">unit</span><span class="p">,</span><span class="n">base</span>
     
-<div class="viewcode-block" id="Util.elTime">
-<a class="viewcode-back" href="../../util.html#multineas.util.Util.elTime">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">elTime</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">start</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="Util.el_time">
+<a class="viewcode-back" href="../../util.html#multineas.util.Util.el_time">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">el_time</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">start</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Compute the time elapsed since last call of this routine.  The displayed time </span>
 <span class="sd">        is preseneted in the more convenient unit, ns (nano seconds), us (micro seconds), </span>
@@ -526,9 +526,9 @@
 
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
-<span class="sd">        &gt;&gt;&gt; Util.elTime() # basic usage (show output)</span>
-<span class="sd">        &gt;&gt;&gt; Util.elTime(verbose=0) # no output</span>
-<span class="sd">        &gt;&gt;&gt; Util.elTime(start=True) # measure elapsed time since program start</span>
+<span class="sd">        &gt;&gt;&gt; Util.el_time() # basic usage (show output)</span>
+<span class="sd">        &gt;&gt;&gt; Util.el_time(verbose=0) # no output</span>
+<span class="sd">        &gt;&gt;&gt; Util.el_time(start=True) # measure elapsed time since program start</span>
 <span class="sd">        &gt;&gt;&gt; print(Util.DTIME, Util.DUTIME) # show values of elapsed time</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">t</span><span class="o">=</span><span class="n">time</span><span class="p">()</span>
@@ -538,7 +538,7 @@
             <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;since script start&quot;</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;since last call&quot;</span>
-        <span class="n">dtu</span><span class="p">,</span><span class="n">unit</span><span class="p">,</span><span class="n">base</span><span class="o">=</span><span class="n">Util</span><span class="o">.</span><span class="n">_tUnit</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
+        <span class="n">dtu</span><span class="p">,</span><span class="n">unit</span><span class="p">,</span><span class="n">base</span><span class="o">=</span><span class="n">Util</span><span class="o">.</span><span class="n">_t_unit</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Elapsed time </span><span class="si">%s</span><span class="s2">: </span><span class="si">%g</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span><span class="n">dtu</span><span class="p">,</span><span class="n">unit</span><span class="p">))</span>
         <span class="n">Util</span><span class="o">.</span><span class="n">DTIME</span><span class="o">=</span><span class="n">dt</span>
         <span class="n">Util</span><span class="o">.</span><span class="n">DUTIME</span><span class="o">=</span><span class="p">[</span><span class="n">dtu</span><span class="p">,</span><span class="n">unit</span><span class="p">]</span>
@@ -546,9 +546,9 @@
         <span class="k">return</span> <span class="n">dt</span><span class="p">,[</span><span class="n">dtu</span><span class="p">,</span><span class="n">unit</span><span class="p">]</span> </div>
 
 
-<div class="viewcode-block" id="Util.mantisaExp">
-<a class="viewcode-back" href="../../util.html#multineas.util.Util.mantisaExp">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">mantisaExp</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<div class="viewcode-block" id="Util.mantisa_exp">
+<a class="viewcode-back" href="../../util.html#multineas.util.Util.mantisa_exp">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">mantisa_exp</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Calculate the mantisa and exponent of a number.</span>
 <span class="sd">        </span>
@@ -566,9 +566,9 @@
 <span class="sd">            </span>
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
-<span class="sd">        &gt;&gt;&gt; m, e = Util.mantisaExp(234.5)</span>
+<span class="sd">        &gt;&gt;&gt; m, e = Util.mantisa_exp(234.5)</span>
 <span class="sd">        # returns m=2.345, e=2</span>
-<span class="sd">        &gt;&gt;&gt; m, e = Util.mantisaExp(-0.000023213)</span>
+<span class="sd">        &gt;&gt;&gt; m, e = Util.mantisa_exp(-0.000023213)</span>
 <span class="sd">        # return m=-2.3213, e=-5</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">xa</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
@@ -591,14 +591,14 @@
     <span class="c1">#Golden ratio: required for golden gaussian.</span>
     <span class="n">phi</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="mi">5</span><span class="o">**</span><span class="mf">0.5</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
     
-<div class="viewcode-block" id="Stats.genIndex">
-<a class="viewcode-back" href="../../util.html#multineas.util.Stats.genIndex">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">genIndex</span><span class="p">(</span><span class="n">probs</span><span class="p">):</span>
+<div class="viewcode-block" id="Stats.gen_index">
+<a class="viewcode-back" href="../../util.html#multineas.util.Stats.gen_index">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">gen_index</span><span class="p">(</span><span class="n">probs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Given a set of (normalized) probabilities, randomly generate an index n following the </span>
 <span class="sd">        probabilities.</span>
 
-<span class="sd">        For instance if we have 3 events with probabilities 0.1, 0.7, 0.2, genIndex will generate</span>
+<span class="sd">        For instance if we have 3 events with probabilities 0.1, 0.7, 0.2, gen_index will generate</span>
 <span class="sd">        a number in the set (0,1,2) having those probabilities, ie. 1 will have 70% of probability.</span>
 <span class="sd">        </span>
 <span class="sd">        Parameters</span>
@@ -614,7 +614,7 @@
 <span class="sd">            </span>
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
-<span class="sd">        &gt;&gt;&gt; n = Stats.genIndex([0.1, 0.7, 0.2])</span>
+<span class="sd">        &gt;&gt;&gt; n = Stats.gen_index([0.1, 0.7, 0.2])</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">cums</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">probs</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">math</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">cums</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="mi">1</span><span class="p">,</span><span class="n">rel_tol</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">):</span>
@@ -625,9 +625,9 @@
         <span class="k">return</span> <span class="n">n</span></div>
 
         
-<div class="viewcode-block" id="Stats.setMatrixOffDiagonal">
-<a class="viewcode-back" href="../../util.html#multineas.util.Stats.setMatrixOffDiagonal">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">setMatrixOffDiagonal</span><span class="p">(</span><span class="n">M</span><span class="p">,</span><span class="n">off</span><span class="p">):</span>
+<div class="viewcode-block" id="Stats.set_matrix_off_diagonal">
+<a class="viewcode-back" href="../../util.html#multineas.util.Stats.set_matrix_off_diagonal">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_matrix_off_diagonal</span><span class="p">(</span><span class="n">M</span><span class="p">,</span><span class="n">off</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set a matrix with the terms of the off diagonal</span>
 <span class="sd">        </span>
@@ -647,7 +647,7 @@
 <span class="sd">        --------</span>
 <span class="sd">        &gt;&gt;&gt; M = np.eye(3)</span>
 <span class="sd">        &gt;&gt;&gt; off = [0.1, 0.2, 0.3]</span>
-<span class="sd">        &gt;&gt;&gt; Stats.setMatrixOffDiagonal(M, off)</span>
+<span class="sd">        &gt;&gt;&gt; Stats.set_matrix_off_diagonal(M, off)</span>
 <span class="sd">        &gt;&gt;&gt; print(M)</span>
 <span class="sd">        [[1. , 0.1, 0.2],</span>
 <span class="sd">         [0.1, 1. , 0.3],</span>
@@ -659,9 +659,9 @@
         <span class="n">M</span><span class="p">[:,:]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">triu</span><span class="p">(</span><span class="n">M</span><span class="p">)</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">tril</span><span class="p">(</span><span class="n">M</span><span class="o">.</span><span class="n">T</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span></div>
 
         
-<div class="viewcode-block" id="Stats.calcCovarianceFromCorrelations">
-<a class="viewcode-back" href="../../util.html#multineas.util.Stats.calcCovarianceFromCorrelations">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">calcCovarianceFromCorrelations</span><span class="p">(</span><span class="n">sigmas</span><span class="p">,</span><span class="n">rhos</span><span class="p">):</span>
+<div class="viewcode-block" id="Stats.calc_covariance_from_correlations">
+<a class="viewcode-back" href="../../util.html#multineas.util.Stats.calc_covariance_from_correlations">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calc_covariance_from_correlations</span><span class="p">(</span><span class="n">sigmas</span><span class="p">,</span><span class="n">rhos</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Compute covariance matrices from the standard deviations and correlations (rho).</span>
 
@@ -683,7 +683,7 @@
 <span class="sd">        &gt;&gt;&gt; sigmas = np.array([[1, 2, 3]])</span>
 <span class="sd">        &gt;&gt;&gt; # rho_12, rho_13, rho_23</span>
 <span class="sd">        &gt;&gt;&gt; rhos = np.array([[0.1, 0.2, 0.3]])</span>
-<span class="sd">        &gt;&gt;&gt; S = Stats.calcCovarianceFromCorrelations(sigmas, rhos)</span>
+<span class="sd">        &gt;&gt;&gt; S = Stats.calc_covariance_from_correlations(sigmas, rhos)</span>
 <span class="sd">        &gt;&gt;&gt; print(S)</span>
 <span class="sd">        [[[1.  0.2 0.6]</span>
 <span class="sd">          [0.2 4.  1.8]</span>
@@ -694,7 +694,7 @@
 <span class="sd">        &gt;&gt;&gt; rho = rhos[0]</span>
 <span class="sd">        &gt;&gt;&gt; sigma = sigmas[0]</span>
 <span class="sd">        &gt;&gt;&gt; R = np.eye(3)</span>
-<span class="sd">        &gt;&gt;&gt; Stats.setMatrixOffDiagonal(R, rho)</span>
+<span class="sd">        &gt;&gt;&gt; Stats.set_matrix_off_diagonal(R, rho)</span>
 <span class="sd">        &gt;&gt;&gt; M = np.zeros((3, 3))</span>
 <span class="sd">        &gt;&gt;&gt; for i in range(3):</span>
 <span class="sd">        ...     for j in range(3):</span>
@@ -722,14 +722,14 @@
             
         <span class="n">Sigmas</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sigmas</span><span class="p">)</span><span class="o">*</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">Nvars</span><span class="p">)])</span>
         <span class="k">for</span> <span class="n">Sigma</span><span class="p">,</span><span class="n">sigma</span><span class="p">,</span><span class="n">rho</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">Sigmas</span><span class="p">,</span><span class="n">sigmas</span><span class="p">,</span><span class="n">rhos</span><span class="p">):</span>
-            <span class="n">Stats</span><span class="o">.</span><span class="n">setMatrixOffDiagonal</span><span class="p">(</span><span class="n">Sigma</span><span class="p">,</span><span class="n">rho</span><span class="p">)</span>
+            <span class="n">Stats</span><span class="o">.</span><span class="n">set_matrix_off_diagonal</span><span class="p">(</span><span class="n">Sigma</span><span class="p">,</span><span class="n">rho</span><span class="p">)</span>
             <span class="n">Sigma</span><span class="o">*=</span><span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span><span class="n">sigma</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">Sigmas</span></div>
 
 
-<div class="viewcode-block" id="Stats.calcCorrelationsFromCovariances">
-<a class="viewcode-back" href="../../util.html#multineas.util.Stats.calcCorrelationsFromCovariances">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">calcCorrelationsFromCovariances</span><span class="p">(</span><span class="n">Sigmas</span><span class="p">):</span>
+<div class="viewcode-block" id="Stats.calc_correlations_from_covariances">
+<a class="viewcode-back" href="../../util.html#multineas.util.Stats.calc_correlations_from_covariances">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calc_correlations_from_covariances</span><span class="p">(</span><span class="n">Sigmas</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Compute the standard deviations and corresponding correlation coefficients given a set of </span>
 <span class="sd">        covariance matrices.</span>
@@ -753,7 +753,7 @@
 <span class="sd">        ...      [0.2, 4. , 1.8],</span>
 <span class="sd">        ...      [0.6, 1.8, 9. ]]</span>
 <span class="sd">        ... ]</span>
-<span class="sd">        &gt;&gt;&gt; sigmas, rhos = Stats.calcCorrelationsFromCovariances(Sigmas)</span>
+<span class="sd">        &gt;&gt;&gt; sigmas, rhos = Stats.calc_correlations_from_covariances(Sigmas)</span>
 <span class="sd">        &gt;&gt;&gt; print(sigmas)</span>
 <span class="sd">        [1. 2. 3.]</span>
 <span class="sd">        &gt;&gt;&gt; print(rhos)</span>
@@ -773,9 +773,9 @@
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sigmas</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">rhos</span><span class="p">)</span>    </div>
 
 
-<div class="viewcode-block" id="Stats.calcCovarianceFromRotation">
-<a class="viewcode-back" href="../../util.html#multineas.util.Stats.calcCovarianceFromRotation">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">calcCovarianceFromRotation</span><span class="p">(</span><span class="n">sigmas</span><span class="p">,</span><span class="n">angles</span><span class="p">):</span>
+<div class="viewcode-block" id="Stats.calc_covariance_from_rotation">
+<a class="viewcode-back" href="../../util.html#multineas.util.Stats.calc_covariance_from_rotation">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calc_covariance_from_rotation</span><span class="p">(</span><span class="n">sigmas</span><span class="p">,</span><span class="n">angles</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Compute covariance matrices from the stds and the angles.</span>
 <span class="sd">    </span>
@@ -804,9 +804,9 @@
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Sigmas</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="Stats.flattenSymmetricMatrix">
-<a class="viewcode-back" href="../../util.html#multineas.util.Stats.flattenSymmetricMatrix">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">flattenSymmetricMatrix</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
+<div class="viewcode-block" id="Stats.flatten_symmetric_matrix">
+<a class="viewcode-back" href="../../util.html#multineas.util.Stats.flatten_symmetric_matrix">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">flatten_symmetric_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Given a symmetric matrix the routine returns the flatten version of the Matrix.</span>
 
@@ -823,16 +823,16 @@
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
 <span class="sd">        &gt;&gt;&gt; M = np.array([[1, 0.2], [0.2, 3]])</span>
-<span class="sd">        &gt;&gt;&gt; F = Stats.flattenSymmetricMatrix(M)</span>
+<span class="sd">        &gt;&gt;&gt; F = Stats.flatten_symmetric_matrix(M)</span>
 <span class="sd">        &gt;&gt;&gt; print(F)</span>
 <span class="sd">        [1.  0.2 3. ]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">M</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">triu_indices</span><span class="p">(</span><span class="n">M</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)]</span></div>
 
 
-<div class="viewcode-block" id="Stats.unflattenSymmetricMatrix">
-<a class="viewcode-back" href="../../util.html#multineas.util.Stats.unflattenSymmetricMatrix">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">unflattenSymmetricMatrix</span><span class="p">(</span><span class="n">F</span><span class="p">,</span><span class="n">M</span><span class="p">):</span>
+<div class="viewcode-block" id="Stats.unflatten_symmetric_matrix">
+<a class="viewcode-back" href="../../util.html#multineas.util.Stats.unflatten_symmetric_matrix">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">unflatten_symmetric_matrix</span><span class="p">(</span><span class="n">F</span><span class="p">,</span><span class="n">M</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Given a flatten version of a matrix, returns the symmetric matrix.</span>
 
@@ -852,7 +852,7 @@
 <span class="sd">        --------</span>
 <span class="sd">        &gt;&gt;&gt; F = [1, 0.2, 3]</span>
 <span class="sd">        &gt;&gt;&gt; M = np.zeros((2, 2))</span>
-<span class="sd">        &gt;&gt;&gt; Stats.unflattenSymmetricMatrix(F, M)</span>
+<span class="sd">        &gt;&gt;&gt; Stats.unflatten_symmetric_matrix(F, M)</span>
 <span class="sd">        &gt;&gt;&gt; print(M)</span>
 <span class="sd">        [[1.  0.2]</span>
 <span class="sd">         [0.2 3. ]]</span>

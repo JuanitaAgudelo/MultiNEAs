@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>multineas.plot &#8212; MultiNEAs 0.1.3 documentation</title>
+    <title>multineas.plot &#8212; MultiNEAs 0.2.4 documentation</title>
   
   
   
@@ -29,7 +29,7 @@
   <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
   
   <!-- So that users can add custom icons -->
   <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -37,9 +37,10 @@
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../_static/documentation_options.js?v=360bc84d"></script>
-    <script src="../../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/documentation_options.js?v=6ffd866b"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/multineas/plot';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -107,7 +108,7 @@
   
   
   
-    <p class="title logo__title">MultiNEAs 0.1.3 documentation</p>
+    <p class="title logo__title">MultiNEAs 0.2.4 documentation</p>
   
 </a></div>
     
@@ -138,6 +139,13 @@
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../../util.html">
     Utilities
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples.html">
+    Tutorials and Examples
   </a>
 </li>
 
@@ -241,6 +249,13 @@
 
 
 <li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples.html">
+    Tutorials and Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
   <a class="nav-link nav-external" href="https://github.com/seap-udea/MultiNEAs">
     Source
   </a>
@@ -325,14 +340,14 @@
                   
   <h1>Source code for multineas.plot</h1><div class="highlight"><pre>
 <span></span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="kn">from</span> <span class="nn">mpl_toolkits.axes_grid1</span> <span class="kn">import</span> <span class="n">make_axes_locatable</span>
-<span class="kn">from</span> <span class="nn">.util</span> <span class="kn">import</span> <span class="n">Util</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mpl_toolkits.axes_grid1</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_axes_locatable</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">Util</span>
 
 <div class="viewcode-block" id="CornerPlot">
 <a class="viewcode-back" href="../../plot.html#multineas.plot.CornerPlot">[docs]</a>
-<span class="k">class</span> <span class="nc">CornerPlot</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">CornerPlot</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Create a grid of plots showing the projection of a N-dimensional data.</span>
 <span class="sd">    </span>
@@ -373,21 +388,21 @@
 <span class="sd">    </span>
 <span class="sd">    Methods</span>
 <span class="sd">    -------</span>
-<span class="sd">    tightLayout()</span>
+<span class="sd">    tight_layout()</span>
 <span class="sd">        Tight layout if no constrained_layout was used.</span>
-<span class="sd">    setLabels(**args)</span>
+<span class="sd">    set_labels(**args)</span>
 <span class="sd">        Set labels parameters.</span>
-<span class="sd">    setRanges()</span>
+<span class="sd">    set_ranges()</span>
 <span class="sd">        Set ranges in panels according to ranges defined in dparameters.</span>
-<span class="sd">    setTickParams(**args)</span>
+<span class="sd">    set_tick_params(**args)</span>
 <span class="sd">        Set tick parameters.</span>
-<span class="sd">    plotHist(data, colorbar=False, **args)</span>
+<span class="sd">    plot_hist(data, colorbar=False, **args)</span>
 <span class="sd">        Create a 2d-histograms of data on all panels of the CornerPlot.</span>
-<span class="sd">    scatterPlot(data, **args)</span>
+<span class="sd">    scatter_plot(data, **args)</span>
 <span class="sd">        Scatter plot on all panels of the CornerPlot.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">properties</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;out&#39;</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">properties</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;out&#39;</span><span class="p">):</span>
 
         <span class="c1">#Basic attributes</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dproperties</span><span class="o">=</span><span class="n">properties</span>
@@ -458,14 +473,14 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">axs</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">M</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s2">&quot;out&quot;</span><span class="p">)</span>
         
         <span class="c1">#Set properties of panels</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">setLabels</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">setRanges</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">setTickParams</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">tightLayout</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_labels</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_ranges</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_tick_params</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
     
-<div class="viewcode-block" id="CornerPlot.tightLayout">
-<a class="viewcode-back" href="../../plot.html#multineas.plot.CornerPlot.tightLayout">[docs]</a>
-    <span class="k">def</span> <span class="nf">tightLayout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="CornerPlot.tight_layout">
+<a class="viewcode-back" href="../../plot.html#multineas.plot.CornerPlot.tight_layout">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">tight_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Tight layout if no constrained_layout was used.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -474,9 +489,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span></div>
 
         
-<div class="viewcode-block" id="CornerPlot.setTickParams">
-<a class="viewcode-back" href="../../plot.html#multineas.plot.CornerPlot.setTickParams">[docs]</a>
-    <span class="k">def</span> <span class="nf">setTickParams</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">args</span><span class="p">):</span>
+<div class="viewcode-block" id="CornerPlot.set_tick_params">
+<a class="viewcode-back" href="../../plot.html#multineas.plot.CornerPlot.set_tick_params">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_tick_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">args</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set tick parameters.</span>
 <span class="sd">        </span>
@@ -492,9 +507,9 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="o">**</span><span class="n">opts</span><span class="p">)</span></div>
 
         
-<div class="viewcode-block" id="CornerPlot.setRanges">
-<a class="viewcode-back" href="../../plot.html#multineas.plot.CornerPlot.setRanges">[docs]</a>
-    <span class="k">def</span> <span class="nf">setRanges</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="CornerPlot.set_ranges">
+<a class="viewcode-back" href="../../plot.html#multineas.plot.CornerPlot.set_ranges">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_ranges</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set ranges in panels according to ranges defined in dparameters.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -507,9 +522,9 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">axp</span><span class="p">[</span><span class="n">propi</span><span class="p">][</span><span class="n">propj</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dproperties</span><span class="p">[</span><span class="n">propj</span><span class="p">][</span><span class="s2">&quot;range&quot;</span><span class="p">])</span></div>
 
     
-<div class="viewcode-block" id="CornerPlot.setLabels">
-<a class="viewcode-back" href="../../plot.html#multineas.plot.CornerPlot.setLabels">[docs]</a>
-    <span class="k">def</span> <span class="nf">setLabels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">args</span><span class="p">):</span>
+<div class="viewcode-block" id="CornerPlot.set_labels">
+<a class="viewcode-back" href="../../plot.html#multineas.plot.CornerPlot.set_labels">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_labels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">args</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set labels parameters.</span>
 <span class="sd">        </span>
@@ -545,12 +560,12 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">axs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">1.05</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">rotation</span><span class="o">=</span><span class="mi">270</span><span class="p">,</span><span class="n">ha</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span><span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
                               <span class="n">transform</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">axs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span><span class="o">**</span><span class="n">opts</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">tightLayout</span><span class="p">()</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span></div>
 
         
-<div class="viewcode-block" id="CornerPlot.plotHist">
-<a class="viewcode-back" href="../../plot.html#multineas.plot.CornerPlot.plotHist">[docs]</a>
-    <span class="k">def</span> <span class="nf">plotHist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">data</span><span class="p">,</span><span class="n">colorbar</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="o">**</span><span class="n">args</span><span class="p">):</span>
+<div class="viewcode-block" id="CornerPlot.plot_hist">
+<a class="viewcode-back" href="../../plot.html#multineas.plot.CornerPlot.plot_hist">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">plot_hist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">data</span><span class="p">,</span><span class="n">colorbar</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="o">**</span><span class="n">args</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create a 2d-histograms of data on all panels of the CornerPlot.</span>
 <span class="sd">        </span>
@@ -577,7 +592,7 @@
 <span class="sd">        ... }</span>
 <span class="sd">        &gt;&gt;&gt; G = mm.CornerPlot(properties, figsize=3)</span>
 <span class="sd">        &gt;&gt;&gt; hargs = dict(bins=100, cmap=&#39;viridis&#39;)</span>
-<span class="sd">        &gt;&gt;&gt; hist = G.plotHist(udata, **hargs)</span>
+<span class="sd">        &gt;&gt;&gt; hist = G.plot_hist(udata, **hargs)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">opts</span><span class="o">=</span><span class="nb">dict</span><span class="p">()</span>
         <span class="n">opts</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
@@ -616,7 +631,7 @@
                     <span class="n">cax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="mf">0.5</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">fs</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s2">&quot;in&quot;</span><span class="p">,</span><span class="n">pad</span><span class="o">=-</span><span class="mf">0.8</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">fs</span><span class="p">)</span>
                     <span class="n">xt</span><span class="o">=</span><span class="n">cax</span><span class="o">.</span><span class="n">get_xticks</span><span class="p">()</span>
                     <span class="n">xm</span><span class="o">=</span><span class="n">xt</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-                    <span class="n">m</span><span class="p">,</span><span class="n">e</span><span class="o">=</span><span class="n">Util</span><span class="o">.</span><span class="n">mantisaExp</span><span class="p">(</span><span class="n">xm</span><span class="p">)</span>
+                    <span class="n">m</span><span class="p">,</span><span class="n">e</span><span class="o">=</span><span class="n">Util</span><span class="o">.</span><span class="n">mantisa_exp</span><span class="p">(</span><span class="n">xm</span><span class="p">)</span>
                     <span class="n">xtl</span><span class="o">=</span><span class="p">[]</span>
                     <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xt</span><span class="p">:</span>
                         <span class="n">xtl</span><span class="o">+=</span><span class="p">[</span><span class="s2">&quot;</span><span class="si">%.1f</span><span class="s2">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="mi">10</span><span class="o">**</span><span class="n">e</span><span class="p">)]</span>
@@ -624,16 +639,16 @@
                     <span class="n">cax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="sa">r</span><span class="s2">&quot;$\times 10^{</span><span class="si">%d</span><span class="s2">}$&quot;</span><span class="o">%</span><span class="n">e</span><span class="p">,</span><span class="n">ha</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span><span class="n">va</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span>
                              <span class="n">transform</span><span class="o">=</span><span class="n">cax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">setLabels</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">setRanges</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">setTickParams</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">tightLayout</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_labels</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_ranges</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_tick_params</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">hist</span></div>
 
                     
-<div class="viewcode-block" id="CornerPlot.scatterPlot">
-<a class="viewcode-back" href="../../plot.html#multineas.plot.CornerPlot.scatterPlot">[docs]</a>
-    <span class="k">def</span> <span class="nf">scatterPlot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">data</span><span class="p">,</span><span class="o">**</span><span class="n">args</span><span class="p">):</span>
+<div class="viewcode-block" id="CornerPlot.scatter_plot">
+<a class="viewcode-back" href="../../plot.html#multineas.plot.CornerPlot.scatter_plot">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">scatter_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">data</span><span class="p">,</span><span class="o">**</span><span class="n">args</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Scatter plot on all panels of the CornerPlot.</span>
 <span class="sd">        </span>
@@ -652,7 +667,7 @@
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
 <span class="sd">        &gt;&gt;&gt; sargs = dict(s=0.2, edgecolor=&#39;None&#39;, color=&#39;r&#39;)</span>
-<span class="sd">        &gt;&gt;&gt; hist = G.scatterPlot(udata, **sargs)</span>
+<span class="sd">        &gt;&gt;&gt; hist = G.scatter_plot(udata, **sargs)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">scatter</span><span class="o">=</span><span class="p">[]</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">propi</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">properties</span><span class="p">):</span>
@@ -660,10 +675,10 @@
                 <span class="k">if</span> <span class="n">j</span><span class="o">&lt;=</span><span class="n">i</span><span class="p">:</span><span class="k">continue</span>
                 <span class="n">scatter</span><span class="o">+=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">axp</span><span class="p">[</span><span class="n">propi</span><span class="p">][</span><span class="n">propj</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="n">i</span><span class="p">],</span><span class="n">data</span><span class="p">[:,</span><span class="n">j</span><span class="p">],</span><span class="o">**</span><span class="n">args</span><span class="p">)]</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">setLabels</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">setRanges</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">setTickParams</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">tightLayout</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_labels</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_ranges</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_tick_params</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">scatter</span></div>
 </div>
 
@@ -717,7 +732,7 @@
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
     <br/>
   </p>
 </div>

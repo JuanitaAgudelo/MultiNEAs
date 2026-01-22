@@ -100,6 +100,10 @@ If you use `MultiNEAs` in your research, please cite:
 
 This project is licensed under the GNU Affero General Public License v3.0 (AGPL-3.0) - see the [LICENSE](LICENSE) file for details.
 
+## Attribution
+
+Authors vibe coded most of this file using in Chat GPT 5.2 in Antigravity.
+
 ## Authors
 
 - **Jorge I. Zuluaga** - jorge.zuluaga@udea.edu.co

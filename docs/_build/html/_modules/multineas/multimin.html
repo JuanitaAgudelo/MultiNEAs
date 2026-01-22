@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>multineas.multimin &#8212; MultiNEAs 0.1.3 documentation</title>
+    <title>multineas.multimin &#8212; MultiNEAs 0.2.4 documentation</title>
   
   
   
@@ -29,7 +29,7 @@
   <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
   
   <!-- So that users can add custom icons -->
   <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -37,9 +37,10 @@
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../_static/documentation_options.js?v=360bc84d"></script>
-    <script src="../../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/documentation_options.js?v=6ffd866b"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/multineas/multimin';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -107,7 +108,7 @@
   
   
   
-    <p class="title logo__title">MultiNEAs 0.1.3 documentation</p>
+    <p class="title logo__title">MultiNEAs 0.2.4 documentation</p>
   
 </a></div>
     
@@ -124,6 +125,27 @@
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../../multimin.html">
     Multimin: Multi-dimensional Minimization
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../plot.html">
+    Plotting Utilities
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../util.html">
+    Utilities
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples.html">
+    Tutorials and Examples
   </a>
 </li>
 
@@ -213,6 +235,27 @@
 
 
 <li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../plot.html">
+    Plotting Utilities
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../util.html">
+    Utilities
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples.html">
+    Tutorials and Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
   <a class="nav-link nav-external" href="https://github.com/seap-udea/MultiNEAs">
     Source
   </a>
@@ -296,25 +339,25 @@
                 <article class="bd-article">
                   
   <h1>Source code for multineas.multimin</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="kn">from</span> <span class="nn">mpl_toolkits.axes_grid1</span> <span class="kn">import</span> <span class="n">make_axes_locatable</span>
-<span class="kn">import</span> <span class="nn">itertools</span>
-<span class="kn">import</span> <span class="nn">math</span>
-<span class="kn">import</span> <span class="nn">string</span>
-<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span><span class="p">,</span><span class="n">strftime</span>
-<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">multivariate_normal</span> <span class="k">as</span> <span class="n">multinorm</span>
-<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize</span>
-<span class="kn">import</span> <span class="nn">pickle</span>
-<span class="kn">from</span> <span class="nn">hashlib</span> <span class="kn">import</span> <span class="n">md5</span>
-<span class="kn">import</span> <span class="nn">os</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mpl_toolkits.axes_grid1</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_axes_locatable</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">itertools</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">string</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">time</span><span class="w"> </span><span class="kn">import</span> <span class="n">time</span><span class="p">,</span><span class="n">strftime</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">multivariate_normal</span> <span class="k">as</span> <span class="n">multinorm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">minimize</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">hashlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">md5</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
-<span class="kn">from</span> <span class="nn">.util</span> <span class="kn">import</span> <span class="n">Util</span><span class="p">,</span> <span class="n">Stats</span>
-<span class="kn">from</span> <span class="nn">.plot</span> <span class="kn">import</span> <span class="n">CornerPlot</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">Util</span><span class="p">,</span> <span class="n">Stats</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.plot</span><span class="w"> </span><span class="kn">import</span> <span class="n">CornerPlot</span>
 
 <div class="viewcode-block" id="ComposedMultiVariateNormal">
 <a class="viewcode-back" href="../../multimin.html#multineas.multimin.ComposedMultiVariateNormal">[docs]</a>
-<span class="k">class</span> <span class="nc">ComposedMultiVariateNormal</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ComposedMultiVariateNormal</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A linear combination of multivariate normal distribution (MND) with special methods </span>
 <span class="sd">    for specifying the parameters of the distributions.</span>
@@ -369,7 +412,7 @@
 <span class="sd">    &gt;&gt;&gt; mus = [[0, 0], [1, 1]]</span>
 <span class="sd">    &gt;&gt;&gt; weights = [0.1, 0]</span>
 <span class="sd">    &gt;&gt;&gt; MND1 = ComposedMultiVariateNormal(mus=mus, weights=weights)</span>
-<span class="sd">    &gt;&gt;&gt; MND1.setSigmas([[[1, 0.2], [0, 1]], [[1, 0], [0, 1]]])</span>
+<span class="sd">    &gt;&gt;&gt; MND1.set_sigmas([[[1, 0.2], [0, 1]], [[1, 0], [0, 1]]])</span>
 <span class="sd">    &gt;&gt;&gt; print(MND1)</span>
 
 <span class="sd">    &gt;&gt;&gt; params = [0.1, 0.9, 0, 0, 1, 1, 1, 0.2, 0.2, 1, 1, 0, 0, 1]</span>
@@ -380,7 +423,7 @@
     <span class="c1">#Control behavior</span>
     <span class="n">_ignoreWarnings</span><span class="o">=</span><span class="kc">True</span>
         
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                  <span class="n">Ngauss</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
                  <span class="n">Nvars</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
                  <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -396,11 +439,11 @@
         
         <span class="c1">#Method 2: initialize from flatten parameters</span>
         <span class="k">elif</span> <span class="n">params</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="n">params</span><span class="p">,</span><span class="n">Nvars</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_params</span><span class="p">(</span><span class="n">params</span><span class="p">,</span><span class="n">Nvars</span><span class="p">)</span>
 
         <span class="c1">#Method 3: initialize from flatten parameters</span>
         <span class="k">elif</span> <span class="n">stdcorr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">setStdcorr</span><span class="p">(</span><span class="n">stdcorr</span><span class="p">,</span><span class="n">Nvars</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_stdcorr</span><span class="p">(</span><span class="n">stdcorr</span><span class="p">,</span><span class="n">Nvars</span><span class="p">)</span>
 
         <span class="c1">#Method 4: initialize from explicit arrays</span>
         <span class="k">else</span><span class="p">:</span>
@@ -409,7 +452,7 @@
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">mus</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-                <span class="n">Util</span><span class="o">.</span><span class="n">errorMsg</span><span class="p">(</span><span class="n">e</span><span class="p">,</span><span class="s2">&quot;Parameter &#39;mus&#39; must be a matrix, eg. mus=[[0,0]]&quot;</span><span class="p">)</span>
+                <span class="n">Util</span><span class="o">.</span><span class="n">error_msg</span><span class="p">(</span><span class="n">e</span><span class="p">,</span><span class="s2">&quot;Parameter &#39;mus&#39; must be a matrix, eg. mus=[[0,0]]&quot;</span><span class="p">)</span>
                 <span class="k">raise</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">mus</span><span class="o">=</span><span class="n">mus</span>
 
@@ -423,20 +466,20 @@
             <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span><span class="o">!=</span><span class="bp">self</span><span class="o">.</span><span class="n">Ngauss</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Length of weights array (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span><span class="si">}</span><span class="s2">) must be equal to number of MND (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">Ngauss</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_normalizeWeights</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_normalize_weights</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
 
             <span class="c1">#Secondary attributes</span>
             <span class="k">if</span> <span class="n">Sigmas</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">Sigmas</span><span class="o">=</span><span class="kc">None</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">=</span><span class="kc">None</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">setSigmas</span><span class="p">(</span><span class="n">Sigmas</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_sigmas</span><span class="p">(</span><span class="n">Sigmas</span><span class="p">)</span>
                 
         <span class="bp">self</span><span class="o">.</span><span class="n">_nerror</span><span class="o">=</span><span class="mi">0</span>
 
-<div class="viewcode-block" id="ComposedMultiVariateNormal.setSigmas">
-<a class="viewcode-back" href="../../multimin.html#multineas.multimin.ComposedMultiVariateNormal.setSigmas">[docs]</a>
-    <span class="k">def</span> <span class="nf">setSigmas</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Sigmas</span><span class="p">):</span>
+<div class="viewcode-block" id="ComposedMultiVariateNormal.set_sigmas">
+<a class="viewcode-back" href="../../multimin.html#multineas.multimin.ComposedMultiVariateNormal.set_sigmas">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_sigmas</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Sigmas</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the value of list of covariance matrices.</span>
 <span class="sd">        </span>
@@ -448,14 +491,14 @@
 <span class="sd">            Array of covariance matrices.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Sigmas</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Sigmas</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_checkSigmas</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_flattenParams</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_flattenStdcorr</span><span class="p">()</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_sigmas</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_flatten_params</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_flatten_stdcorr</span><span class="p">()</span></div>
 
         
-<div class="viewcode-block" id="ComposedMultiVariateNormal.setParams">
-<a class="viewcode-back" href="../../multimin.html#multineas.multimin.ComposedMultiVariateNormal.setParams">[docs]</a>
-    <span class="k">def</span> <span class="nf">setParams</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">params</span><span class="p">,</span><span class="n">Nvars</span><span class="p">):</span>
+<div class="viewcode-block" id="ComposedMultiVariateNormal.set_params">
+<a class="viewcode-back" href="../../multimin.html#multineas.multimin.ComposedMultiVariateNormal.set_params">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">params</span><span class="p">,</span><span class="n">Nvars</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the properties of the CMND from flatten params.</span>
 <span class="sd">        </span>
@@ -470,14 +513,14 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">Nvars</span><span class="o">==</span><span class="mi">0</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">params</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;When setting from flat params, Nvars (</span><span class="si">{</span><span class="n">Nvars</span><span class="si">}</span><span class="s2">) cannot be zero&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_unflattenParams</span><span class="p">(</span><span class="n">params</span><span class="p">,</span><span class="n">Nvars</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_normalizeWeights</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_unflatten_params</span><span class="p">(</span><span class="n">params</span><span class="p">,</span><span class="n">Nvars</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_normalize_weights</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">)</span>
         <span class="k">return</span> </div>
 
 
-<div class="viewcode-block" id="ComposedMultiVariateNormal.setStdcorr">
-<a class="viewcode-back" href="../../multimin.html#multineas.multimin.ComposedMultiVariateNormal.setStdcorr">[docs]</a>
-    <span class="k">def</span> <span class="nf">setStdcorr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">stdcorr</span><span class="p">,</span><span class="n">Nvars</span><span class="p">):</span>
+<div class="viewcode-block" id="ComposedMultiVariateNormal.set_stdcorr">
+<a class="viewcode-back" href="../../multimin.html#multineas.multimin.ComposedMultiVariateNormal.set_stdcorr">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_stdcorr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">stdcorr</span><span class="p">,</span><span class="n">Nvars</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the properties of the CMND from flatten stdcorr.</span>
 <span class="sd">        </span>
@@ -492,35 +535,35 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">Nvars</span><span class="o">==</span><span class="mi">0</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">stdcorr</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;When setting from flat params, Nvars (</span><span class="si">{</span><span class="n">Nvars</span><span class="si">}</span><span class="s2">) cannot be zero&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_unflattenStdcorr</span><span class="p">(</span><span class="n">stdcorr</span><span class="p">,</span><span class="n">Nvars</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_normalizeWeights</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_unflatten_stdcorr</span><span class="p">(</span><span class="n">stdcorr</span><span class="p">,</span><span class="n">Nvars</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_normalize_weights</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">)</span>
         <span class="k">return</span></div>
 
     
-    <span class="k">def</span> <span class="nf">_normalizeWeights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">weights</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_normalize_weights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">weights</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Normalize weights in such a way that sum(weights)=1</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span><span class="o">/</span><span class="nb">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">weights</span><span class="p">))</span>
             
-    <span class="k">def</span> <span class="nf">_flattenParams</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_flatten_params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Flatten params</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_checkParams</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Sigmas</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_params</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Sigmas</span><span class="p">)</span>
         
         <span class="c1">#Flatten covariance matrix</span>
-        <span class="n">SF</span><span class="o">=</span><span class="p">[</span><span class="n">Stats</span><span class="o">.</span><span class="n">flattenSymmetricMatrix</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Sigmas</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Ngauss</span><span class="p">)]</span>
+        <span class="n">SF</span><span class="o">=</span><span class="p">[</span><span class="n">Stats</span><span class="o">.</span><span class="n">flatten_symmetric_matrix</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Sigmas</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Ngauss</span><span class="p">)]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span>
                                     <span class="bp">self</span><span class="o">.</span><span class="n">mus</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span>
                                     <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span><span class="o">*</span><span class="n">SF</span><span class="p">))))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Npars</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">)</span> <span class="c1">#Ngauss*(1+Nvars+Nvar*(Nvars+1)/2)</span>
         
-    <span class="k">def</span> <span class="nf">_flattenStdcorr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_flatten_stdcorr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Flatten stdcorr</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_checkParams</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sigmas</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_params</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sigmas</span><span class="p">)</span>
         
         <span class="c1">#Flatten stds. and correlations</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">stdcorr</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span>
@@ -530,7 +573,7 @@
                                     <span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Ncor</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stdcorr</span><span class="p">)</span>
         
-    <span class="k">def</span> <span class="nf">_unflattenParams</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">params</span><span class="p">,</span><span class="n">Nvars</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_unflatten_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">params</span><span class="p">,</span><span class="n">Nvars</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Unflatten properties from params</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -558,10 +601,10 @@
         <span class="c1">#Get the sigmas</span>
         <span class="n">Nsym</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">Nvars</span><span class="o">*</span><span class="p">(</span><span class="n">Nvars</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
         <span class="n">Sigmas</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">Ngauss</span><span class="p">,</span><span class="n">Nvars</span><span class="p">,</span><span class="n">Nvars</span><span class="p">))</span>
-        <span class="p">[</span><span class="n">Stats</span><span class="o">.</span><span class="n">unflattenSymmetricMatrix</span><span class="p">(</span><span class="n">F</span><span class="p">,</span><span class="n">Sigmas</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">F</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">Ngauss</span><span class="o">*</span><span class="n">Nsym</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">Ngauss</span><span class="p">,</span><span class="n">Nsym</span><span class="p">))]</span>
+        <span class="p">[</span><span class="n">Stats</span><span class="o">.</span><span class="n">unflatten_symmetric_matrix</span><span class="p">(</span><span class="n">F</span><span class="p">,</span><span class="n">Sigmas</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">F</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">Ngauss</span><span class="o">*</span><span class="n">Nsym</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">Ngauss</span><span class="p">,</span><span class="n">Nsym</span><span class="p">))]</span>
 
         <span class="c1">#Normalize weights</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_normalizeWeights</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_normalize_weights</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
 
         <span class="c1">#Check Sigmas</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Nvars</span><span class="o">=</span><span class="n">Nvars</span>
@@ -569,12 +612,12 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="o">=</span><span class="n">weights</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mus</span><span class="o">=</span><span class="n">mus</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Sigmas</span><span class="o">=</span><span class="n">Sigmas</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_checkSigmas</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_sigmas</span><span class="p">()</span>
 
         <span class="c1">#Flatten correlations</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_flattenStdcorr</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_flatten_stdcorr</span><span class="p">()</span>
         
-    <span class="k">def</span> <span class="nf">_unflattenStdcorr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">stdcorr</span><span class="p">,</span><span class="n">Nvars</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_unflatten_stdcorr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">stdcorr</span><span class="p">,</span><span class="n">Nvars</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Unflatten properties from stdcorr</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -608,7 +651,7 @@
         <span class="n">rhos</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">stdcorr</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">Ngauss</span><span class="o">*</span><span class="n">Noff</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">Ngauss</span><span class="p">,</span><span class="n">Noff</span><span class="p">)</span>
 
         <span class="c1">#Normalize weights</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_normalizeWeights</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_normalize_weights</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
 
         <span class="c1">#Set properties</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Nvars</span><span class="o">=</span><span class="n">Nvars</span>
@@ -619,17 +662,17 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">rhos</span><span class="o">=</span><span class="n">rhos</span>
 
         <span class="c1">#Generate Sigma</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">Sigmas</span><span class="o">=</span><span class="n">Stats</span><span class="o">.</span><span class="n">calcCovarianceFromCorrelations</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sigmas</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">rhos</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_checkSigmas</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Sigmas</span><span class="o">=</span><span class="n">Stats</span><span class="o">.</span><span class="n">calc_covariance_from_correlations</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sigmas</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">rhos</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_sigmas</span><span class="p">()</span>
 
         <span class="c1">#Flatten params</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_flattenParams</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_flatten_params</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">_checkSigmas</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_check_sigmas</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Check value of sigmas</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_checkParams</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Sigmas</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_params</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Sigmas</span><span class="p">)</span>
         
         <span class="c1">#Check matrix</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Sigmas</span><span class="p">)</span><span class="o">!=</span><span class="bp">self</span><span class="o">.</span><span class="n">Ngauss</span><span class="p">:</span>
@@ -648,15 +691,15 @@
 <span class="sd">            &quot;&quot;&quot;</span>
 
         <span class="c1">#Get sigmas and correlations</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sigmas</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">rhos</span><span class="o">=</span><span class="n">Stats</span><span class="o">.</span><span class="n">calcCorrelationsFromCovariances</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Sigmas</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sigmas</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">rhos</span><span class="o">=</span><span class="n">Stats</span><span class="o">.</span><span class="n">calc_correlations_from_covariances</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Sigmas</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_checkParams</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">checkvar</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_check_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">checkvar</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">checkvar</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="s2">&quot;You must first set the parameters (Sigmas, mus, etc.)&quot;</span><span class="p">)</span>
 
 <div class="viewcode-block" id="ComposedMultiVariateNormal.pdf">
 <a class="viewcode-back" href="../../multimin.html#multineas.multimin.ComposedMultiVariateNormal.pdf">[docs]</a>
-    <span class="k">def</span> <span class="nf">pdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">X</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">X</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Compute the PDF.</span>
 <span class="sd">        </span>
@@ -670,7 +713,7 @@
 <span class="sd">        p : float</span>
 <span class="sd">            PDF value at X.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_checkParams</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_params</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_nerror</span><span class="o">=</span><span class="mi">0</span>
         <span class="n">value</span><span class="o">=</span><span class="mi">0</span>
         
@@ -687,7 +730,7 @@
             
 <div class="viewcode-block" id="ComposedMultiVariateNormal.rvs">
 <a class="viewcode-back" href="../../multimin.html#multineas.multimin.ComposedMultiVariateNormal.rvs">[docs]</a>
-    <span class="k">def</span> <span class="nf">rvs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Nsam</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">rvs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Nsam</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generate a random sample of points following this Multivariate distribution.</span>
 <span class="sd">        </span>
@@ -701,18 +744,18 @@
 <span class="sd">        rs : numpy.ndarray</span>
 <span class="sd">            Samples (Nsam x Nvars).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_checkParams</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_params</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
         
         <span class="n">Xs</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">Nsam</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">Nvars</span><span class="p">))</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Nsam</span><span class="p">):</span>
-            <span class="n">n</span><span class="o">=</span><span class="n">Stats</span><span class="o">.</span><span class="n">genIndex</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">)</span>
+            <span class="n">n</span><span class="o">=</span><span class="n">Stats</span><span class="o">.</span><span class="n">gen_index</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">)</span>
             <span class="n">Xs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">multinorm</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mus</span><span class="p">[</span><span class="n">n</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">Sigmas</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">Xs</span></div>
 
 
-<div class="viewcode-block" id="ComposedMultiVariateNormal.sampleCMNDLikelihood">
-<a class="viewcode-back" href="../../multimin.html#multineas.multimin.ComposedMultiVariateNormal.sampleCMNDLikelihood">[docs]</a>
-    <span class="k">def</span> <span class="nf">sampleCMNDLikelihood</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">uparams</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">pmap</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">tset</span><span class="o">=</span><span class="s2">&quot;stdcorr&quot;</span><span class="p">,</span><span class="n">scales</span><span class="o">=</span><span class="p">[],</span><span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<div class="viewcode-block" id="ComposedMultiVariateNormal.sample_cmnd_likelihood">
+<a class="viewcode-back" href="../../multimin.html#multineas.multimin.ComposedMultiVariateNormal.sample_cmnd_likelihood">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sample_cmnd_likelihood</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">uparams</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">pmap</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">tset</span><span class="o">=</span><span class="s2">&quot;stdcorr&quot;</span><span class="p">,</span><span class="n">scales</span><span class="o">=</span><span class="p">[],</span><span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Compute the negative value of the logarithm of the likelihood of a sample.</span>
 <span class="sd">        </span>
@@ -721,7 +764,7 @@
 <span class="sd">        uparams : numpy.ndarray</span>
 <span class="sd">            Minimization parameters (unbound).</span>
 <span class="sd">        data : numpy.ndarray, optional</span>
-<span class="sd">            Data for which logL is computed.</span>
+<span class="sd">            Data for which log_l is computed.</span>
 <span class="sd">        pmap : function, optional</span>
 <span class="sd">            Routine to map from minparams to params or stdcorr.</span>
 <span class="sd">            Example:</span>
@@ -738,11 +781,11 @@
 <span class="sd">        </span>
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        logL : float</span>
+<span class="sd">        log_l : float</span>
 <span class="sd">            Negative log-likelihood.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1">#Map unbound minimization parameters into their right range</span>
-        <span class="n">minparams</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Util</span><span class="o">.</span><span class="n">tIF</span><span class="p">(</span><span class="n">uparams</span><span class="p">,</span><span class="n">scales</span><span class="p">,</span><span class="n">Util</span><span class="o">.</span><span class="n">u2f</span><span class="p">))</span>
+        <span class="n">minparams</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Util</span><span class="o">.</span><span class="n">t_if</span><span class="p">(</span><span class="n">uparams</span><span class="p">,</span><span class="n">scales</span><span class="p">,</span><span class="n">Util</span><span class="o">.</span><span class="n">u2f</span><span class="p">))</span>
 
         <span class="c1">#Map minimizaiton parameters into CMND parameters</span>
         <span class="n">params</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pmap</span><span class="p">(</span><span class="n">minparams</span><span class="p">))</span>
@@ -753,25 +796,25 @@
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CMND parameters: </span><span class="si">{</span><span class="n">params</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
         <span class="c1">#Update CMND parameters according to type of minimization parameters</span>
-        <span class="k">if</span> <span class="n">tset</span><span class="o">==</span><span class="s2">&quot;params&quot;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="n">params</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">Nvars</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">setStdcorr</span><span class="p">(</span><span class="n">params</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">Nvars</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">tset</span><span class="o">==</span><span class="s2">&quot;params&quot;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">set_params</span><span class="p">(</span><span class="n">params</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">Nvars</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">set_stdcorr</span><span class="p">(</span><span class="n">params</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">Nvars</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">verbose</span><span class="o">&gt;=</span><span class="mi">2</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CMND:&quot;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
         <span class="c1">#Compute PDF for each point in data and sum</span>
-        <span class="n">logL</span><span class="o">=-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">data</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="n">log_l</span><span class="o">=-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">data</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
         
         <span class="k">if</span> <span class="n">verbose</span><span class="o">&gt;=</span><span class="mi">1</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;-logL = </span><span class="si">{</span><span class="n">logL</span><span class="si">:</span><span class="s2">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;-log_l = </span><span class="si">{</span><span class="n">log_l</span><span class="si">:</span><span class="s2">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">logL</span></div>
+        <span class="k">return</span> <span class="n">log_l</span></div>
 
 
-<div class="viewcode-block" id="ComposedMultiVariateNormal.plotSample">
-<a class="viewcode-back" href="../../multimin.html#multineas.multimin.ComposedMultiVariateNormal.plotSample">[docs]</a>
-    <span class="k">def</span> <span class="nf">plotSample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="ComposedMultiVariateNormal.plot_sample">
+<a class="viewcode-back" href="../../multimin.html#multineas.multimin.ComposedMultiVariateNormal.plot_sample">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">plot_sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                    <span class="n">N</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>
                    <span class="n">props</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">ranges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                    <span class="n">figsize</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">sargs</span><span class="o">=</span><span class="nb">dict</span><span class="p">(),</span><span class="n">hargs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -802,11 +845,11 @@
 <span class="sd">            </span>
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
-<span class="sd">        &gt;&gt;&gt; G = CMND.plotSample(N=10000, sargs=dict(s=1, c=&#39;r&#39;))</span>
-<span class="sd">        &gt;&gt;&gt; G = CMND.plotSample(N=1000, sargs=dict(s=1, c=&#39;r&#39;), hargs=dict(bins=20))</span>
+<span class="sd">        &gt;&gt;&gt; G = CMND.plot_sample(N=10000, sargs=dict(s=1, c=&#39;r&#39;))</span>
+<span class="sd">        &gt;&gt;&gt; G = CMND.plot_sample(N=1000, sargs=dict(s=1, c=&#39;r&#39;), hargs=dict(bins=20))</span>
 
 <span class="sd">        &gt;&gt;&gt; CMND = ComposedMultiVariateNormal(Ngauss=1, Nvars=2)</span>
-<span class="sd">        &gt;&gt;&gt; fig = CMND.plotSample(N=1000, hargs=dict(bins=20), sargs=dict(s=1, c=&#39;r&#39;))</span>
+<span class="sd">        &gt;&gt;&gt; fig = CMND.plot_sample(N=1000, hargs=dict(bins=20), sargs=dict(s=1, c=&#39;r&#39;))</span>
 
 <span class="sd">        &gt;&gt;&gt; CMND = ComposedMultiVariateNormal(Ngauss=2, Nvars=3)</span>
 <span class="sd">        &gt;&gt;&gt; print(CMND)</span>
@@ -814,7 +857,7 @@
 <span class="sd">        &gt;&gt;&gt; weights = [0.1, 0.9]</span>
 <span class="sd">        &gt;&gt;&gt; Sigmas = [[[1, 0.2], [0, 1]], [[1, 0], [0, 1]]]</span>
 <span class="sd">        &gt;&gt;&gt; MND1 = ComposedMultiVariateNormal(mus=mus, weights=weights, Sigmas=Sigmas)</span>
-<span class="sd">        &gt;&gt;&gt; #MND1=ComposedMultiVariateNormal(mus=mus,weights=weights);MND1.setSigmas(Sigmas)</span>
+<span class="sd">        &gt;&gt;&gt; #MND1=ComposedMultiVariateNormal(mus=mus,weights=weights);MND1.set_sigmas(Sigmas)</span>
 <span class="sd">        &gt;&gt;&gt; print(MND1)</span>
 <span class="sd">        &gt;&gt;&gt; print(MND1.pdf([1, 1]))</span>
 <span class="sd">        &gt;&gt;&gt; params = [0.1, 0.9, 0.0, 0.0, 1.0, 1.0, 1.0, 0.2, 1.0, 1.0, 0.0, 1.0]</span>
@@ -836,8 +879,8 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Nvars</span><span class="o">&gt;</span><span class="mi">2</span><span class="p">:</span>
             <span class="n">G</span><span class="o">=</span><span class="n">CornerPlot</span><span class="p">(</span><span class="n">properties</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">hargs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">G</span><span class="o">.</span><span class="n">plotHist</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span><span class="o">**</span><span class="n">hargs</span><span class="p">)</span>
-            <span class="n">G</span><span class="o">.</span><span class="n">scatterPlot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span><span class="o">**</span><span class="n">sargs</span><span class="p">);</span>
+                <span class="n">G</span><span class="o">.</span><span class="n">plot_hist</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span><span class="o">**</span><span class="n">hargs</span><span class="p">)</span>
+            <span class="n">G</span><span class="o">.</span><span class="n">scatter_plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span><span class="o">**</span><span class="n">sargs</span><span class="p">);</span>
             <span class="n">G</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
             <span class="k">return</span> <span class="n">G</span>
         <span class="k">else</span><span class="p">:</span>
@@ -855,7 +898,7 @@
             <span class="k">return</span> <span class="n">fig</span></div>
 
     
-    <span class="k">def</span> <span class="nf">_strParams</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_str_params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generate strings explaining which quantities are stored in the flatten arrays params and stdcorr.</span>
 <span class="sd">        </span>
@@ -907,14 +950,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">str_stdcorr</span><span class="o">=</span><span class="n">str_stdcorr</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;]&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">bnd_stdcorr</span><span class="o">=</span><span class="n">bnd_stdcorr</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;]&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generates a string version of the object</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Npars</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Ncor</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stdcorr</span><span class="p">)</span>
         
-        <span class="bp">self</span><span class="o">.</span><span class="n">_strParams</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_str_params</span><span class="p">()</span>
         
         <span class="n">msg</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;&quot;&quot;Composition of Ngauss = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">Ngauss</span><span class="si">}</span><span class="s2"> gaussian multivariates of Nvars = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">Nvars</span><span class="si">}</span><span class="s2"> random variables:</span>
 <span class="s2">    Weights: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span><span class="si">}</span>
@@ -943,7 +986,7 @@
 
 <div class="viewcode-block" id="FitCMND">
 <a class="viewcode-back" href="../../multimin.html#multineas.multimin.FitCMND">[docs]</a>
-<span class="k">class</span> <span class="nc">FitCMND</span><span class="p">():</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">FitCMND</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    CMND Fitting handler.</span>
 <span class="sd">    </span>
@@ -985,26 +1028,26 @@
 <span class="sd">    &gt;&gt;&gt; mus = [[1.0, 0.5, -0.5]]</span>
 <span class="sd">    &gt;&gt;&gt; sigmas = [[1, 1.2, 2.3]]</span>
 <span class="sd">    &gt;&gt;&gt; angles = [[10*Angle.Deg, 30*Angle.Deg, 20*Angle.Deg]]</span>
-<span class="sd">    &gt;&gt;&gt; Sigmas = Stats.calcCovarianceFromRotation(sigmas, angles)</span>
+<span class="sd">    &gt;&gt;&gt; Sigmas = Stats.calc_covariance_from_rotation(sigmas, angles)</span>
 <span class="sd">    &gt;&gt;&gt; CMND = ComposedMultiVariateNormal(mus=mus, weights=weights, Sigmas=Sigmas)</span>
 <span class="sd">    &gt;&gt;&gt; data = CMND.rvs(10000)</span>
 <span class="sd">    &gt;&gt;&gt; F = FitCMND(Ngauss=CMND.Ngauss, Nvars=CMND.Nvars)</span>
 <span class="sd">    &gt;&gt;&gt; F.cmnd._fevfreq = 200</span>
 <span class="sd">    &gt;&gt;&gt; bounds = None</span>
-<span class="sd">    &gt;&gt;&gt; # bounds = F.setBounds(boundw=(0.1, 0.9))</span>
-<span class="sd">    &gt;&gt;&gt; # bounds = F.setBounds(boundr=(-0.9, 0.9))</span>
-<span class="sd">    &gt;&gt;&gt; # bounds = F.setBounds(bounds=(0.1, 0.9*F._sigmax))</span>
-<span class="sd">    &gt;&gt;&gt; # bounds = F.setBounds(boundsm=((-3, 3), (-2, 2), (-2, 2)), boundw=(0.1, 0.9), bounds=(0.1, 0.9*F._sigmax), boundr=(-0.9, 0.9))</span>
+<span class="sd">    &gt;&gt;&gt; # bounds = F.set_bounds(boundw=(0.1, 0.9))</span>
+<span class="sd">    &gt;&gt;&gt; # bounds = F.set_bounds(boundr=(-0.9, 0.9))</span>
+<span class="sd">    &gt;&gt;&gt; # bounds = F.set_bounds(bounds=(0.1, 0.9*F._sigmax))</span>
+<span class="sd">    &gt;&gt;&gt; # bounds = F.set_bounds(boundsm=((-3, 3), (-2, 2), (-2, 2)), boundw=(0.1, 0.9), bounds=(0.1, 0.9*F._sigmax), boundr=(-0.9, 0.9))</span>
 <span class="sd">    &gt;&gt;&gt; print(bounds)</span>
-<span class="sd">    &gt;&gt;&gt; Util.elTime(0)</span>
-<span class="sd">    &gt;&gt;&gt; # F.fitData(data, verbose=0, tol=1e-3, options=dict(maxiter=100, disp=True), bounds=bounds)</span>
-<span class="sd">    &gt;&gt;&gt; F.fitData(data, verbose=0, tol=1e-3, options=dict(maxiter=100, disp=True), method=None, bounds=bounds)</span>
-<span class="sd">    &gt;&gt;&gt; T = Util.elTime()</span>
+<span class="sd">    &gt;&gt;&gt; Util.el_time(0)</span>
+<span class="sd">    &gt;&gt;&gt; # F.fit_data(data, verbose=0, tol=1e-3, options=dict(maxiter=100, disp=True), bounds=bounds)</span>
+<span class="sd">    &gt;&gt;&gt; F.fit_data(data, verbose=0, tol=1e-3, options=dict(maxiter=100, disp=True), method=None, bounds=bounds)</span>
+<span class="sd">    &gt;&gt;&gt; T = Util.el_time()</span>
 <span class="sd">    &gt;&gt;&gt; print(F.cmnd)</span>
-<span class="sd">    &gt;&gt;&gt; G = F.plotFit(figsize=3, hargs=dict(bins=30, cmap=&#39;YlGn&#39;), sargs=dict(s=0.5, edgecolor=&#39;None&#39;, color=&#39;r&#39;))</span>
-<span class="sd">    &gt;&gt;&gt; F.saveFit(&quot;/tmp/fit.pkl&quot;, useprefix=False)</span>
-<span class="sd">    &gt;&gt;&gt; F._loadFit(&quot;/tmp/fit.pkl&quot;)</span>
-<span class="sd">    &gt;&gt;&gt; F.saveFit(&quot;/tmp/nuevo.pkl&quot;, useprefix=True, myprefix=&quot;test&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; G = F.plot_fit(figsize=3, hargs=dict(bins=30, cmap=&#39;YlGn&#39;), sargs=dict(s=0.5, edgecolor=&#39;None&#39;, color=&#39;r&#39;))</span>
+<span class="sd">    &gt;&gt;&gt; F.save_fit(&quot;/tmp/fit.pkl&quot;, useprefix=False)</span>
+<span class="sd">    &gt;&gt;&gt; F._load_fit(&quot;/tmp/fit.pkl&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; F.save_fit(&quot;/tmp/nuevo.pkl&quot;, useprefix=True, myprefix=&quot;test&quot;)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     
     
@@ -1013,10 +1056,10 @@
     <span class="n">_sigmax</span><span class="o">=</span><span class="mi">10</span>
     <span class="n">_ignoreWarnings</span><span class="o">=</span><span class="kc">True</span>
     
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">objfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Ngauss</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">Nvars</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">objfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Ngauss</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">Nvars</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
         
         <span class="k">if</span> <span class="n">objfile</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_loadFit</span><span class="p">(</span><span class="n">objfile</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_load_fit</span><span class="p">(</span><span class="n">objfile</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c1">#Basic attributes</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Ngauss</span><span class="o">=</span><span class="n">Ngauss</span>
@@ -1028,15 +1071,15 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">cmnd</span><span class="o">=</span><span class="n">ComposedMultiVariateNormal</span><span class="p">(</span><span class="n">Ngauss</span><span class="o">=</span><span class="n">Ngauss</span><span class="p">,</span><span class="n">Nvars</span><span class="o">=</span><span class="n">Nvars</span><span class="p">)</span>
 
             <span class="c1">#Set parameters</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">setParams</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_params</span><span class="p">()</span>
             
         <span class="c1">#Other</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">=</span><span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
         
-<div class="viewcode-block" id="FitCMND.setParams">
-<a class="viewcode-back" href="../../multimin.html#multineas.multimin.FitCMND.setParams">[docs]</a>
-    <span class="k">def</span> <span class="nf">setParams</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">mu</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">sigma</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span><span class="n">rho</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+<div class="viewcode-block" id="FitCMND.set_params">
+<a class="viewcode-back" href="../../multimin.html#multineas.multimin.FitCMND.set_params">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">mu</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">sigma</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span><span class="n">rho</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the value of the basic params (minparams, scales, etc.).</span>
 <span class="sd">        </span>
@@ -1068,14 +1111,14 @@
             
         <span class="bp">self</span><span class="o">.</span><span class="n">minparams</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">minparams</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">scales</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">scales</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">uparams</span><span class="o">=</span><span class="n">Util</span><span class="o">.</span><span class="n">tIF</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">minparams</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">scales</span><span class="p">,</span><span class="n">Util</span><span class="o">.</span><span class="n">f2u</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">uparams</span><span class="o">=</span><span class="n">Util</span><span class="o">.</span><span class="n">t_if</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">minparams</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">scales</span><span class="p">,</span><span class="n">Util</span><span class="o">.</span><span class="n">f2u</span><span class="p">)</span></div>
 
         
 <div class="viewcode-block" id="FitCMND.pmap">
 <a class="viewcode-back" href="../../multimin.html#multineas.multimin.FitCMND.pmap">[docs]</a>
-    <span class="k">def</span> <span class="nf">pmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">minparams</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">minparams</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Mapping routine used in sampleCMNDLikelihood.</span>
+<span class="sd">        Mapping routine used in sample_cmnd_likelihood.</span>
 <span class="sd">        </span>
 <span class="sd">        Mapping may change depending on the complexity of the parameters to be minimized.</span>
 <span class="sd">        Here we assume that all parameters in the stdcorr vector is susceptible to be minimized</span>
@@ -1097,9 +1140,9 @@
         <span class="k">return</span> <span class="n">stdcorr</span></div>
 
     
-<div class="viewcode-block" id="FitCMND.logL">
-<a class="viewcode-back" href="../../multimin.html#multineas.multimin.FitCMND.logL">[docs]</a>
-    <span class="k">def</span> <span class="nf">logL</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">data</span><span class="p">):</span>
+<div class="viewcode-block" id="FitCMND.log_l">
+<a class="viewcode-back" href="../../multimin.html#multineas.multimin.FitCMND.log_l">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">log_l</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">data</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Value of the -log(Likelihood).</span>
 <span class="sd">        </span>
@@ -1110,21 +1153,21 @@
 <span class="sd">            </span>
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        logL : float</span>
+<span class="sd">        log_l : float</span>
 <span class="sd">            Value of the -log(Likelihood).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         
-        <span class="n">logL</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cmnd</span><span class="o">.</span><span class="n">sampleCMNDLikelihood</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">uparams</span><span class="p">,</span>
+        <span class="n">log_l</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cmnd</span><span class="o">.</span><span class="n">sample_cmnd_likelihood</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">uparams</span><span class="p">,</span>
                                             <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
                                             <span class="n">pmap</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">pmap</span><span class="p">,</span>
                                             <span class="n">tset</span><span class="o">=</span><span class="s2">&quot;stdcorr&quot;</span><span class="p">,</span>
                                             <span class="n">scales</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">scales</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">logL</span></div>
+        <span class="k">return</span> <span class="n">log_l</span></div>
 
     
-<div class="viewcode-block" id="FitCMND.fitData">
-<a class="viewcode-back" href="../../multimin.html#multineas.multimin.FitCMND.fitData">[docs]</a>
-    <span class="k">def</span> <span class="nf">fitData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">data</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">advance</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="o">**</span><span class="n">args</span><span class="p">):</span>
+<div class="viewcode-block" id="FitCMND.fit_data">
+<a class="viewcode-back" href="../../multimin.html#multineas.multimin.FitCMND.fit_data">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fit_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">data</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">advance</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="o">**</span><span class="n">args</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Minimization procedure.</span>
 <span class="sd">        </span>
@@ -1135,7 +1178,7 @@
 <span class="sd">        data : numpy.ndarray</span>
 <span class="sd">            Array with data (Nsam x Nvars).</span>
 <span class="sd">        verbose : int, optional</span>
-<span class="sd">            Verbosity level for the sampleCMNDLikelihood routine (default 0).</span>
+<span class="sd">            Verbosity level for the sample_cmnd_likelihood routine (default 0).</span>
 <span class="sd">        advance : int, optional</span>
 <span class="sd">            If larger than 0 show advance each &quot;advance&quot; iterations (default 0).</span>
 <span class="sd">        **args : dict</span>
@@ -1153,17 +1196,17 @@
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
 <span class="sd">        &gt;&gt;&gt; F = FitCMND(1, 3)</span>
-<span class="sd">        &gt;&gt;&gt; F.fitData(data, verbose=0, tol=1e-3, options=dict(maxiter=100, disp=True))</span>
+<span class="sd">        &gt;&gt;&gt; F.fit_data(data, verbose=0, tol=1e-3, options=dict(maxiter=100, disp=True))</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">advance</span><span class="p">:</span>
             <span class="n">advance</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">advance</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">neval</span><span class="o">=</span><span class="mi">0</span>
-            <span class="k">def</span> <span class="nf">_advance</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+            <span class="k">def</span><span class="w"> </span><span class="nf">_advance</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">neval</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Iterations:&quot;</span><span class="p">)</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">neval</span><span class="o">%</span><span class="n">advance</span><span class="o">==</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">show</span><span class="p">:</span>
                     <span class="nb">vars</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array2string</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="s1">&#39;, &#39;</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">max_line_width</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">formatter</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;float_kind&#39;</span><span class="p">:</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">x</span><span class="si">:</span><span class="s2">.2g</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">})</span>
-                    <span class="n">fun</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmnd</span><span class="o">.</span><span class="n">sampleCMNDLikelihood</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">data</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">pmap</span><span class="p">,</span><span class="s2">&quot;stdcorr&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">scales</span><span class="p">,</span><span class="n">verbose</span><span class="p">)</span>
+                    <span class="n">fun</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmnd</span><span class="o">.</span><span class="n">sample_cmnd_likelihood</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">data</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">pmap</span><span class="p">,</span><span class="s2">&quot;stdcorr&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">scales</span><span class="p">,</span><span class="n">verbose</span><span class="p">)</span>
                     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Iter </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">neval</span><span class="si">}</span><span class="s2">:</span><span class="se">\n\t</span><span class="s2">Vars: </span><span class="si">{</span><span class="nb">vars</span><span class="si">}</span><span class="se">\n\t</span><span class="s2">LogL/N: </span><span class="si">{</span><span class="n">fun</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">neval</span><span class="o">+=</span><span class="mi">1</span>
         <span class="k">else</span><span class="p">:</span>
@@ -1173,7 +1216,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">cmnd</span><span class="o">.</span><span class="n">_ignoreWarnings</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_ignoreWarnings</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">minargs</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;Powell&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">minargs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">solution</span><span class="o">=</span><span class="n">minimize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cmnd</span><span class="o">.</span><span class="n">sampleCMNDLikelihood</span><span class="p">,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">solution</span><span class="o">=</span><span class="n">minimize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cmnd</span><span class="o">.</span><span class="n">sample_cmnd_likelihood</span><span class="p">,</span>
                                <span class="bp">self</span><span class="o">.</span><span class="n">minparams</span><span class="p">,</span>
                                <span class="n">callback</span><span class="o">=</span><span class="n">_advance</span><span class="p">,</span>
                                <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">pmap</span><span class="p">,</span><span class="s2">&quot;stdcorr&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">scales</span><span class="p">,</span><span class="n">verbose</span><span class="p">),</span>
@@ -1183,19 +1226,22 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">uparams</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">solution</span><span class="o">.</span><span class="n">x</span>
 
         <span class="c1">#Set the new params</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_invParams</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cmnd</span><span class="o">.</span><span class="n">stdcorr</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_updatePrefix</span><span class="p">()</span></div>
+        <span class="c1">#Set the new params</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">minparams</span><span class="o">=</span><span class="n">Util</span><span class="o">.</span><span class="n">t_if</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">uparams</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">scales</span><span class="p">,</span><span class="n">Util</span><span class="o">.</span><span class="n">u2f</span><span class="p">)</span>
+        <span class="n">params</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">pmap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">minparams</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cmnd</span><span class="o">.</span><span class="n">set_stdcorr</span><span class="p">(</span><span class="n">params</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">Nvars</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_update_prefix</span><span class="p">()</span></div>
 
             
-    <span class="k">def</span> <span class="nf">_loadFit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">objfile</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_load_fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">objfile</span><span class="p">):</span>
         <span class="n">F</span><span class="o">=</span><span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">objfile</span><span class="p">,</span><span class="s2">&quot;rb&quot;</span><span class="p">))</span>
         <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">F</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
             <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="nb">getattr</span><span class="p">(</span><span class="n">F</span><span class="p">,</span><span class="n">k</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_updatePrefix</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_update_prefix</span><span class="p">()</span>
     
-<div class="viewcode-block" id="FitCMND.plotFit">
-<a class="viewcode-back" href="../../multimin.html#multineas.multimin.FitCMND.plotFit">[docs]</a>
-    <span class="k">def</span> <span class="nf">plotFit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">N</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">props</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">ranges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">hargs</span><span class="o">=</span><span class="nb">dict</span><span class="p">(),</span><span class="n">sargs</span><span class="o">=</span><span class="nb">dict</span><span class="p">()):</span>
+<div class="viewcode-block" id="FitCMND.plot_fit">
+<a class="viewcode-back" href="../../multimin.html#multineas.multimin.FitCMND.plot_fit">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">plot_fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">N</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">props</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">ranges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">hargs</span><span class="o">=</span><span class="nb">dict</span><span class="p">(),</span><span class="n">sargs</span><span class="o">=</span><span class="nb">dict</span><span class="p">()):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Plot the result of the fitting procedure.</span>
 <span class="sd">        </span>
@@ -1222,8 +1268,8 @@
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
 <span class="sd">        &gt;&gt;&gt; F = FitCMND(1, 3)</span>
-<span class="sd">        &gt;&gt;&gt; F.fitData(data, verbose=0, tol=1e-3, options=dict(maxiter=100, disp=True))</span>
-<span class="sd">        &gt;&gt;&gt; G = F.plotFit(figsize=3, hargs=dict(bins=30, cmap=&#39;YlGn&#39;), sargs=dict(s=0.5, edgecolor=&#39;None&#39;, color=&#39;r&#39;))</span>
+<span class="sd">        &gt;&gt;&gt; F.fit_data(data, verbose=0, tol=1e-3, options=dict(maxiter=100, disp=True))</span>
+<span class="sd">        &gt;&gt;&gt; G = F.plot_fit(figsize=3, hargs=dict(bins=30, cmap=&#39;YlGn&#39;), sargs=dict(s=0.5, edgecolor=&#39;None&#39;, color=&#39;r&#39;))</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">Xfits</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cmnd</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
         <span class="n">properties</span><span class="o">=</span><span class="nb">dict</span><span class="p">()</span>
@@ -1238,8 +1284,8 @@
             
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Nvars</span><span class="o">&gt;</span><span class="mi">2</span><span class="p">:</span>
             <span class="n">G</span><span class="o">=</span><span class="n">CornerPlot</span><span class="p">(</span><span class="n">properties</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">)</span>
-            <span class="n">G</span><span class="o">.</span><span class="n">plotHist</span><span class="p">(</span><span class="n">Xfits</span><span class="p">,</span><span class="o">**</span><span class="n">hargs</span><span class="p">)</span>
-            <span class="n">G</span><span class="o">.</span><span class="n">scatterPlot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span><span class="o">**</span><span class="n">sargs</span><span class="p">);</span>
+            <span class="n">G</span><span class="o">.</span><span class="n">plot_hist</span><span class="p">(</span><span class="n">Xfits</span><span class="p">,</span><span class="o">**</span><span class="n">hargs</span><span class="p">)</span>
+            <span class="n">G</span><span class="o">.</span><span class="n">scatter_plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span><span class="o">**</span><span class="n">sargs</span><span class="p">);</span>
             <span class="n">G</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">=</span><span class="n">G</span><span class="o">.</span><span class="n">fig</span>
             <span class="k">return</span> <span class="n">G</span>
@@ -1257,12 +1303,12 @@
             <span class="k">return</span> <span class="n">fig</span></div>
 
         
-    <span class="k">def</span> <span class="nf">_invParams</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">stdcorr</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_inv_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">stdcorr</span><span class="p">):</span>
         <span class="n">minparams</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">stdcorr</span><span class="p">)</span>
         <span class="n">minparams</span><span class="p">[</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">Ngauss</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">Ncorr</span><span class="p">:]</span><span class="o">+=</span><span class="mi">1</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">minparams</span><span class="o">=</span><span class="n">minparams</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Ngauss</span><span class="o">==</span><span class="mi">1</span> <span class="k">else</span> <span class="n">minparams</span>
 
-    <span class="k">def</span> <span class="nf">_updatePrefix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">myprefix</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_update_prefix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">myprefix</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Update prefix of fit.</span>
 <span class="sd">        </span>
@@ -1285,9 +1331,9 @@
             <span class="n">myprefix</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;_</span><span class="si">{</span><span class="n">myprefix</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">Ngauss</span><span class="si">}</span><span class="s2">cmnd</span><span class="si">{</span><span class="n">myprefix</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">hash</span><span class="si">}</span><span class="s2">&quot;</span>
         
-<div class="viewcode-block" id="FitCMND.saveFit">
-<a class="viewcode-back" href="../../multimin.html#multineas.multimin.FitCMND.saveFit">[docs]</a>
-    <span class="k">def</span> <span class="nf">saveFit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">objfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">useprefix</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">myprefix</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="FitCMND.save_fit">
+<a class="viewcode-back" href="../../multimin.html#multineas.multimin.FitCMND.save_fit">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">save_fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">objfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">useprefix</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">myprefix</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Pickle the result of a fit.</span>
 <span class="sd">        </span>
@@ -1307,7 +1353,7 @@
 <span class="sd">        If objfile=&quot;fit.pkl&quot;, the final filename will be fit-1mnd_asa33.pkl</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">=</span><span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_updatePrefix</span><span class="p">(</span><span class="n">myprefix</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_update_prefix</span><span class="p">(</span><span class="n">myprefix</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">objfile</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">objfile</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;/tmp/FitCMND.pkl&quot;</span>
         <span class="k">if</span> <span class="n">useprefix</span><span class="p">:</span>
@@ -1316,9 +1362,9 @@
         <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="nb">open</span><span class="p">(</span><span class="n">objfile</span><span class="p">,</span><span class="s2">&quot;wb&quot;</span><span class="p">))</span></div>
 
         
-<div class="viewcode-block" id="FitCMND.setBounds">
-<a class="viewcode-back" href="../../multimin.html#multineas.multimin.FitCMND.setBounds">[docs]</a>
-    <span class="k">def</span> <span class="nf">setBounds</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">boundw</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">bounds</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">boundr</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">boundsm</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="FitCMND.set_bounds">
+<a class="viewcode-back" href="../../multimin.html#multineas.multimin.FitCMND.set_bounds">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_bounds</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">boundw</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">bounds</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">boundr</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">boundsm</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the minimization parameters.</span>
 <span class="sd">        </span>
@@ -1369,6 +1415,7 @@
         
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Ngauss</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
             <span class="n">bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cmnd</span><span class="o">.</span><span class="n">_str_params</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">bounds</span></div>
 </div>
 
@@ -1423,7 +1470,7 @@
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
     <br/>
   </p>
 </div>

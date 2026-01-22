@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Utilities &#8212; MultiNEAs 0.2.3 documentation</title>
+    <title>Utilities &#8212; MultiNEAs 0.2.4 documentation</title>
   
   
   
@@ -38,7 +38,7 @@
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="_static/documentation_options.js?v=a47416a6"></script>
+    <script src="_static/documentation_options.js?v=6ffd866b"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -111,7 +111,7 @@
   
   
   
-    <p class="title logo__title">MultiNEAs 0.2.3 documentation</p>
+    <p class="title logo__title">MultiNEAs 0.2.4 documentation</p>
   
 </a></div>
     
@@ -357,8 +357,8 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Abstract class with useful routines</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="multineas.util.Stats.calcCorrelationsFromCovariances">
-<span class="sig-name descname"><span class="pre">calcCorrelationsFromCovariances</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/multineas/util.html#Stats.calcCorrelationsFromCovariances"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multineas.util.Stats.calcCorrelationsFromCovariances" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="multineas.util.Stats.calc_correlations_from_covariances">
+<span class="sig-name descname"><span class="pre">calc_correlations_from_covariances</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/multineas/util.html#Stats.calc_correlations_from_covariances"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multineas.util.Stats.calc_correlations_from_covariances" title="Link to this definition">#</a></dt>
 <dd><p>Compute the standard deviations and corresponding correlation coefficients given a set of
 covariance matrices.</p>
 <dl class="field-list simple">
@@ -379,7 +379,7 @@ covariance matrices.</p>
 <span class="gp">... </span>     <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">4.</span> <span class="p">,</span> <span class="mf">1.8</span><span class="p">],</span>
 <span class="gp">... </span>     <span class="p">[</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">,</span> <span class="mf">9.</span> <span class="p">]]</span>
 <span class="gp">... </span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">sigmas</span><span class="p">,</span> <span class="n">rhos</span> <span class="o">=</span> <span class="n">Stats</span><span class="o">.</span><span class="n">calcCorrelationsFromCovariances</span><span class="p">(</span><span class="n">Sigmas</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sigmas</span><span class="p">,</span> <span class="n">rhos</span> <span class="o">=</span> <span class="n">Stats</span><span class="o">.</span><span class="n">calc_correlations_from_covariances</span><span class="p">(</span><span class="n">Sigmas</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">sigmas</span><span class="p">)</span>
 <span class="go">[1. 2. 3.]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">rhos</span><span class="p">)</span>
@@ -389,8 +389,8 @@ covariance matrices.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="multineas.util.Stats.calcCovarianceFromCorrelations">
-<span class="sig-name descname"><span class="pre">calcCovarianceFromCorrelations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rhos</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multineas/util.html#Stats.calcCovarianceFromCorrelations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multineas.util.Stats.calcCovarianceFromCorrelations" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="multineas.util.Stats.calc_covariance_from_correlations">
+<span class="sig-name descname"><span class="pre">calc_covariance_from_correlations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rhos</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multineas/util.html#Stats.calc_covariance_from_correlations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multineas.util.Stats.calc_covariance_from_correlations" title="Link to this definition">#</a></dt>
 <dd><p>Compute covariance matrices from the standard deviations and correlations (rho).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -411,7 +411,7 @@ covariance matrices.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sigmas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># rho_12, rho_13, rho_23</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rhos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">S</span> <span class="o">=</span> <span class="n">Stats</span><span class="o">.</span><span class="n">calcCovarianceFromCorrelations</span><span class="p">(</span><span class="n">sigmas</span><span class="p">,</span> <span class="n">rhos</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">S</span> <span class="o">=</span> <span class="n">Stats</span><span class="o">.</span><span class="n">calc_covariance_from_correlations</span><span class="p">(</span><span class="n">sigmas</span><span class="p">,</span> <span class="n">rhos</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
 <span class="go">[[[1.  0.2 0.6]</span>
 <span class="go">  [0.2 4.  1.8]</span>
@@ -422,7 +422,7 @@ covariance matrices.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rho</span> <span class="o">=</span> <span class="n">rhos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sigma</span> <span class="o">=</span> <span class="n">sigmas</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Stats</span><span class="o">.</span><span class="n">setMatrixOffDiagonal</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">rho</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Stats</span><span class="o">.</span><span class="n">set_matrix_off_diagonal</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">rho</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
@@ -440,8 +440,8 @@ covariance matrices.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="multineas.util.Stats.calcCovarianceFromRotation">
-<span class="sig-name descname"><span class="pre">calcCovarianceFromRotation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angles</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multineas/util.html#Stats.calcCovarianceFromRotation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multineas.util.Stats.calcCovarianceFromRotation" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="multineas.util.Stats.calc_covariance_from_rotation">
+<span class="sig-name descname"><span class="pre">calc_covariance_from_rotation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angles</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multineas/util.html#Stats.calc_covariance_from_rotation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multineas.util.Stats.calc_covariance_from_rotation" title="Link to this definition">#</a></dt>
 <dd><p>Compute covariance matrices from the stds and the angles.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -460,8 +460,8 @@ covariance matrices.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="multineas.util.Stats.flattenSymmetricMatrix">
-<span class="sig-name descname"><span class="pre">flattenSymmetricMatrix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/multineas/util.html#Stats.flattenSymmetricMatrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multineas.util.Stats.flattenSymmetricMatrix" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="multineas.util.Stats.flatten_symmetric_matrix">
+<span class="sig-name descname"><span class="pre">flatten_symmetric_matrix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/multineas/util.html#Stats.flatten_symmetric_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multineas.util.Stats.flatten_symmetric_matrix" title="Link to this definition">#</a></dt>
 <dd><p>Given a symmetric matrix the routine returns the flatten version of the Matrix.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -476,7 +476,7 @@ covariance matrices.</p>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">F</span> <span class="o">=</span> <span class="n">Stats</span><span class="o">.</span><span class="n">flattenSymmetricMatrix</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">F</span> <span class="o">=</span> <span class="n">Stats</span><span class="o">.</span><span class="n">flatten_symmetric_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">F</span><span class="p">)</span>
 <span class="go">[1.  0.2 3. ]</span>
 </pre></div>
@@ -484,11 +484,11 @@ covariance matrices.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="multineas.util.Stats.genIndex">
-<span class="sig-name descname"><span class="pre">genIndex</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/multineas/util.html#Stats.genIndex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multineas.util.Stats.genIndex" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="multineas.util.Stats.gen_index">
+<span class="sig-name descname"><span class="pre">gen_index</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/multineas/util.html#Stats.gen_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multineas.util.Stats.gen_index" title="Link to this definition">#</a></dt>
 <dd><p>Given a set of (normalized) probabilities, randomly generate an index n following the
 probabilities.</p>
-<p>For instance if we have 3 events with probabilities 0.1, 0.7, 0.2, genIndex will generate
+<p>For instance if we have 3 events with probabilities 0.1, 0.7, 0.2, gen_index will generate
 a number in the set (0,1,2) having those probabilities, ie. 1 will have 70% of probability.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -503,7 +503,7 @@ NOTE: It should be normalized, ie. sum(probs)=1</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">Stats</span><span class="o">.</span><span class="n">genIndex</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">Stats</span><span class="o">.</span><span class="n">gen_index</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">])</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -514,8 +514,8 @@ NOTE: It should be normalized, ie. sum(probs)=1</p>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="multineas.util.Stats.setMatrixOffDiagonal">
-<span class="sig-name descname"><span class="pre">setMatrixOffDiagonal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">off</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multineas/util.html#Stats.setMatrixOffDiagonal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multineas.util.Stats.setMatrixOffDiagonal" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="multineas.util.Stats.set_matrix_off_diagonal">
+<span class="sig-name descname"><span class="pre">set_matrix_off_diagonal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">off</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multineas/util.html#Stats.set_matrix_off_diagonal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multineas.util.Stats.set_matrix_off_diagonal" title="Link to this definition">#</a></dt>
 <dd><p>Set a matrix with the terms of the off diagonal</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -534,7 +534,7 @@ NOTE: It should be normalized, ie. sum(probs)=1</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">off</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Stats</span><span class="o">.</span><span class="n">setMatrixOffDiagonal</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">off</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Stats</span><span class="o">.</span><span class="n">set_matrix_off_diagonal</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">off</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
 <span class="go">[[1. , 0.1, 0.2],</span>
 <span class="go"> [0.1, 1. , 0.3],</span>
@@ -544,8 +544,8 @@ NOTE: It should be normalized, ie. sum(probs)=1</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="multineas.util.Stats.unflattenSymmetricMatrix">
-<span class="sig-name descname"><span class="pre">unflattenSymmetricMatrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">M</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multineas/util.html#Stats.unflattenSymmetricMatrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multineas.util.Stats.unflattenSymmetricMatrix" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="multineas.util.Stats.unflatten_symmetric_matrix">
+<span class="sig-name descname"><span class="pre">unflatten_symmetric_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">M</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multineas/util.html#Stats.unflatten_symmetric_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multineas.util.Stats.unflatten_symmetric_matrix" title="Link to this definition">#</a></dt>
 <dd><p>Given a flatten version of a matrix, returns the symmetric matrix.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -564,7 +564,7 @@ NOTE: It should be normalized, ie. sum(probs)=1</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">F</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Stats</span><span class="o">.</span><span class="n">unflattenSymmetricMatrix</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">M</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Stats</span><span class="o">.</span><span class="n">unflatten_symmetric_matrix</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">M</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
 <span class="go">[[1.  0.2]</span>
 <span class="go"> [0.2 3. ]]</span>
@@ -591,12 +591,12 @@ NOTE: It should be normalized, ie. sum(probs)=1</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="multineas.util.Util.TIME">
-<span class="sig-name descname"><span class="pre">TIME</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1769063243.9071739</span></span><a class="headerlink" href="#multineas.util.Util.TIME" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">TIME</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1769066528.792605</span></span><a class="headerlink" href="#multineas.util.Util.TIME" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="multineas.util.Util.TIMESTART">
-<span class="sig-name descname"><span class="pre">TIMESTART</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1769063243.9071739</span></span><a class="headerlink" href="#multineas.util.Util.TIMESTART" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">TIMESTART</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1769066528.792605</span></span><a class="headerlink" href="#multineas.util.Util.TIMESTART" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -605,8 +605,8 @@ NOTE: It should be normalized, ie. sum(probs)=1</p>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="multineas.util.Util.elTime">
-<span class="sig-name descname"><span class="pre">elTime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multineas/util.html#Util.elTime"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multineas.util.Util.elTime" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="multineas.util.Util.el_time">
+<span class="sig-name descname"><span class="pre">el_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multineas/util.html#Util.el_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multineas.util.Util.el_time" title="Link to this definition">#</a></dt>
 <dd><p>Compute the time elapsed since last call of this routine.  The displayed time
 is preseneted in the more convenient unit, ns (nano seconds), us (micro seconds),
 ms (miliseconds), s (seconds), min (minutes), h (hours), d (days)</p>
@@ -626,17 +626,17 @@ ms (miliseconds), s (seconds), min (minutes), h (hours), d (days)</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Util</span><span class="o">.</span><span class="n">elTime</span><span class="p">()</span> <span class="c1"># basic usage (show output)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Util</span><span class="o">.</span><span class="n">elTime</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># no output</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Util</span><span class="o">.</span><span class="n">elTime</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># measure elapsed time since program start</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Util</span><span class="o">.</span><span class="n">el_time</span><span class="p">()</span> <span class="c1"># basic usage (show output)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Util</span><span class="o">.</span><span class="n">el_time</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># no output</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Util</span><span class="o">.</span><span class="n">el_time</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># measure elapsed time since program start</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">Util</span><span class="o">.</span><span class="n">DTIME</span><span class="p">,</span> <span class="n">Util</span><span class="o">.</span><span class="n">DUTIME</span><span class="p">)</span> <span class="c1"># show values of elapsed time</span>
 </pre></div>
 </div>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="multineas.util.Util.errorMsg">
-<span class="sig-name descname"><span class="pre">errorMsg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multineas/util.html#Util.errorMsg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multineas.util.Util.errorMsg" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="multineas.util.Util.error_msg">
+<span class="sig-name descname"><span class="pre">error_msg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multineas/util.html#Util.error_msg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multineas.util.Util.error_msg" title="Link to this definition">#</a></dt>
 <dd><p>Add a custom message msg to an error handle.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -701,8 +701,8 @@ ms (miliseconds), s (seconds), min (minutes), h (hours), d (days)</p>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="multineas.util.Util.mantisaExp">
-<span class="sig-name descname"><span class="pre">mantisaExp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/multineas/util.html#Util.mantisaExp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multineas.util.Util.mantisaExp" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="multineas.util.Util.mantisa_exp">
+<span class="sig-name descname"><span class="pre">mantisa_exp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/multineas/util.html#Util.mantisa_exp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multineas.util.Util.mantisa_exp" title="Link to this definition">#</a></dt>
 <dd><p>Calculate the mantisa and exponent of a number.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -717,9 +717,9 @@ ms (miliseconds), s (seconds), min (minutes), h (hours), d (days)</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="p">,</span> <span class="n">e</span> <span class="o">=</span> <span class="n">Util</span><span class="o">.</span><span class="n">mantisaExp</span><span class="p">(</span><span class="mf">234.5</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="p">,</span> <span class="n">e</span> <span class="o">=</span> <span class="n">Util</span><span class="o">.</span><span class="n">mantisa_exp</span><span class="p">(</span><span class="mf">234.5</span><span class="p">)</span>
 <span class="go"># returns m=2.345, e=2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="p">,</span> <span class="n">e</span> <span class="o">=</span> <span class="n">Util</span><span class="o">.</span><span class="n">mantisaExp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.000023213</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="p">,</span> <span class="n">e</span> <span class="o">=</span> <span class="n">Util</span><span class="o">.</span><span class="n">mantisa_exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.000023213</span><span class="p">)</span>
 <span class="go"># return m=-2.3213, e=-5</span>
 </pre></div>
 </div>
@@ -731,8 +731,8 @@ ms (miliseconds), s (seconds), min (minutes), h (hours), d (days)</p>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="multineas.util.Util.tIF">
-<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">tIF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multineas/util.html#Util.tIF"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multineas.util.Util.tIF" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="multineas.util.Util.t_if">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">t_if</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multineas/util.html#Util.t_if"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multineas.util.Util.t_if" title="Link to this definition">#</a></dt>
 <dd><p>Transform a set of parameters using a transformation function f and scales s.</p>
 <p>This routine allows the conversion from a finite interval [0,s] to an unbound one [-inf,inf]
 (using f=Util.f2u) or vice versa (using f=Util.u2f).</p>
@@ -755,7 +755,7 @@ If s[i] == 0, the parameter is unchanged.</p></li>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">scales</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">minparams</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">uparams</span> <span class="o">=</span> <span class="n">Util</span><span class="o">.</span><span class="n">tIF</span><span class="p">(</span><span class="n">minparams</span><span class="p">,</span> <span class="n">scales</span><span class="p">,</span> <span class="n">Util</span><span class="o">.</span><span class="n">f2u</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">uparams</span> <span class="o">=</span> <span class="n">Util</span><span class="o">.</span><span class="n">t_if</span><span class="p">(</span><span class="n">minparams</span><span class="p">,</span> <span class="n">scales</span><span class="p">,</span> <span class="n">Util</span><span class="o">.</span><span class="n">f2u</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">uparams</span><span class="p">)</span>
 <span class="go">[0.0, 0.0, -2.197224577336219, -2.197224577336219, 0.8472978603872034]</span>
 </pre></div>
@@ -834,14 +834,14 @@ If s[i] == 0, the parameter is unchanged.</p></li>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multineas.util.Stats"><code class="docutils literal notranslate"><span class="pre">Stats</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multineas.util.Stats.calcCorrelationsFromCovariances"><code class="docutils literal notranslate"><span class="pre">Stats.calcCorrelationsFromCovariances()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multineas.util.Stats.calcCovarianceFromCorrelations"><code class="docutils literal notranslate"><span class="pre">Stats.calcCovarianceFromCorrelations()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multineas.util.Stats.calcCovarianceFromRotation"><code class="docutils literal notranslate"><span class="pre">Stats.calcCovarianceFromRotation()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multineas.util.Stats.flattenSymmetricMatrix"><code class="docutils literal notranslate"><span class="pre">Stats.flattenSymmetricMatrix()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multineas.util.Stats.genIndex"><code class="docutils literal notranslate"><span class="pre">Stats.genIndex()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multineas.util.Stats.calc_correlations_from_covariances"><code class="docutils literal notranslate"><span class="pre">Stats.calc_correlations_from_covariances()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multineas.util.Stats.calc_covariance_from_correlations"><code class="docutils literal notranslate"><span class="pre">Stats.calc_covariance_from_correlations()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multineas.util.Stats.calc_covariance_from_rotation"><code class="docutils literal notranslate"><span class="pre">Stats.calc_covariance_from_rotation()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multineas.util.Stats.flatten_symmetric_matrix"><code class="docutils literal notranslate"><span class="pre">Stats.flatten_symmetric_matrix()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multineas.util.Stats.gen_index"><code class="docutils literal notranslate"><span class="pre">Stats.gen_index()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multineas.util.Stats.phi"><code class="docutils literal notranslate"><span class="pre">Stats.phi</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multineas.util.Stats.setMatrixOffDiagonal"><code class="docutils literal notranslate"><span class="pre">Stats.setMatrixOffDiagonal()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multineas.util.Stats.unflattenSymmetricMatrix"><code class="docutils literal notranslate"><span class="pre">Stats.unflattenSymmetricMatrix()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multineas.util.Stats.set_matrix_off_diagonal"><code class="docutils literal notranslate"><span class="pre">Stats.set_matrix_off_diagonal()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multineas.util.Stats.unflatten_symmetric_matrix"><code class="docutils literal notranslate"><span class="pre">Stats.unflatten_symmetric_matrix()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multineas.util.Util"><code class="docutils literal notranslate"><span class="pre">Util</span></code></a><ul class="nav section-nav flex-column">
@@ -850,15 +850,15 @@ If s[i] == 0, the parameter is unchanged.</p></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multineas.util.Util.TIME"><code class="docutils literal notranslate"><span class="pre">Util.TIME</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multineas.util.Util.TIMESTART"><code class="docutils literal notranslate"><span class="pre">Util.TIMESTART</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multineas.util.Util.cos"><code class="docutils literal notranslate"><span class="pre">Util.cos</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multineas.util.Util.elTime"><code class="docutils literal notranslate"><span class="pre">Util.elTime()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multineas.util.Util.errorMsg"><code class="docutils literal notranslate"><span class="pre">Util.errorMsg()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multineas.util.Util.el_time"><code class="docutils literal notranslate"><span class="pre">Util.el_time()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multineas.util.Util.error_msg"><code class="docutils literal notranslate"><span class="pre">Util.error_msg()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multineas.util.Util.exp"><code class="docutils literal notranslate"><span class="pre">Util.exp</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multineas.util.Util.f2u"><code class="docutils literal notranslate"><span class="pre">Util.f2u()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multineas.util.Util.get_data"><code class="docutils literal notranslate"><span class="pre">Util.get_data()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multineas.util.Util.log"><code class="docutils literal notranslate"><span class="pre">Util.log</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multineas.util.Util.mantisaExp"><code class="docutils literal notranslate"><span class="pre">Util.mantisaExp()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multineas.util.Util.mantisa_exp"><code class="docutils literal notranslate"><span class="pre">Util.mantisa_exp()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multineas.util.Util.sin"><code class="docutils literal notranslate"><span class="pre">Util.sin</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multineas.util.Util.tIF"><code class="docutils literal notranslate"><span class="pre">Util.tIF()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multineas.util.Util.t_if"><code class="docutils literal notranslate"><span class="pre">Util.t_if()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multineas.util.Util.u2f"><code class="docutils literal notranslate"><span class="pre">Util.u2f()</span></code></a></li>
 </ul>
 </li>
