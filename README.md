@@ -8,9 +8,11 @@
 [![pythonver](https://img.shields.io/pypi/pyversions/multineas)](https://pypi.org/project/multineas/)
 [![Powered by SpiceyPy](https://img.shields.io/badge/Powered%20by-SpiceyPy-blue)](https://github.com/AndrewAnnex/SpiceyPy)
 
+<p></p>
 <div align="center">
   <img src="https://raw.githubusercontent.com/seap-udea/MultiNEAs/master/docs/MultiNEAs-logo.webp" alt="MultiNEAs Logo" width="600"/>
 </div>
+<p></p>
 
 `MultiNEAs` is a `Python` package designed to provide numerical tools for studying the dynamics and population of Near-Earth Asteroids (NEAs). The package offers a comprehensive suite of utilities for orbital calculations, statistical analysis, and visualization of NEA populations.
 
