@@ -1,0 +1,11 @@
+##################################################################
+#                                                                #
+# MultiNEAs: Numerical tools for near-earth asteroid dynamics   #
+#            and population                                      #
+#                                                                #
+##################################################################
+# License: MIT                                                   #
+##################################################################
+[build-system]
+requires = ['setuptools', 'numpy', 'scipy', 'matplotlib']
+build-backend = "setuptools.build_meta"

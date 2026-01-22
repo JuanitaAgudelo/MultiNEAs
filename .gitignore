@@ -1,0 +1,16 @@
+*~
+.ipynb_checkpoints
+*.egg-info
+__pycache__
+.anim*
+env/
+dist/
+build/
+*.bak
+*.pyf
+*.so
+.DS_Store
+*.swp
+.pytest_cache/
+.coverage
+htmlcov/
