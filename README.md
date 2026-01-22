@@ -1,8 +1,8 @@
 # MultiNEAs
 
 [![version](https://img.shields.io/pypi/v/multineas?color=blue)](https://pypi.org/project/multineas/)
-[![downloads](https://static.pepy.tech/badge/multineas)](https://pepy.tech/project/multineas)
-[![license](https://img.shields.io/pypi/l/multineas)](https://pypi.org/project/multineas/)
+<!-- [![downloads](https://img.shields.io/pypi/dw/multineas)](https://pypi.org/project/multineas/) -->
+[![license](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://github.com/seap-udea/MultiNEAs/blob/master/LICENSE)
 [![pythonver](https://img.shields.io/pypi/pyversions/multineas)](https://pypi.org/project/multineas/)
 [![Powered by SpiceyPy](https://img.shields.io/badge/Powered%20by-SpiceyPy-blue)](https://github.com/AndrewAnnex/SpiceyPy)
 

@@ -6,20 +6,21 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Utilities &mdash; MultiNEAs 0.2.16 documentation</title>
+  <title>Utilities &mdash; MultiNEAs 0.2.18 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=e2418eca"></script>
+      <script src="_static/documentation_options.js?v=ae23a911"></script>
       <script src="_static/doctools.js?v=fd6eb6e6"></script>
       <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Plotting Utilities" href="plot.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -41,42 +42,17 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">Utilities</a><ul>
-<li><a class="reference internal" href="#multineas.util.Stats"><code class="docutils literal notranslate"><span class="pre">Stats</span></code></a><ul>
-<li><a class="reference internal" href="#multineas.util.Stats.calc_correlations_from_covariances"><code class="docutils literal notranslate"><span class="pre">Stats.calc_correlations_from_covariances()</span></code></a></li>
-<li><a class="reference internal" href="#multineas.util.Stats.calc_covariance_from_correlations"><code class="docutils literal notranslate"><span class="pre">Stats.calc_covariance_from_correlations()</span></code></a></li>
-<li><a class="reference internal" href="#multineas.util.Stats.calc_covariance_from_rotation"><code class="docutils literal notranslate"><span class="pre">Stats.calc_covariance_from_rotation()</span></code></a></li>
-<li><a class="reference internal" href="#multineas.util.Stats.flatten_symmetric_matrix"><code class="docutils literal notranslate"><span class="pre">Stats.flatten_symmetric_matrix()</span></code></a></li>
-<li><a class="reference internal" href="#multineas.util.Stats.gen_index"><code class="docutils literal notranslate"><span class="pre">Stats.gen_index()</span></code></a></li>
-<li><a class="reference internal" href="#multineas.util.Stats.phi"><code class="docutils literal notranslate"><span class="pre">Stats.phi</span></code></a></li>
-<li><a class="reference internal" href="#multineas.util.Stats.set_matrix_off_diagonal"><code class="docutils literal notranslate"><span class="pre">Stats.set_matrix_off_diagonal()</span></code></a></li>
-<li><a class="reference internal" href="#multineas.util.Stats.unflatten_symmetric_matrix"><code class="docutils literal notranslate"><span class="pre">Stats.unflatten_symmetric_matrix()</span></code></a></li>
+              <p class="caption" role="heading"><span class="caption-text">EXAMPLES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Tutorials and Examples</a></li>
 </ul>
-</li>
-<li><a class="reference internal" href="#multineas.util.Util"><code class="docutils literal notranslate"><span class="pre">Util</span></code></a><ul>
-<li><a class="reference internal" href="#multineas.util.Util.DTIME"><code class="docutils literal notranslate"><span class="pre">Util.DTIME</span></code></a></li>
-<li><a class="reference internal" href="#multineas.util.Util.DUTIME"><code class="docutils literal notranslate"><span class="pre">Util.DUTIME</span></code></a></li>
-<li><a class="reference internal" href="#multineas.util.Util.TIME"><code class="docutils literal notranslate"><span class="pre">Util.TIME</span></code></a></li>
-<li><a class="reference internal" href="#multineas.util.Util.TIMESTART"><code class="docutils literal notranslate"><span class="pre">Util.TIMESTART</span></code></a></li>
-<li><a class="reference internal" href="#multineas.util.Util.cos"><code class="docutils literal notranslate"><span class="pre">Util.cos</span></code></a></li>
-<li><a class="reference internal" href="#multineas.util.Util.el_time"><code class="docutils literal notranslate"><span class="pre">Util.el_time()</span></code></a></li>
-<li><a class="reference internal" href="#multineas.util.Util.error_msg"><code class="docutils literal notranslate"><span class="pre">Util.error_msg()</span></code></a></li>
-<li><a class="reference internal" href="#multineas.util.Util.exp"><code class="docutils literal notranslate"><span class="pre">Util.exp</span></code></a></li>
-<li><a class="reference internal" href="#multineas.util.Util.f2u"><code class="docutils literal notranslate"><span class="pre">Util.f2u()</span></code></a></li>
-<li><a class="reference internal" href="#multineas.util.Util.get_data"><code class="docutils literal notranslate"><span class="pre">Util.get_data()</span></code></a></li>
-<li><a class="reference internal" href="#multineas.util.Util.log"><code class="docutils literal notranslate"><span class="pre">Util.log</span></code></a></li>
-<li><a class="reference internal" href="#multineas.util.Util.mantisa_exp"><code class="docutils literal notranslate"><span class="pre">Util.mantisa_exp()</span></code></a></li>
-<li><a class="reference internal" href="#multineas.util.Util.sin"><code class="docutils literal notranslate"><span class="pre">Util.sin</span></code></a></li>
-<li><a class="reference internal" href="#multineas.util.Util.t_if"><code class="docutils literal notranslate"><span class="pre">Util.t_if()</span></code></a></li>
-<li><a class="reference internal" href="#multineas.util.Util.u2f"><code class="docutils literal notranslate"><span class="pre">Util.u2f()</span></code></a></li>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="multimin.html">Multi-dimensional Minimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plot.html">Plotting Utilities</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Utilities</a></li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-</div>
+
         </div>
       </div>
     </nav>
@@ -108,6 +84,7 @@
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">multineas.util.</span></span><span class="sig-name descname"><span class="pre">Stats</span></span><a class="reference internal" href="_modules/multineas/util.html#Stats"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multineas.util.Stats" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Abstract class with useful routines</p>
+<p>Attr. [HC]</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="multineas.util.Stats.calc_correlations_from_covariances">
 <span class="sig-name descname"><span class="pre">calc_correlations_from_covariances</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/multineas/util.html#Stats.calc_correlations_from_covariances"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multineas.util.Stats.calc_correlations_from_covariances" title="Link to this definition"></a></dt>
@@ -136,6 +113,9 @@ covariance matrices.</p>
 <span class="go">[1. 2. 3.]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">rhos</span><span class="p">)</span>
 <span class="go">[[0.1 0.2 0.3]]</span>
+<span class="go">    Attribution</span>
+<span class="go">    -----------</span>
+<span class="go">    [HC] This class was mostly developed by human intelligences.</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -187,7 +167,10 @@ covariance matrices.</p>
 </div>
 <section id="sources">
 <h2>Sources<a class="headerlink" href="#sources" title="Link to this heading"></a></h2>
-<p>Based on: <a class="reference external" href="https://www.visiondummy.com/2014/04/geometric-interpretation-covariance-matrix/">https://www.visiondummy.com/2014/04/geometric-interpretation-covariance-matrix/</a></p>
+<dl class="simple">
+<dt>Based on: <a class="reference external" href="https://www.visiondummy.com/2014/04/geometric-interpretation-covariance-matrix/">https://www.visiondummy.com/2014/04/geometric-interpretation-covariance-matrix/</a></dt><dd><p>[HC] This class was mostly developed by human intelligences.</p>
+</dd>
+</dl>
 </section>
 </dd></dl>
 
@@ -203,7 +186,10 @@ covariance matrices.</p>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>Sigmas</strong> – Array with covariance matrices corresponding to these sigmas and angles (Ngauss x 3 x 3).</p>
+<dd class="field-even"><p><strong>Sigmas</strong> – Array with covariance matrices corresponding to these sigmas and angles (Ngauss x 3 x 3).
+Attribution
+———–
+[HC] This class was mostly developed by human intelligences.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>numpy.ndarray</p>
@@ -231,6 +217,9 @@ covariance matrices.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">F</span> <span class="o">=</span> <span class="n">Stats</span><span class="o">.</span><span class="n">flatten_symmetric_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">F</span><span class="p">)</span>
 <span class="go">[1.  0.2 3. ]</span>
+<span class="go">    Attribution</span>
+<span class="go">    -----------</span>
+<span class="go">    [HC] This class was mostly developed by human intelligences.</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -256,6 +245,9 @@ NOTE: It should be normalized, ie. sum(probs)=1</p>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">Stats</span><span class="o">.</span><span class="n">gen_index</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">])</span>
+<span class="go">    Attribution</span>
+<span class="go">    -----------</span>
+<span class="go">    [HC] This class was mostly developed by human intelligences.</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -291,6 +283,9 @@ NOTE: It should be normalized, ie. sum(probs)=1</p>
 <span class="go">[[1. , 0.1, 0.2],</span>
 <span class="go"> [0.1, 1. , 0.3],</span>
 <span class="go"> [0.2, 0.3, 1. ]]</span>
+<span class="go">    Attribution</span>
+<span class="go">    -----------</span>
+<span class="go">    [HC] This class was mostly developed by human intelligences.</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -320,6 +315,9 @@ NOTE: It should be normalized, ie. sum(probs)=1</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
 <span class="go">[[1.  0.2]</span>
 <span class="go"> [0.2 3. ]]</span>
+<span class="go">    Attribution</span>
+<span class="go">    -----------</span>
+<span class="go">    [HC] This class was mostly developed by human intelligences.</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -331,6 +329,7 @@ NOTE: It should be normalized, ie. sum(probs)=1</p>
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">multineas.util.</span></span><span class="sig-name descname"><span class="pre">Util</span></span><a class="reference internal" href="_modules/multineas/util.html#Util"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multineas.util.Util" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>This abstract class contains useful methods for the package.</p>
+<p>Attr. [HC]</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="multineas.util.Util.DTIME">
 <span class="sig-name descname"><span class="pre">DTIME</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-1</span></span><a class="headerlink" href="#multineas.util.Util.DTIME" title="Link to this definition"></a></dt>
@@ -343,12 +342,12 @@ NOTE: It should be normalized, ie. sum(probs)=1</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="multineas.util.Util.TIME">
-<span class="sig-name descname"><span class="pre">TIME</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1769071951.528853</span></span><a class="headerlink" href="#multineas.util.Util.TIME" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">TIME</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1769096299.1102662</span></span><a class="headerlink" href="#multineas.util.Util.TIME" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="multineas.util.Util.TIMESTART">
-<span class="sig-name descname"><span class="pre">TIMESTART</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1769071951.528853</span></span><a class="headerlink" href="#multineas.util.Util.TIMESTART" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">TIMESTART</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1769096299.1102662</span></span><a class="headerlink" href="#multineas.util.Util.TIMESTART" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -382,6 +381,9 @@ ms (miliseconds), s (seconds), min (minutes), h (hours), d (days)</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Util</span><span class="o">.</span><span class="n">el_time</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># no output</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Util</span><span class="o">.</span><span class="n">el_time</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># measure elapsed time since program start</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">Util</span><span class="o">.</span><span class="n">DTIME</span><span class="p">,</span> <span class="n">Util</span><span class="o">.</span><span class="n">DUTIME</span><span class="p">)</span> <span class="c1"># show values of elapsed time</span>
+<span class="go">    Attribution</span>
+<span class="go">    -----------</span>
+<span class="go">    [HC] This class was mostly developed by human intelligences.</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -394,7 +396,10 @@ ms (miliseconds), s (seconds), min (minutes), h (hours), d (days)</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>error</strong> (<em>Exception</em>) – Error handle (eg. except ValueError as error).</p></li>
-<li><p><strong>msg</strong> (<em>str</em>) – Message to add to error.</p></li>
+<li><p><strong>msg</strong> (<em>str</em>) – Message to add to error.
+Attribution
+———–
+[HC] This class was mostly developed by human intelligences.</p></li>
 </ul>
 </dd>
 </dl>
@@ -417,10 +422,13 @@ ms (miliseconds), s (seconds), min (minutes), h (hours), d (days)</p>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>u</strong> – Unbound value.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float or array_like</p>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>u</strong> (<em>float or array_like</em>) – Unbound value.</p></li>
+<li><p><em>Attribution</em></p></li>
+<li><p><em>———–</em></p></li>
+<li><p><em>[HC] This function was mostly developed by human intelligences.</em></p></li>
+</ul>
+</p>
 </dd>
 </dl>
 </dd></dl>
@@ -443,6 +451,9 @@ ms (miliseconds), s (seconds), min (minutes), h (hours), d (days)</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">multineas.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">Util</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">path</span><span class="o">=</span><span class="n">Util</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;nea_extended.json.gz&quot;</span><span class="p">)</span>
+<span class="go">Attribution</span>
+<span class="go">-----------</span>
+<span class="go">[HC] This function was mostly developed by human intelligences.</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -473,6 +484,9 @@ ms (miliseconds), s (seconds), min (minutes), h (hours), d (days)</p>
 <span class="go"># returns m=2.345, e=2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="p">,</span> <span class="n">e</span> <span class="o">=</span> <span class="n">Util</span><span class="o">.</span><span class="n">mantisa_exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.000023213</span><span class="p">)</span>
 <span class="go"># return m=-2.3213, e=-5</span>
+<span class="go">    Attribution</span>
+<span class="go">    -----------</span>
+<span class="go">    [HC] This class was mostly developed by human intelligences.</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -510,6 +524,9 @@ If s[i] == 0, the parameter is unchanged.</p></li>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">uparams</span> <span class="o">=</span> <span class="n">Util</span><span class="o">.</span><span class="n">t_if</span><span class="p">(</span><span class="n">minparams</span><span class="p">,</span> <span class="n">scales</span><span class="p">,</span> <span class="n">Util</span><span class="o">.</span><span class="n">f2u</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">uparams</span><span class="p">)</span>
 <span class="go">[0.0, 0.0, -2.197224577336219, -2.197224577336219, 0.8472978603872034]</span>
+<span class="go">Attribution</span>
+<span class="go">-----------</span>
+<span class="go">[HC] This function was mostly developed by human intelligences.</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -526,10 +543,13 @@ If s[i] == 0, the parameter is unchanged.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>x</strong> – Value in the interval [0,s].</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float or array_like</p>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>x</strong> (<em>float or array_like</em>) – Value in the interval [0,s].</p></li>
+<li><p><em>Attribution</em></p></li>
+<li><p><em>———–</em></p></li>
+<li><p><em>[HC] This function was mostly developed by human intelligences.</em></p></li>
+</ul>
+</p>
 </dd>
 </dl>
 </dd></dl>
@@ -541,7 +561,9 @@ If s[i] == 0, the parameter is unchanged.</p></li>
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="plot.html" class="btn btn-neutral float-left" title="Plotting Utilities" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
 
   <hr/>
 
