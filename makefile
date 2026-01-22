@@ -2,7 +2,9 @@
 # MultiNEAs Makefile
 ##################################################################
 
-.PHONY: help install install-dev test clean build upload docs release
+.PHONY: help install install-dev test clean build upload upload-test docs push release
+RELMODE=release
+COMMIT_MSG ?= chore: sync tracked changes
 
 help:
 	@echo "MultiNEAs Development Makefile"
@@ -16,6 +18,7 @@ help:
 	@echo "  upload       - Upload package to PyPI"
 	@echo "  upload-test  - Upload package to TestPyPI"
 	@echo "  docs         - Build documentation"
+	@echo "  push         - Commit (tracked changes) and push current branch"
 	@echo "  release      - Release a new version (usage: make release RELMODE=release VERSION=x.y.z)"
 
 install:
@@ -52,7 +55,19 @@ upload-test: build
 docs:
 	cd docs && make html
 
-#Example: make release RELMODE=release VERSION=0.2.0.2 
-release:
+push:
+	@echo "Committing tracked changes (if any)..."
+	@if ! git diff --quiet || ! git diff --cached --quiet; then \
+		git add -u && \
+		git commit -m "$(COMMIT_MSG)"; \
+	else \
+		echo "Working tree is clean (tracked files); nothing to commit."; \
+	fi
+	@echo "Pushing current branch..."
+	@git push -u origin HEAD
+
+# Example: make release RELMODE=release VERSION=0.2.0.2
+release: push
+	@test -n "$(VERSION)" || (echo "ERROR: VERSION is required. Example: make release RELMODE=release VERSION=0.2.0" && exit 1)
 	@echo "Releasing a new version..."
 	@bash bin/release.sh $(RELMODE) $(VERSION)
