@@ -69,7 +69,7 @@ class ComposedMultiVariateNormal(object):
     >>> mus = [[0, 0], [1, 1]]
     >>> weights = [0.1, 0]
     >>> MND1 = ComposedMultiVariateNormal(mus=mus, weights=weights)
-    >>> MND1.setSigmas([[[1, 0.2], [0, 1]], [[1, 0], [0, 1]]])
+    >>> MND1.set_sigmas([[[1, 0.2], [0, 1]], [[1, 0], [0, 1]]])
     >>> print(MND1)
 
     >>> params = [0.1, 0.9, 0, 0, 1, 1, 1, 0.2, 0.2, 1, 1, 0, 0, 1]
@@ -96,11 +96,11 @@ class ComposedMultiVariateNormal(object):
         
         #Method 2: initialize from flatten parameters
         elif params is not None:
-            self.setParams(params,Nvars)
+            self.set_params(params,Nvars)
 
         #Method 3: initialize from flatten parameters
         elif stdcorr is not None:
-            self.setStdcorr(stdcorr,Nvars)
+            self.set_stdcorr(stdcorr,Nvars)
 
         #Method 4: initialize from explicit arrays
         else:
@@ -109,7 +109,7 @@ class ComposedMultiVariateNormal(object):
             try:
                 mus[0,0]
             except Exception as e:
-                Util.errorMsg(e,"Parameter 'mus' must be a matrix, eg. mus=[[0,0]]")
+                Util.error_msg(e,"Parameter 'mus' must be a matrix, eg. mus=[[0,0]]")
                 raise
             self.mus=mus
 
@@ -123,18 +123,18 @@ class ComposedMultiVariateNormal(object):
             elif len(weights)!=self.Ngauss:
                 raise ValueError(f"Length of weights array ({len(weights)}) must be equal to number of MND ({self.Ngauss})")
             else:
-                self._normalizeWeights(weights)
+                self._normalize_weights(weights)
 
             #Secondary attributes
             if Sigmas is None:
                 self.Sigmas=None
                 self.params=None
             else:
-                self.setSigmas(Sigmas)
+                self.set_sigmas(Sigmas)
                 
         self._nerror=0
 
-    def setSigmas(self,Sigmas):
+    def set_sigmas(self,Sigmas):
         """
         Set the value of list of covariance matrices.
         
@@ -146,11 +146,11 @@ class ComposedMultiVariateNormal(object):
             Array of covariance matrices.
         """
         self.Sigmas=np.array(Sigmas)
-        self._checkSigmas()
-        self._flattenParams()
-        self._flattenStdcorr()
+        self._check_sigmas()
+        self._flatten_params()
+        self._flatten_stdcorr()
         
-    def setParams(self,params,Nvars):
+    def set_params(self,params,Nvars):
         """
         Set the properties of the CMND from flatten params.
         
@@ -165,11 +165,11 @@ class ComposedMultiVariateNormal(object):
         """
         if Nvars==0 or len(params)==0:
             raise ValueError(f"When setting from flat params, Nvars ({Nvars}) cannot be zero")
-        self._unflattenParams(params,Nvars)
-        self._normalizeWeights(self.weights)
+        self._unflatten_params(params,Nvars)
+        self._normalize_weights(self.weights)
         return 
 
-    def setStdcorr(self,stdcorr,Nvars):
+    def set_stdcorr(self,stdcorr,Nvars):
         """
         Set the properties of the CMND from flatten stdcorr.
         
@@ -184,34 +184,34 @@ class ComposedMultiVariateNormal(object):
         """
         if Nvars==0 or len(stdcorr)==0:
             raise ValueError(f"When setting from flat params, Nvars ({Nvars}) cannot be zero")
-        self._unflattenStdcorr(stdcorr,Nvars)
-        self._normalizeWeights(self.weights)
+        self._unflatten_stdcorr(stdcorr,Nvars)
+        self._normalize_weights(self.weights)
         return
     
-    def _normalizeWeights(self,weights):
+    def _normalize_weights(self,weights):
         """
         Normalize weights in such a way that sum(weights)=1
         """
         self.weights=np.array(weights)/sum(np.array(weights))
             
-    def _flattenParams(self):
+    def _flatten_params(self):
         """
         Flatten params
         """
-        self._checkParams(self.Sigmas)
+        self._check_params(self.Sigmas)
         
         #Flatten covariance matrix
-        SF=[Stats.flattenSymmetricMatrix(self.Sigmas[i]).tolist() for i in range(self.Ngauss)]
+        SF=[Stats.flatten_symmetric_matrix(self.Sigmas[i]).tolist() for i in range(self.Ngauss)]
         self.params=np.concatenate((self.weights.flatten(),
                                     self.mus.flatten(),
                                     list(itertools.chain(*SF))))
         self.Npars=len(self.params) #Ngauss*(1+Nvars+Nvar*(Nvars+1)/2)
         
-    def _flattenStdcorr(self):
+    def _flatten_stdcorr(self):
         """
         Flatten stdcorr
         """
-        self._checkParams(self.sigmas)
+        self._check_params(self.sigmas)
         
         #Flatten stds. and correlations
         self.stdcorr=np.concatenate((self.weights.flatten(),
@@ -221,7 +221,7 @@ class ComposedMultiVariateNormal(object):
                                     ))
         self.Ncor=len(self.stdcorr)
         
-    def _unflattenParams(self,params,Nvars):
+    def _unflatten_params(self,params,Nvars):
         """
         Unflatten properties from params
         """
@@ -249,10 +249,10 @@ class ComposedMultiVariateNormal(object):
         #Get the sigmas
         Nsym=int(Nvars*(Nvars+1)/2)
         Sigmas=np.zeros((Ngauss,Nvars,Nvars))
-        [Stats.unflattenSymmetricMatrix(F,Sigmas[i]) for i,F in enumerate(self.params[i:i+Ngauss*Nsym].reshape(Ngauss,Nsym))]
+        [Stats.unflatten_symmetric_matrix(F,Sigmas[i]) for i,F in enumerate(self.params[i:i+Ngauss*Nsym].reshape(Ngauss,Nsym))]
 
         #Normalize weights
-        self._normalizeWeights(weights)
+        self._normalize_weights(weights)
 
         #Check Sigmas
         self.Nvars=Nvars
@@ -260,12 +260,12 @@ class ComposedMultiVariateNormal(object):
         self.weights=weights
         self.mus=mus
         self.Sigmas=Sigmas
-        self._checkSigmas()
+        self._check_sigmas()
 
         #Flatten correlations
-        self._flattenStdcorr()
+        self._flatten_stdcorr()
         
-    def _unflattenStdcorr(self,stdcorr,Nvars):
+    def _unflatten_stdcorr(self,stdcorr,Nvars):
         """
         Unflatten properties from stdcorr
         """
@@ -299,7 +299,7 @@ class ComposedMultiVariateNormal(object):
         rhos=self.stdcorr[i:i+Ngauss*Noff].reshape(Ngauss,Noff)
 
         #Normalize weights
-        self._normalizeWeights(weights)
+        self._normalize_weights(weights)
 
         #Set properties
         self.Nvars=Nvars
@@ -310,17 +310,17 @@ class ComposedMultiVariateNormal(object):
         self.rhos=rhos
 
         #Generate Sigma
-        self.Sigmas=Stats.calcCovarianceFromCorrelations(self.sigmas,self.rhos)
-        self._checkSigmas()
+        self.Sigmas=Stats.calc_covariance_from_correlations(self.sigmas,self.rhos)
+        self._check_sigmas()
 
         #Flatten params
-        self._flattenParams()
+        self._flatten_params()
 
-    def _checkSigmas(self):
+    def _check_sigmas(self):
         """
         Check value of sigmas
         """
-        self._checkParams(self.Sigmas)
+        self._check_params(self.Sigmas)
         
         #Check matrix
         if len(self.Sigmas)!=self.Ngauss:
@@ -339,9 +339,9 @@ class ComposedMultiVariateNormal(object):
             """
 
         #Get sigmas and correlations
-        self.sigmas,self.rhos=Stats.calcCorrelationsFromCovariances(self.Sigmas)
+        self.sigmas,self.rhos=Stats.calc_correlations_from_covariances(self.Sigmas)
 
-    def _checkParams(self,checkvar=None):
+    def _check_params(self,checkvar=None):
         if checkvar is None:
             raise AssertionError("You must first set the parameters (Sigmas, mus, etc.)")
 
@@ -359,7 +359,7 @@ class ComposedMultiVariateNormal(object):
         p : float
             PDF value at X.
         """
-        self._checkParams(self.params)
+        self._check_params(self.params)
         self._nerror=0
         value=0
         
@@ -387,15 +387,15 @@ class ComposedMultiVariateNormal(object):
         rs : numpy.ndarray
             Samples (Nsam x Nvars).
         """
-        self._checkParams(self.params)
+        self._check_params(self.params)
         
         Xs=np.zeros((Nsam,self.Nvars))
         for i in range(Nsam):
-            n=Stats.genIndex(self.weights)
+            n=Stats.gen_index(self.weights)
             Xs[i]=multinorm.rvs(self.mus[n],self.Sigmas[n])
         return Xs
 
-    def sampleCMNDLikelihood(self,uparams,data=None,pmap=None,tset="stdcorr",scales=[],verbose=0):
+    def sample_cmnd_likelihood(self,uparams,data=None,pmap=None,tset="stdcorr",scales=[],verbose=0):
         """
         Compute the negative value of the logarithm of the likelihood of a sample.
         
@@ -404,7 +404,7 @@ class ComposedMultiVariateNormal(object):
         uparams : numpy.ndarray
             Minimization parameters (unbound).
         data : numpy.ndarray, optional
-            Data for which logL is computed.
+            Data for which log_l is computed.
         pmap : function, optional
             Routine to map from minparams to params or stdcorr.
             Example:
@@ -421,11 +421,11 @@ class ComposedMultiVariateNormal(object):
         
         Returns
         -------
-        logL : float
+        log_l : float
             Negative log-likelihood.
         """
         #Map unbound minimization parameters into their right range
-        minparams=np.array(Util.tIF(uparams,scales,Util.u2f))
+        minparams=np.array(Util.t_if(uparams,scales,Util.u2f))
 
         #Map minimizaiton parameters into CMND parameters
         params=np.array(pmap(minparams))
@@ -436,22 +436,22 @@ class ComposedMultiVariateNormal(object):
             print(f"CMND parameters: {params.tolist()}")
 
         #Update CMND parameters according to type of minimization parameters
-        if tset=="params":self.setParams(params,self.Nvars)
-        else:self.setStdcorr(params,self.Nvars)
+        if tset=="params":self.set_params(params,self.Nvars)
+        else:self.set_stdcorr(params,self.Nvars)
 
         if verbose>=2:
             print("CMND:")
             print(self)
 
         #Compute PDF for each point in data and sum
-        logL=-np.log(self.pdf(data)).sum()
+        log_l=-np.log(self.pdf(data)).sum()
         
         if verbose>=1:
-            print(f"-logL = {logL:e}")
+            print(f"-log_l = {log_l:e}")
 
-        return logL
+        return log_l
 
-    def plotSample(self,data=None,
+    def plot_sample(self,data=None,
                    N=10000,
                    props=None,ranges=None,
                    figsize=2,sargs=dict(),hargs=None):
@@ -482,11 +482,11 @@ class ComposedMultiVariateNormal(object):
             
         Examples
         --------
-        >>> G = CMND.plotSample(N=10000, sargs=dict(s=1, c='r'))
-        >>> G = CMND.plotSample(N=1000, sargs=dict(s=1, c='r'), hargs=dict(bins=20))
+        >>> G = CMND.plot_sample(N=10000, sargs=dict(s=1, c='r'))
+        >>> G = CMND.plot_sample(N=1000, sargs=dict(s=1, c='r'), hargs=dict(bins=20))
 
         >>> CMND = ComposedMultiVariateNormal(Ngauss=1, Nvars=2)
-        >>> fig = CMND.plotSample(N=1000, hargs=dict(bins=20), sargs=dict(s=1, c='r'))
+        >>> fig = CMND.plot_sample(N=1000, hargs=dict(bins=20), sargs=dict(s=1, c='r'))
 
         >>> CMND = ComposedMultiVariateNormal(Ngauss=2, Nvars=3)
         >>> print(CMND)
@@ -494,7 +494,7 @@ class ComposedMultiVariateNormal(object):
         >>> weights = [0.1, 0.9]
         >>> Sigmas = [[[1, 0.2], [0, 1]], [[1, 0], [0, 1]]]
         >>> MND1 = ComposedMultiVariateNormal(mus=mus, weights=weights, Sigmas=Sigmas)
-        >>> #MND1=ComposedMultiVariateNormal(mus=mus,weights=weights);MND1.setSigmas(Sigmas)
+        >>> #MND1=ComposedMultiVariateNormal(mus=mus,weights=weights);MND1.set_sigmas(Sigmas)
         >>> print(MND1)
         >>> print(MND1.pdf([1, 1]))
         >>> params = [0.1, 0.9, 0.0, 0.0, 1.0, 1.0, 1.0, 0.2, 1.0, 1.0, 0.0, 1.0]
@@ -516,8 +516,8 @@ class ComposedMultiVariateNormal(object):
         if self.Nvars>2:
             G=CornerPlot(properties,figsize=figsize)
             if hargs is not None:
-                G.plotHist(self.data,**hargs)
-            G.scatterPlot(self.data,**sargs);
+                G.plot_hist(self.data,**hargs)
+            G.scatter_plot(self.data,**sargs);
             G.fig.tight_layout()
             return G
         else:
@@ -534,7 +534,7 @@ class ComposedMultiVariateNormal(object):
             fig.tight_layout()
             return fig
     
-    def _strParams(self):
+    def _str_params(self):
         """
         Generate strings explaining which quantities are stored in the flatten arrays params and stdcorr.
         
@@ -593,7 +593,7 @@ class ComposedMultiVariateNormal(object):
         self.Npars=len(self.params)
         self.Ncor=len(self.stdcorr)
         
-        self._strParams()
+        self._str_params()
         
         msg=f"""Composition of Ngauss = {self.Ngauss} gaussian multivariates of Nvars = {self.Nvars} random variables:
     Weights: {self.weights.tolist()}
@@ -661,26 +661,26 @@ class FitCMND():
     >>> mus = [[1.0, 0.5, -0.5]]
     >>> sigmas = [[1, 1.2, 2.3]]
     >>> angles = [[10*Angle.Deg, 30*Angle.Deg, 20*Angle.Deg]]
-    >>> Sigmas = Stats.calcCovarianceFromRotation(sigmas, angles)
+    >>> Sigmas = Stats.calc_covariance_from_rotation(sigmas, angles)
     >>> CMND = ComposedMultiVariateNormal(mus=mus, weights=weights, Sigmas=Sigmas)
     >>> data = CMND.rvs(10000)
     >>> F = FitCMND(Ngauss=CMND.Ngauss, Nvars=CMND.Nvars)
     >>> F.cmnd._fevfreq = 200
     >>> bounds = None
-    >>> # bounds = F.setBounds(boundw=(0.1, 0.9))
-    >>> # bounds = F.setBounds(boundr=(-0.9, 0.9))
-    >>> # bounds = F.setBounds(bounds=(0.1, 0.9*F._sigmax))
-    >>> # bounds = F.setBounds(boundsm=((-3, 3), (-2, 2), (-2, 2)), boundw=(0.1, 0.9), bounds=(0.1, 0.9*F._sigmax), boundr=(-0.9, 0.9))
+    >>> # bounds = F.set_bounds(boundw=(0.1, 0.9))
+    >>> # bounds = F.set_bounds(boundr=(-0.9, 0.9))
+    >>> # bounds = F.set_bounds(bounds=(0.1, 0.9*F._sigmax))
+    >>> # bounds = F.set_bounds(boundsm=((-3, 3), (-2, 2), (-2, 2)), boundw=(0.1, 0.9), bounds=(0.1, 0.9*F._sigmax), boundr=(-0.9, 0.9))
     >>> print(bounds)
-    >>> Util.elTime(0)
-    >>> # F.fitData(data, verbose=0, tol=1e-3, options=dict(maxiter=100, disp=True), bounds=bounds)
-    >>> F.fitData(data, verbose=0, tol=1e-3, options=dict(maxiter=100, disp=True), method=None, bounds=bounds)
-    >>> T = Util.elTime()
+    >>> Util.el_time(0)
+    >>> # F.fit_data(data, verbose=0, tol=1e-3, options=dict(maxiter=100, disp=True), bounds=bounds)
+    >>> F.fit_data(data, verbose=0, tol=1e-3, options=dict(maxiter=100, disp=True), method=None, bounds=bounds)
+    >>> T = Util.el_time()
     >>> print(F.cmnd)
-    >>> G = F.plotFit(figsize=3, hargs=dict(bins=30, cmap='YlGn'), sargs=dict(s=0.5, edgecolor='None', color='r'))
-    >>> F.saveFit("/tmp/fit.pkl", useprefix=False)
-    >>> F._loadFit("/tmp/fit.pkl")
-    >>> F.saveFit("/tmp/nuevo.pkl", useprefix=True, myprefix="test")
+    >>> G = F.plot_fit(figsize=3, hargs=dict(bins=30, cmap='YlGn'), sargs=dict(s=0.5, edgecolor='None', color='r'))
+    >>> F.save_fit("/tmp/fit.pkl", useprefix=False)
+    >>> F._load_fit("/tmp/fit.pkl")
+    >>> F.save_fit("/tmp/nuevo.pkl", useprefix=True, myprefix="test")
     """
     
     
@@ -692,7 +692,7 @@ class FitCMND():
     def __init__(self,objfile=None,Ngauss=1,Nvars=2):
         
         if objfile is not None:
-            self._loadFit(objfile)
+            self._load_fit(objfile)
         else:
             #Basic attributes
             self.Ngauss=Ngauss
@@ -704,13 +704,13 @@ class FitCMND():
             self.cmnd=ComposedMultiVariateNormal(Ngauss=Ngauss,Nvars=Nvars)
 
             #Set parameters
-            self.setParams()
+            self.set_params()
             
         #Other
         self.fig=None
         self.prefix=""
         
-    def setParams(self,mu=0.5,sigma=1.0,rho=0.5):
+    def set_params(self,mu=0.5,sigma=1.0,rho=0.5):
         """
         Set the value of the basic params (minparams, scales, etc.).
         
@@ -742,11 +742,11 @@ class FitCMND():
             
         self.minparams=np.array(minparams)
         self.scales=np.array(scales)
-        self.uparams=Util.tIF(self.minparams,self.scales,Util.f2u)
+        self.uparams=Util.t_if(self.minparams,self.scales,Util.f2u)
         
     def pmap(self,minparams):
         """
-        Mapping routine used in sampleCMNDLikelihood.
+        Mapping routine used in sample_cmnd_likelihood.
         
         Mapping may change depending on the complexity of the parameters to be minimized.
         Here we assume that all parameters in the stdcorr vector is susceptible to be minimized
@@ -767,7 +767,7 @@ class FitCMND():
         stdcorr[-self.Ngauss*self.Ncorr:]-=1
         return stdcorr
     
-    def logL(self,data):
+    def log_l(self,data):
         """
         Value of the -log(Likelihood).
         
@@ -778,18 +778,18 @@ class FitCMND():
             
         Returns
         -------
-        logL : float
+        log_l : float
             Value of the -log(Likelihood).
         """
         
-        logL=self.cmnd.sampleCMNDLikelihood(self.uparams,
+        log_l=self.cmnd.sample_cmnd_likelihood(self.uparams,
                                             data=data,
                                             pmap=self.pmap,
                                             tset="stdcorr",
                                             scales=self.scales)
-        return logL
+        return log_l
     
-    def fitData(self,data,verbose=0,advance=0,**args):
+    def fit_data(self,data,verbose=0,advance=0,**args):
         """
         Minimization procedure.
         
@@ -800,7 +800,7 @@ class FitCMND():
         data : numpy.ndarray
             Array with data (Nsam x Nvars).
         verbose : int, optional
-            Verbosity level for the sampleCMNDLikelihood routine (default 0).
+            Verbosity level for the sample_cmnd_likelihood routine (default 0).
         advance : int, optional
             If larger than 0 show advance each "advance" iterations (default 0).
         **args : dict
@@ -818,7 +818,7 @@ class FitCMND():
         Examples
         --------
         >>> F = FitCMND(1, 3)
-        >>> F.fitData(data, verbose=0, tol=1e-3, options=dict(maxiter=100, disp=True))
+        >>> F.fit_data(data, verbose=0, tol=1e-3, options=dict(maxiter=100, disp=True))
         """
         if advance:
             advance=int(advance)
@@ -828,7 +828,7 @@ class FitCMND():
                     print(f"Iterations:")
                 if self.neval%advance==0 or show:
                     vars = np.array2string(X, separator=', ', precision=4, max_line_width=np.inf, formatter={'float_kind':lambda x: f"{x:.2g}"})
-                    fun = self.cmnd.sampleCMNDLikelihood(X,data,self.pmap,"stdcorr",self.scales,verbose)
+                    fun = self.cmnd.sample_cmnd_likelihood(X,data,self.pmap,"stdcorr",self.scales,verbose)
                     print(f"Iter {self.neval}:\n\tVars: {vars}\n\tLogL/N: {fun/len(data)}")
                 self.neval+=1
         else:
@@ -838,7 +838,7 @@ class FitCMND():
         self.cmnd._ignoreWarnings=self._ignoreWarnings
         self.minargs=dict(method="Powell")
         self.minargs.update(args)
-        self.solution=minimize(self.cmnd.sampleCMNDLikelihood,
+        self.solution=minimize(self.cmnd.sample_cmnd_likelihood,
                                self.minparams,
                                callback=_advance,
                                args=(data,self.pmap,"stdcorr",self.scales,verbose),
@@ -848,16 +848,19 @@ class FitCMND():
         self.uparams=self.solution.x
 
         #Set the new params
-        self._invParams(self.cmnd.stdcorr)
-        self._updatePrefix()
+        #Set the new params
+        self.minparams=Util.t_if(self.uparams,self.scales,Util.u2f)
+        params=self.pmap(self.minparams)
+        self.cmnd.set_stdcorr(params,self.Nvars)
+        self._update_prefix()
             
-    def _loadFit(self,objfile):
+    def _load_fit(self,objfile):
         F=pickle.load(open(objfile,"rb"))
         for k in F.__dict__.keys():
             setattr(self,k,getattr(F,k))
-        self._updatePrefix()
+        self._update_prefix()
     
-    def plotFit(self,N=10000,figsize=2,props=None,ranges=None,hargs=dict(),sargs=dict()):
+    def plot_fit(self,N=10000,figsize=2,props=None,ranges=None,hargs=dict(),sargs=dict()):
         """
         Plot the result of the fitting procedure.
         
@@ -884,8 +887,8 @@ class FitCMND():
         Examples
         --------
         >>> F = FitCMND(1, 3)
-        >>> F.fitData(data, verbose=0, tol=1e-3, options=dict(maxiter=100, disp=True))
-        >>> G = F.plotFit(figsize=3, hargs=dict(bins=30, cmap='YlGn'), sargs=dict(s=0.5, edgecolor='None', color='r'))
+        >>> F.fit_data(data, verbose=0, tol=1e-3, options=dict(maxiter=100, disp=True))
+        >>> G = F.plot_fit(figsize=3, hargs=dict(bins=30, cmap='YlGn'), sargs=dict(s=0.5, edgecolor='None', color='r'))
         """
         Xfits=self.cmnd.rvs(N)
         properties=dict()
@@ -900,8 +903,8 @@ class FitCMND():
             
         if self.Nvars>2:
             G=CornerPlot(properties,figsize=figsize)
-            G.plotHist(Xfits,**hargs)
-            G.scatterPlot(self.data,**sargs);
+            G.plot_hist(Xfits,**hargs)
+            G.scatter_plot(self.data,**sargs);
             G.fig.tight_layout()
             self.fig=G.fig
             return G
@@ -918,12 +921,12 @@ class FitCMND():
             self.fig=fig
             return fig
         
-    def _invParams(self,stdcorr):
+    def _inv_params(self,stdcorr):
         minparams=np.copy(stdcorr)
         minparams[-self.Ngauss*self.Ncorr:]+=1
         self.minparams=minparams[1:] if self.Ngauss==1 else minparams
 
-    def _updatePrefix(self,myprefix=None):
+    def _update_prefix(self,myprefix=None):
         """
         Update prefix of fit.
         
@@ -946,7 +949,7 @@ class FitCMND():
             myprefix=f"_{myprefix}"
         self.prefix=f"{self.Ngauss}cmnd{myprefix}_{self.hash}"
         
-    def saveFit(self,objfile=None,useprefix=True,myprefix=None):
+    def save_fit(self,objfile=None,useprefix=True,myprefix=None):
         """
         Pickle the result of a fit.
         
@@ -966,7 +969,7 @@ class FitCMND():
         If objfile="fit.pkl", the final filename will be fit-1mnd_asa33.pkl
         """
         self.fig=None
-        self._updatePrefix(myprefix)
+        self._update_prefix(myprefix)
         if objfile is None:
             objfile=f"/tmp/FitCMND.pkl"
         if useprefix:
@@ -974,7 +977,7 @@ class FitCMND():
             objfile=f"{parts[0]}-{self.prefix}{parts[1]}"
         pickle.dump(self,open(objfile,"wb"))
         
-    def setBounds(self,boundw=None,bounds=None,boundr=None,boundsm=None):
+    def set_bounds(self,boundw=None,bounds=None,boundr=None,boundsm=None):
         """
         Set the minimization parameters.
         
@@ -1025,5 +1028,6 @@ class FitCMND():
         
         if self.Ngauss==1:
             bounds=bounds[1:]
+        self.cmnd._str_params()
         return bounds
 

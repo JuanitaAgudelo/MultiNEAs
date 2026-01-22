@@ -25,9 +25,9 @@ class Util(object):
     
     #Stores the time of start of the script when gravray is imported
     TIMESTART=time()
-    #Stores the time of the last call of elTime
+    #Stores the time of the last call of el_time
     TIME=time()
-    #Stores the duration between elTime consecutive calls 
+    #Stores the duration between el_time consecutive calls 
     DTIME=-1
     DTIME=-1
     DUTIME=[]
@@ -93,7 +93,7 @@ class Util(object):
         return s/(1+Util.exp(-t))
 
     @staticmethod
-    def tIF(p,s,f):
+    def t_if(p,s,f):
         """
         Transform a set of parameters using a transformation function f and scales s.
         
@@ -119,13 +119,13 @@ class Util(object):
         --------
         >>> scales = [0, 0, 10, 10, 1]
         >>> minparams = [0.0, 0.0, 1, 1, 0.7]
-        >>> uparams = Util.tIF(minparams, scales, Util.f2u)
+        >>> uparams = Util.t_if(minparams, scales, Util.f2u)
         >>> print(uparams)
         [0.0, 0.0, -2.197224577336219, -2.197224577336219, 0.8472978603872034]
         """
         return [f(p[i],s[i]) if s[i]>0 else p[i] for i in range(len(p))]
 
-    def errorMsg(error,msg):
+    def error_msg(error,msg):
         """
         Add a custom message msg to an error handle.
 
@@ -138,13 +138,13 @@ class Util(object):
         """
         error.args=(error.args if error.args else tuple())+(msg,)
 
-    def _tUnit(t):
+    def _t_unit(t):
         for unit,base in dict(d=86400,h=3600,min=60,s=1e0,ms=1e-3,us=1e-6,ns=1e-9).items():
             tu=t/base
             if tu>1:break
         return tu,unit,base
     
-    def elTime(verbose=1,start=False):
+    def el_time(verbose=1,start=False):
         """
         Compute the time elapsed since last call of this routine.  The displayed time 
         is preseneted in the more convenient unit, ns (nano seconds), us (micro seconds), 
@@ -166,9 +166,9 @@ class Util(object):
 
         Examples
         --------
-        >>> Util.elTime() # basic usage (show output)
-        >>> Util.elTime(verbose=0) # no output
-        >>> Util.elTime(start=True) # measure elapsed time since program start
+        >>> Util.el_time() # basic usage (show output)
+        >>> Util.el_time(verbose=0) # no output
+        >>> Util.el_time(start=True) # measure elapsed time since program start
         >>> print(Util.DTIME, Util.DUTIME) # show values of elapsed time
         """
         t=time()
@@ -178,14 +178,14 @@ class Util(object):
             msg="since script start"
         else:
             msg="since last call"
-        dtu,unit,base=Util._tUnit(dt)
+        dtu,unit,base=Util._t_unit(dt)
         if verbose:print("Elapsed time %s: %g %s"%(msg,dtu,unit))
         Util.DTIME=dt
         Util.DUTIME=[dtu,unit]
         Util.TIME=time()
         return dt,[dtu,unit] 
 
-    def mantisaExp(x):
+    def mantisa_exp(x):
         """
         Calculate the mantisa and exponent of a number.
         
@@ -203,9 +203,9 @@ class Util(object):
             
         Examples
         --------
-        >>> m, e = Util.mantisaExp(234.5)
+        >>> m, e = Util.mantisa_exp(234.5)
         # returns m=2.345, e=2
-        >>> m, e = Util.mantisaExp(-0.000023213)
+        >>> m, e = Util.mantisa_exp(-0.000023213)
         # return m=-2.3213, e=-5
         """
         xa=np.abs(x)
@@ -224,12 +224,12 @@ class Stats(object):
     #Golden ratio: required for golden gaussian.
     phi=(1+5**0.5)/2
     
-    def genIndex(probs):
+    def gen_index(probs):
         """
         Given a set of (normalized) probabilities, randomly generate an index n following the 
         probabilities.
 
-        For instance if we have 3 events with probabilities 0.1, 0.7, 0.2, genIndex will generate
+        For instance if we have 3 events with probabilities 0.1, 0.7, 0.2, gen_index will generate
         a number in the set (0,1,2) having those probabilities, ie. 1 will have 70% of probability.
         
         Parameters
@@ -245,7 +245,7 @@ class Stats(object):
             
         Examples
         --------
-        >>> n = Stats.genIndex([0.1, 0.7, 0.2])
+        >>> n = Stats.gen_index([0.1, 0.7, 0.2])
         """
         cums=np.cumsum(probs)
         if not math.isclose(cums[-1],1,rel_tol=1e-5):
@@ -255,7 +255,7 @@ class Stats(object):
         n=isort[cond][0] if sum(cond)>0 else isort[0]
         return n
         
-    def setMatrixOffDiagonal(M,off):
+    def set_matrix_off_diagonal(M,off):
         """
         Set a matrix with the terms of the off diagonal
         
@@ -275,7 +275,7 @@ class Stats(object):
         --------
         >>> M = np.eye(3)
         >>> off = [0.1, 0.2, 0.3]
-        >>> Stats.setMatrixOffDiagonal(M, off)
+        >>> Stats.set_matrix_off_diagonal(M, off)
         >>> print(M)
         [[1. , 0.1, 0.2],
          [0.1, 1. , 0.3],
@@ -286,7 +286,7 @@ class Stats(object):
         for i,j in zip(I,J):M[i,j]=ffo.pop() if j>i else 0
         M[:,:]=np.triu(M)+np.tril(M.T,-1)
         
-    def calcCovarianceFromCorrelations(sigmas,rhos):
+    def calc_covariance_from_correlations(sigmas,rhos):
         """
         Compute covariance matrices from the standard deviations and correlations (rho).
 
@@ -308,7 +308,7 @@ class Stats(object):
         >>> sigmas = np.array([[1, 2, 3]])
         >>> # rho_12, rho_13, rho_23
         >>> rhos = np.array([[0.1, 0.2, 0.3]])
-        >>> S = Stats.calcCovarianceFromCorrelations(sigmas, rhos)
+        >>> S = Stats.calc_covariance_from_correlations(sigmas, rhos)
         >>> print(S)
         [[[1.  0.2 0.6]
           [0.2 4.  1.8]
@@ -319,7 +319,7 @@ class Stats(object):
         >>> rho = rhos[0]
         >>> sigma = sigmas[0]
         >>> R = np.eye(3)
-        >>> Stats.setMatrixOffDiagonal(R, rho)
+        >>> Stats.set_matrix_off_diagonal(R, rho)
         >>> M = np.zeros((3, 3))
         >>> for i in range(3):
         ...     for j in range(3):
@@ -347,11 +347,11 @@ class Stats(object):
             
         Sigmas=np.array(len(sigmas)*[np.eye(Nvars)])
         for Sigma,sigma,rho in zip(Sigmas,sigmas,rhos):
-            Stats.setMatrixOffDiagonal(Sigma,rho)
+            Stats.set_matrix_off_diagonal(Sigma,rho)
             Sigma*=np.outer(sigma,sigma)
         return Sigmas
 
-    def calcCorrelationsFromCovariances(Sigmas):
+    def calc_correlations_from_covariances(Sigmas):
         """
         Compute the standard deviations and corresponding correlation coefficients given a set of 
         covariance matrices.
@@ -375,7 +375,7 @@ class Stats(object):
         ...      [0.2, 4. , 1.8],
         ...      [0.6, 1.8, 9. ]]
         ... ]
-        >>> sigmas, rhos = Stats.calcCorrelationsFromCovariances(Sigmas)
+        >>> sigmas, rhos = Stats.calc_correlations_from_covariances(Sigmas)
         >>> print(sigmas)
         [1. 2. 3.]
         >>> print(rhos)
@@ -394,7 +394,7 @@ class Stats(object):
             for i,j in zip(I,J):rhos[n]+=[R[i,j]] if j>i else []
         return np.array(sigmas),np.array(rhos)    
 
-    def calcCovarianceFromRotation(sigmas,angles):
+    def calc_covariance_from_rotation(sigmas,angles):
         """
         Compute covariance matrices from the stds and the angles.
     
@@ -422,7 +422,7 @@ class Stats(object):
 
         return np.array(Sigmas)
 
-    def flattenSymmetricMatrix(M):
+    def flatten_symmetric_matrix(M):
         """
         Given a symmetric matrix the routine returns the flatten version of the Matrix.
 
@@ -439,13 +439,13 @@ class Stats(object):
         Examples
         --------
         >>> M = np.array([[1, 0.2], [0.2, 3]])
-        >>> F = Stats.flattenSymmetricMatrix(M)
+        >>> F = Stats.flatten_symmetric_matrix(M)
         >>> print(F)
         [1.  0.2 3. ]
         """
         return M[np.triu_indices(M.shape[0], k = 0)]
 
-    def unflattenSymmetricMatrix(F,M):
+    def unflatten_symmetric_matrix(F,M):
         """
         Given a flatten version of a matrix, returns the symmetric matrix.
 
@@ -465,7 +465,7 @@ class Stats(object):
         --------
         >>> F = [1, 0.2, 3]
         >>> M = np.zeros((2, 2))
-        >>> Stats.unflattenSymmetricMatrix(F, M)
+        >>> Stats.unflatten_symmetric_matrix(F, M)
         >>> print(M)
         [[1.  0.2]
          [0.2 3. ]]

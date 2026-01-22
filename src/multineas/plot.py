@@ -45,17 +45,17 @@ class CornerPlot(object):
     
     Methods
     -------
-    tightLayout()
+    tight_layout()
         Tight layout if no constrained_layout was used.
-    setLabels(**args)
+    set_labels(**args)
         Set labels parameters.
-    setRanges()
+    set_ranges()
         Set ranges in panels according to ranges defined in dparameters.
-    setTickParams(**args)
+    set_tick_params(**args)
         Set tick parameters.
-    plotHist(data, colorbar=False, **args)
+    plot_hist(data, colorbar=False, **args)
         Create a 2d-histograms of data on all panels of the CornerPlot.
-    scatterPlot(data, **args)
+    scatter_plot(data, **args)
         Scatter plot on all panels of the CornerPlot.
     """
     
@@ -130,12 +130,12 @@ class CornerPlot(object):
             self.axs[self.M-1,i].tick_params(axis='x',direction="out")
         
         #Set properties of panels
-        self.setLabels()
-        self.setRanges()
-        self.setTickParams()
-        self.tightLayout()
+        self.set_labels()
+        self.set_ranges()
+        self.set_tick_params()
+        self.tight_layout()
     
-    def tightLayout(self):
+    def tight_layout(self):
         """
         Tight layout if no constrained_layout was used.
         """
@@ -143,7 +143,7 @@ class CornerPlot(object):
             self.fig.subplots_adjust(wspace=self.fw/100.,hspace=self.fw/100.)
         self.fig.tight_layout()
         
-    def setTickParams(self,**args):
+    def set_tick_params(self,**args):
         """
         Set tick parameters.
         
@@ -158,7 +158,7 @@ class CornerPlot(object):
             for j in range(self.M):
                 self.axs[i][j].tick_params(**opts)
         
-    def setRanges(self):
+    def set_ranges(self):
         """
         Set ranges in panels according to ranges defined in dparameters.
         """
@@ -170,7 +170,7 @@ class CornerPlot(object):
                 if self.dproperties[propj]["range"] is not None:
                     self.axp[propi][propj].set_ylim(self.dproperties[propj]["range"])
     
-    def setLabels(self,**args):
+    def set_labels(self,**args):
         """
         Set labels parameters.
         
@@ -206,9 +206,9 @@ class CornerPlot(object):
         self.axs[-1][-1].text(1.05,0.5,label,rotation=270,ha='left',va='center',
                               transform=self.axs[-1][-1].transAxes,**opts)
 
-        self.tightLayout()
+        self.tight_layout()
         
-    def plotHist(self,data,colorbar=False,**args):
+    def plot_hist(self,data,colorbar=False,**args):
         """
         Create a 2d-histograms of data on all panels of the CornerPlot.
         
@@ -235,7 +235,7 @@ class CornerPlot(object):
         ... }
         >>> G = mm.CornerPlot(properties, figsize=3)
         >>> hargs = dict(bins=100, cmap='viridis')
-        >>> hist = G.plotHist(udata, **hargs)
+        >>> hist = G.plot_hist(udata, **hargs)
         """
         opts=dict()
         opts.update(args)
@@ -274,7 +274,7 @@ class CornerPlot(object):
                     cax.xaxis.set_tick_params(labelsize=0.5*self.fs,direction="in",pad=-0.8*self.fs)
                     xt=cax.get_xticks()
                     xm=xt.mean()
-                    m,e=Util.mantisaExp(xm)
+                    m,e=Util.mantisa_exp(xm)
                     xtl=[]
                     for x in xt:
                         xtl+=["%.1f"%(x/10**e)]
@@ -282,13 +282,13 @@ class CornerPlot(object):
                     cax.text(0,0.5,r"$\times 10^{%d}$"%e,ha="left",va="center",
                              transform=cax.transAxes,fontsize=6,color='w')
 
-        self.setLabels()
-        self.setRanges()
-        self.setTickParams()
-        self.tightLayout()
+        self.set_labels()
+        self.set_ranges()
+        self.set_tick_params()
+        self.tight_layout()
         return hist
                     
-    def scatterPlot(self,data,**args):
+    def scatter_plot(self,data,**args):
         """
         Scatter plot on all panels of the CornerPlot.
         
@@ -307,7 +307,7 @@ class CornerPlot(object):
         Examples
         --------
         >>> sargs = dict(s=0.2, edgecolor='None', color='r')
-        >>> hist = G.scatterPlot(udata, **sargs)
+        >>> hist = G.scatter_plot(udata, **sargs)
         """
         scatter=[]
         for i,propi in enumerate(self.properties):
@@ -315,8 +315,8 @@ class CornerPlot(object):
                 if j<=i:continue
                 scatter+=[self.axp[propi][propj].scatter(data[:,i],data[:,j],**args)]
 
-        self.setLabels()
-        self.setRanges()
-        self.setTickParams()
-        self.tightLayout()
+        self.set_labels()
+        self.set_ranges()
+        self.set_tick_params()
+        self.tight_layout()
         return scatter
