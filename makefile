@@ -2,7 +2,7 @@
 # MultiNEAs Makefile
 ##################################################################
 
-.PHONY: help install install-dev test clean build docs push release
+.PHONY: help install install-dev test verify clean build docs push release
 RELMODE=release
 PYTHON ?= python3
 COMMIT_MSG ?= chore: sync tracked changes
@@ -14,6 +14,7 @@ help:
 	@echo "  install      - Install the package"
 	@echo "  install-dev  - Install package in development mode with dev dependencies"
 	@echo "  test         - Run tests with pytest"
+	@echo "  verify       - Verify package installation"
 	@echo "  clean        - Remove build artifacts and cache files"
 	@echo "  build        - Build distribution packages"
 
@@ -31,6 +32,10 @@ install-dev:
 
 test:
 	pytest
+
+verify:
+	@chmod +x bin/verify_installation.py
+	@$(PYTHON) bin/verify_installation.py
 
 clean:
 	rm -rf build/
