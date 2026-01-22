@@ -11,7 +11,7 @@ sys.path.insert(0, os.path.abspath('../src'))
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'MultiNEAs'
-copyright = '2025, Jorge I. Zuluaga, Juanita A. Agudelo'
+copyright = '2026, Jorge I. Zuluaga, Juanita A. Agudelo'
 author = 'Zuluaga & Agudelo'
 from multineas.version import __version__
 release = __version__

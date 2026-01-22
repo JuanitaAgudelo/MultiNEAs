@@ -40,15 +40,14 @@ class Util(object):
     #Lambda methods
     """
     This set of routines allows the conversion from a finite interval [0,s] to an unbound one [-inf,inf]
-    
-    Example:
-    
-        scales=[0,0,10,10,1]
-        minparams=[0.0,0.0,1,1,0.7]
-        uparams=Util.tIF(minparams,scales,Util.f2u)
-        
-        Result:
-        [0.0, 0.0, -2.197224577336219, -2.197224577336219, 0.8472978603872034]
+
+    Examples
+    --------
+    >>> scales = [0, 0, 10, 10, 1]
+    >>> minparams = [0.0, 0.0, 1, 1, 0.7]
+    >>> uparams = Util.tIF(minparams, scales, Util.f2u)
+    >>> print(uparams)
+    [0.0, 0.0, -2.197224577336219, -2.197224577336219, 0.8472978603872034]
     """
     f2u=lambda x,s:Util.log((x/s)/(1-(x/s)))
     u2f=lambda t,s:s/(1+Util.exp(-t))
@@ -58,11 +57,12 @@ class Util(object):
         """
         Add a custom message msg to an error handle.
 
-        Parameters:
-            error: error handle, handle (eg. except ValueError as error)
-            msg: message to add to error, string.
-
-        Return: None.
+        Parameters
+        ----------
+        error : Exception
+            Error handle (eg. except ValueError as error).
+        msg : str
+            Message to add to error.
         """
         error.args=(error.args if error.args else tuple())+(msg,)
 
@@ -78,19 +78,26 @@ class Util(object):
         is preseneted in the more convenient unit, ns (nano seconds), us (micro seconds), 
         ms (miliseconds), s (seconds), min (minutes), h (hours), d (days)
 
-        Parameters: None.
+        Parameters
+        ----------
+        verbose : int or bool, optional
+            Show the time in screen (default 1).
+        start : int or bool, optional
+            Compute time from program start (default 0).
 
-        Optional:
-            verbose: show the time in screen (default 1), integer or boolean.
-            start: compute time from program start (deault 0), integer or boolean.
+        Returns
+        -------
+        dt : float
+            Elapsed time in seconds.
+        dtu_unit : list
+            List containing [time in units, unit string].
 
-        Return: None.
-
-        Examples:
-            elTime(), basic usage (show output)
-            elTime(0), no output
-            elTime(start=True), measure elapsed time since program 
-            print(DTIME,DUTIME), show values of elapsed time
+        Examples
+        --------
+        >>> Util.elTime() # basic usage (show output)
+        >>> Util.elTime(verbose=0) # no output
+        >>> Util.elTime(start=True) # measure elapsed time since program start
+        >>> print(Util.DTIME, Util.DUTIME) # show values of elapsed time
         """
         t=time()
         dt=t-Util.TIME
@@ -107,18 +114,27 @@ class Util(object):
         return dt,[dtu,unit] 
 
     def mantisaExp(x):
-        """Calculate the mantisa and exponent of a number.
+        """
+        Calculate the mantisa and exponent of a number.
         
-        Parameters:
-            x: number, float.
+        Parameters
+        ----------
+        x : float
+            Number.
             
-        Return:
-            man: mantisa, float
-            exp: exponent, float.
+        Returns
+        -------
+        man : float
+            Mantisa.
+        exp : float
+            Exponent.
             
-        Examples:
-            m,e=mantisaExp(234.5), returns m=2.345, e=2
-            m,e=mantisaExp(-0.000023213), return m=-2.3213, e=-5
+        Examples
+        --------
+        >>> m, e = Util.mantisaExp(234.5)
+        # returns m=2.345, e=2
+        >>> m, e = Util.mantisaExp(-0.000023213)
+        # return m=-2.3213, e=-5
         """
         xa=np.abs(x)
         s=np.sign(x)
@@ -130,40 +146,58 @@ class Util(object):
         return man,exp
 
 class PlotGrid(object):
-    """Class PlotGrid
+    """
+    Create a grid of plots showing the projection of a N-dimensional data.
     
-    Create a grid of plots showing the projection of a N-dimensional
-    
-    Initialization attributes:
-        dproperties: list of properties to be shown, dictionary of dictionaries (N entries)
-            keys: label of attribute, ex. "q"
-            dictionary: 
-                label: label used in axis, string
-                range: range for property, tuple (2)
+    Parameters
+    ----------
+    properties : dict
+        List of properties to be shown, dictionary of dictionaries (N entries).
+        Keys are label of attribute, ex. "q".
+        Dictionary values:
         
-    Optional initialization attributes:
-        figsize=3 : base size for panels (the size of figure will be M x figsize), integer
-        fontsize=10 : base fontsize, int
-        direction='out' : direction of ticks in panels.
+        * label: label used in axis, string
+        * range: range for property, tuple (2)
+    figsize : int, optional
+        Base size for panels (the size of figure will be M x figsize), default 3.
+    fontsize : int, optional
+        Base fontsize, default 10.
+    direction : str, optional
+        Direction of ticks in panels, default 'out'.
     
-    Other attributes:
-        N: number of properties, int
-        M: size of grid matrix (M=N-1), int
-        fw: figsize
-        fs: fontsize
-        fig: figure handle, figure
-        axs: matrix with subplots, axes handles (MxM)
-        axp: matrix with subplots, dictionary of dictionaries
-        properties: list of properties labels, list of strings (N)
+    Attributes
+    ----------
+    N : int
+        Number of properties.
+    M : int
+        Size of grid matrix (M=N-1).
+    fw : int
+        Figsize.
+    fs : int
+        Fontsize.
+    fig : matplotlib.figure.Figure
+        Figure handle.
+    axs : numpy.ndarray
+        Matrix with subplots, axes handles (MxM).
+    axp : dict
+        Matrix with subplots, dictionary of dictionaries.
+    properties : list
+        List of properties labels, list of strings (N).
     
-    Methods:
-        tightLayout
-        setLabels
-        setRanges
-        setTickParams
-        
-        plotHist
-        scatterPlot
+    Methods
+    -------
+    tightLayout()
+        Tight layout if no constrained_layout was used.
+    setLabels(**args)
+        Set labels parameters.
+    setRanges()
+        Set ranges in panels according to ranges defined in dparameters.
+    setTickParams(**args)
+        Set tick parameters.
+    plotHist(data, colorbar=False, **args)
+        Create a 2d-histograms of data on all panels of the PlotGrid.
+    scatterPlot(data, **args)
+        Scatter plot on all panels of the PlotGrid.
     """
     
     def __init__(self,properties,figsize=3,fontsize=10,direction='out'):
@@ -245,10 +279,6 @@ class PlotGrid(object):
     def tightLayout(self):
         """
         Tight layout if no constrained_layout was used.
-        
-        Parameters: None
-        
-        Return: None
         """
         if self.constrained==False:
             self.fig.subplots_adjust(wspace=self.fw/100.,hspace=self.fw/100.)
@@ -258,10 +288,10 @@ class PlotGrid(object):
         """
         Set tick parameters.
         
-        Parameters: 
-            **args: same arguments as tick_params method, dictionary
-        
-        Return: None
+        Parameters
+        ----------
+        **args : dict
+            Same arguments as tick_params method.
         """
         opts=dict(axis='both',which='major',labelsize=0.8*self.fs)
         opts.update(args)
@@ -272,10 +302,6 @@ class PlotGrid(object):
     def setRanges(self):
         """
         Set ranges in panels according to ranges defined in dparameters.
-        
-        Parameters: None
-        
-        Return: None
         """
         for i,propi in enumerate(self.properties):
             for j,propj in enumerate(self.properties):
@@ -289,10 +315,10 @@ class PlotGrid(object):
         """
         Set labels parameters.
         
-        Parameters: 
-            **args: common arguments of set_xlabel, set_ylabel and text, dictionary
-        
-        Return: None
+        Parameters
+        ----------
+        **args : dict
+            Common arguments of set_xlabel, set_ylabel and text.
         """
         opts=dict(fontsize=self.fs)
         opts.update(args)
@@ -327,15 +353,30 @@ class PlotGrid(object):
         """
         Create a 2d-histograms of data on all panels of the PlotGrid.
         
-        Parameters: 
-            data: data to be histogramed (n=len(data)), numpy array (nxN)
-            
-        Optional parameters:
-            colorbar=False: include a colorbar?, boolean or int (0/1)
-            **args: all arguments of hist2d method, dictionary
+        Parameters
+        ----------
+        data : numpy.ndarray
+            Data to be histogramed (n=len(data)), numpy array (nxN).
+        colorbar : bool, optional
+            Include a colorbar? (default False).
+        **args : dict
+            All arguments of hist2d method.
         
-        Return: 
-            hist: list of histogram instances.
+        Returns
+        -------
+        hist : list
+            List of histogram instances.
+        
+        Examples
+        --------
+        >>> properties = {
+        ...     'Q': {'label': r"$Q$", 'range': None},
+        ...     'E': {'label': r"$C$", 'range': None},
+        ...     'I': {'label': r"$I$", 'range': None},
+        ... }
+        >>> G = mm.PlotGrid(properties, figsize=3)
+        >>> hargs = dict(bins=100, cmap='viridis')
+        >>> hist = G.plotHist(udata, **hargs)
         """
         opts=dict()
         opts.update(args)
@@ -392,14 +433,22 @@ class PlotGrid(object):
         """
         Scatter plot on all panels of the PlotGrid.
         
-        Parameters: 
-            data: data to be histogramed (n=len(data)), numpy array (nxN)
-            
-        Optional parameters:
-            **args: all arguments of scatter method, dictionary
+        Parameters
+        ----------
+        data : numpy.ndarray
+            Data to be histogramed (n=len(data)), numpy array (nxN).
+        **args : dict
+            All arguments of scatter method.
         
-        Return: 
-            scatter: list of scatter instances.
+        Returns
+        -------
+        scatter : list
+            List of scatter instances.
+            
+        Examples
+        --------
+        >>> sargs = dict(s=0.2, edgecolor='None', color='r')
+        >>> hist = G.scatterPlot(udata, **sargs)
         """
         scatter=[]
         for i,propi in enumerate(self.properties):
@@ -428,18 +477,20 @@ class UtilStats(object):
         For instance if we have 3 events with probabilities 0.1, 0.7, 0.2, genIndex will generate
         a number in the set (0,1,2) having those probabilities, ie. 1 will have 70% of probability.
         
-        Parameters:
-            probs: Probabilities, numpy array (N), adimensional
-                NOTE: It should be normalized, ie. sum(probs)=1
+        Parameters
+        ----------
+        probs : numpy.ndarray
+            Probabilities (N), adimensional.
+            NOTE: It should be normalized, ie. sum(probs)=1
             
-        Return:
-            n: Index in the set [0,1,2,... len(probs)-1], integer
+        Returns
+        -------
+        n : int
+            Index in the set [0,1,2,... len(probs)-1].
             
-        Example:
-            genIndex([0.1,0.7,0.2])
-            
-        Used in:
-            - ComposedMultiVariateNormal.rvs
+        Examples
+        --------
+        >>> n = UtilStats.genIndex([0.1, 0.7, 0.2])
         """
         cums=np.cumsum(probs)
         if not math.isclose(cums[-1],1,rel_tol=1e-5):
@@ -452,26 +503,28 @@ class UtilStats(object):
     def setMatrixOffDiagonal(M,off):
         """
         Set a matrix with the terms of the off diagonal
+        
+        Parameters
+        ----------
+        M : numpy.ndarray
+            Matrix (n x n).
+        off : list or numpy.ndarray
+            Terms off diagonal (n x (n-1) / 2).
 
-        Parameters:
-            M: Matrix, array, n x n 
-            off: Terms off diagonal, array, n x (n-1) / 2
+        Returns
+        -------
+        None
+            Implicitly the matrix M has now the off diagonal terms.
 
-        Returns:
-            Implicitly the matrix M has now the off diagonal terms
-
-        Example:
-            M=np.eye(3)
-            off=[0.1,0.2,0.3]
-            setMatrixOffDiagonal(M,off)
-
-            Result:
-            M=array([[1. , 0.1, 0.2],
-                       [0.1, 1. , 0.3],
-                       [0.2, 0.3, 1. ]])
-                       
-        Sources:
-            https://newbedev.com/how-to-get-indices-of-non-diagonal-elements-of-a-numpy-array
+        Examples
+        --------
+        >>> M = np.eye(3)
+        >>> off = [0.1, 0.2, 0.3]
+        >>> UtilStats.setMatrixOffDiagonal(M, off)
+        >>> print(M)
+        [[1. , 0.1, 0.2],
+         [0.1, 1. , 0.3],
+         [0.2, 0.3, 1. ]]
         """
         I,J=np.where(~np.eye(M.shape[0],dtype=bool))
         ffo=list(off[::-1])
@@ -480,46 +533,50 @@ class UtilStats(object):
         
     def calcCovarianceFromCorrelations(sigmas,rhos):
         """
-        Compute covariance matrices from the stds and correlations (rho)
+        Compute covariance matrices from the standard deviations and correlations (rho).
 
-        Parameters:
+        Parameters
+        ----------
+        sigmas : numpy.ndarray
+            Array of values of standard deviation for variables (Ngauss x Nvars).
+        rhos : numpy.ndarray
+            Array with correlations (Ngauss x Nvars x (Nvars-1)/2).
 
-            sigmas: Array of values of standard deviation for variables, 
-                    array, Ngauss x Nvars
+        Returns
+        -------
+        Sigmas : numpy.ndarray
+            Array with covariance matrices corresponding to these sigmas and rhos (Ngauss x Nvars x Nvars).
 
-            rhos: Array with correlations, array Ngauss x Nvars x Nvars
+        Examples
+        --------
+        >>> import numpy as np
+        >>> sigmas = np.array([[1, 2, 3]])
+        >>> # rho_12, rho_13, rho_23
+        >>> rhos = np.array([[0.1, 0.2, 0.3]])
+        >>> S = UtilStats.calcCovarianceFromCorrelations(sigmas, rhos)
+        >>> print(S)
+        [[[1.  0.2 0.6]
+          [0.2 4.  1.8]
+          [0.6 1.8 9. ]]]
 
-        Returns:
+        This is equivalent to:
 
-            Sigmas: Array with covariance matrices corresponding to these sigmas 
-                    and rhos, array, Ngauss x Nvars x Nvars
+        >>> rho = rhos[0]
+        >>> sigma = sigmas[0]
+        >>> R = np.eye(3)
+        >>> UtilStats.setMatrixOffDiagonal(R, rho)
+        >>> M = np.zeros((3, 3))
+        >>> for i in range(3):
+        ...     for j in range(3):
+        ...         M[i,j] = R[i,j] * sigma[i] * sigma[j]
+        >>> print(M)
+        [[1.  0.2 0.6]
+         [0.2 4.  1.8]
+         [0.6 1.8 9. ]]
 
-        Examples:
-            sigmas=[[1,2,3]]
-            # rho_12, rho_13, rho_23
-            rhos=[[0.1,0.2,0.3]] #Size of rhos is Nvars x (Nvars-1)/2
-            UtilStats.calcCovarianceFromCorrelations(sigmas,rhos)
-            
-            Results:
-            array([[[1. , 0.2, 0.6],
-                    [0.2, 4. , 1.8],
-                    [0.6, 1.8, 9. ]]])
-                    
-            This is equivalent to:
-            
-            rho=rhos[0]
-            sigma=sigmas[0]
-            R=np.eye(3)
-            UtilStats.setMatrixOffDiagonal(R,rho)
-            M=np.zeros((3,3))
-            for i in range(3):
-                for j in range(3):
-                    M[i,j]=R[i,j]*sigma[i]*sigma[j]
-            
-        Sources: 
-
-            Based on: 
-            https://www.visiondummy.com/2014/04/geometric-interpretation-covariance-matrix/    
+        Sources
+        -------
+        Based on: https://www.visiondummy.com/2014/04/geometric-interpretation-covariance-matrix/
         """
         try:
             Nvars=len(sigmas[0])        
@@ -544,25 +601,30 @@ class UtilStats(object):
         Compute the standard deviations and corresponding correlation coefficients given a set of 
         covariance matrices.
 
-        Parameters:
-            Sigmas: Array of covariance matrices, array, Ngauss x Nvars x Nvars
+        Parameters
+        ----------
+        Sigmas : numpy.ndarray
+            Array of covariance matrices (Ngauss x Nvars x Nvars).
 
-        Returns:
-            sigmas: Array of standard deviarions, array, Ngauss x Nvars
-            rhos: Array of correlation coefficiones, array, Ngauss x Nvars (Nvars-1) / 2
+        Returns
+        -------
+        sigmas : numpy.ndarray
+            Array of standard deviations (Ngauss x Nvars).
+        rhos : numpy.ndarray
+            Array of correlation coefficients (Ngauss x Nvars * (Nvars-1) / 2).
 
-        Example: 
-            Sigmas=[
-                    [[1. , 0.2, 0.6],
-                    [0.2, 4. , 1.8],
-                    [0.6, 1.8, 9. ]]
-                   ]
-            calcCorrelationsFromCovariances(Sigmas)
-
-            Result:
-
-            sigmas=array([1., 2., 3.])
-            rhos=[[0.1, 0.20000000000000004, 0.3]]        
+        Examples
+        --------
+        >>> Sigmas = [
+        ...     [[1. , 0.2, 0.6],
+        ...      [0.2, 4. , 1.8],
+        ...      [0.6, 1.8, 9. ]]
+        ... ]
+        >>> sigmas, rhos = UtilStats.calcCorrelationsFromCovariances(Sigmas)
+        >>> print(sigmas)
+        [1. 2. 3.]
+        >>> print(rhos)
+        [[0.1 0.2 0.3]]
         """
         if len(np.array(Sigmas).shape)!=3:
             raise AssertionError(f"Array of Sigmas (shape {np.array(Sigmas).shape}) must be an array of matrices")
@@ -581,26 +643,17 @@ class UtilStats(object):
         """
         Compute covariance matrices from the stds and the angles.
     
-        Parameters:
-        
-            sigmas: Array of values of standard deviation for variables, 
-                    array Ngauss x 3
-                    
-            angles: Euler angles expressing the directions of the principal 
-                    axes of the distribution, array, Ngauss x 3
+        Parameters
+        ----------
+        sigmas : numpy.ndarray
+            Array of values of standard deviation for variables (Ngauss x 3).
+        angles : numpy.ndarray
+            Euler angles expressing the directions of the principal axes of the distribution (Ngauss x 3).
 
-        Returns:
-        
-            Sigmas: Array with covariance matrices corresponding to these sigmas 
-                    and angles, array, Ngauss x 3 x 3
-
-        Examples:
-            
-
-        Sources: 
-        
-            Based on: 
-            https://www.visiondummy.com/2014/04/geometric-interpretation-covariance-matrix/    
+        Returns
+        -------
+        Sigmas : numpy.ndarray
+            Array with covariance matrices corresponding to these sigmas and angles (Ngauss x 3 x 3).
         """
         try:
             Nvars=len(sigmas[0])        
@@ -618,18 +671,22 @@ class UtilStats(object):
         """
         Given a symmetric matrix the routine returns the flatten version of the Matrix.
 
-        Parameters:
-            M: Matrix, array, n x n 
+        Parameters
+        ----------
+        M : numpy.ndarray
+            Matrix (n x n).
 
-        Returns:
-            F: Flatten array, array, nx(n+1)/2
+        Returns
+        -------
+        F : numpy.ndarray
+            Flatten array (nx(n+1)/2).
 
-        Example:
-            M=[[1,0.2],[0.2,3]]
-            F=flattenSymmetricMatrix(M)
-
-            Result:
-            F=[1,0.2,3]
+        Examples
+        --------
+        >>> M = np.array([[1, 0.2], [0.2, 3]])
+        >>> F = UtilStats.flattenSymmetricMatrix(M)
+        >>> print(F)
+        [1.  0.2 3. ]
         """
         return M[np.triu_indices(M.shape[0], k = 0)]
 
@@ -637,121 +694,91 @@ class UtilStats(object):
         """
         Given a flatten version of a matrix, returns the symmetric matrix.
 
-        Parameters:
-            F: Flatten array, array, n x (n+1)/2
-            M: Matrix where the result will be stored, array, n x n 
+        Parameters
+        ----------
+        F : numpy.ndarray
+            Flatten array (n x (n+1)/2).
+        M : numpy.ndarray
+            Matrix where the result will be stored (n x n).
 
-        Returns:
+        Returns
+        -------
+        None
             It return the results in matrix M.
 
-        Example:
-            F = [1,0.2,3]
-            M=np.zeros((2,2))
-            unflattenSymmetricMatrix(F,M)
-
-            Results:
-            M=[[1,0.2],[0.2,3]]
-            
-        Notes:
-            Number of components:
-
-                Given f (size of flatten matrix) what is the dimension (N) of the symmetric matrix:
-
-                $$
-                N(N+1)/2 = f
-                $$
-
-                $$
-                N^2+N-2f=0
-                $$
-
-                $$
-                N=(\sqrt{1+8f}-1)/2
-                $$
+        Examples
+        --------
+        >>> F = [1, 0.2, 3]
+        >>> M = np.zeros((2, 2))
+        >>> UtilStats.unflattenSymmetricMatrix(F, M)
+        >>> print(M)
+        [[1.  0.2]
+         [0.2 3. ]]
         """
         M[np.triu_indices(M.shape[0],k=0)]=np.array(F)
         M[:,:]=np.triu(M)+np.tril(M.T,-1)
 
 class ComposedMultiVariateNormal(object):
     """
-    A linear combination of multivariate normal distribution (MND) with speccial methods 
+    A linear combination of multivariate normal distribution (MND) with special methods 
     for specifying the parameters of the distributions.
     
-    Basic attributes:
-        Ngauss: Number of composed MND, int
+    Attributes
+    ----------
+    Ngauss : int
+        Number of composed MND.
+    Nvars : int
+        Number of random variables.
+    mus : numpy.ndarray
+        Array with average (mu) of random variables (Ngauss x Nvars).
+    weights : numpy.ndarray
+        Array with weights of each MND (Ngauss).
+        NOTE: These weights are normalized at the end.
+    sigmas : numpy.ndarray
+        Standard deviation of each variable(Ngauss x Nvars).
+    rhos : numpy.ndarray
+        Elements of the upper triangle of the correlation matrix (Ngauss x Nvars x (Nvars-1)/2).
+    Sigmas : numpy.ndarray
+        Array with covariance matrices for each MND (Ngauss x Nvars x Nvars).
+    params : numpy.ndarray
+        Parameters of the distribution in flatten form including symmetric elements of the covariance
+        matrix (Ngauss*(1+Nvars+Nvars*(Nvars+1)/2)).
+    stdcorr : numpy.ndarray
+        Parameters of the distribution in flatten form, including upper triangle of the correlation
+        matrix (Ngauss*(1+Nvars+Nvars*(Nvars+1)/2)).
         
-        Nvars: Number of random variables, int
-        
-        mus: Array with average (mu) of random variables, array, Ngauss x Nvars
-
-        weigths: Array with weights of each MND, array, Ngauss
-            
-            NOTE: This weights are normalized at the end.
-             
-        sigmas: Standard deviation of each variable, array, Ngauss x Nvars
-        
-        rhos: Elements of the upper triangle of the correlation matrix, array, Ngauss x Nvars x (Nvars-1)/2
-        
-        Sigmas: Array with covariance matrices for each MND, array, Ngauss x Nvars x Nvars
-        
-        params: Parameters of the distribution in flatten form including symmetric elements of the covariance
-                matrix, array, Ngauss*(1+Nvars+Nvars*(Nvars+1)/2)
-        
-        stdcorr: Parameters of the distribution in flatten form, including upper triangle of the correlation
-                 matrix, array, Ngauss*(1+Nvars+Nvars*(Nvars+1)/2)
-        
-    Initialization:
-        There are several ways of initialize a CMND:
-        
-        Providing: Ngauss and Nvars
-            In this case the class is instantiated with zero means, unitary dispersion and 
-            covariance matrix equal to Ngasus identity matrices Nvars x Nvars.
-            
-        Providing: params, Nvars
-            In this case you have a flatted version of the parametes (weights, mus, Sigmas)
-            and want to instantiate the system.  All parameters are set and no other action
-            is required.
-
-        Providing: stdcorr, Nvars
-            In this case you have a flatted version of the parametes (weights, mus, sigmas, rhos)
-            and want to instantiate the system.  All parameters are set and no other action
-            is required.
-            
-        Providing: weights, mus, Sigmas (optional)
-            In this case the basic properties of the CMND are set.
-            
-    Methods:
-        pdf(X):
-            Parameters:
-                X: Set of values of the random variable, array Nvars
-
-            Return:
-                pdf: Value of the composed pdf at X.
-                
-        rvs(Nsam):
-            Parameters:
-                Nsam: Number of samples drawn from CMND
-            
-            Return:
-                Xs: Array with Nsam samples, array Nsam x Nvars
-            
-    Examples:
+    Notes
+    -----
+    There are several ways of initialize a CMND:
     
-        mus=[[0,0],[1,1]]
-        weights=[0.1,0]
-        MND1=ComposedMultiVariateNormal(mus=mus,weights=weights)
-        MND1.setSigmas(
-            [
-                [[1,0.2],[0,1]],
-                [[1,0],[0,1]]
-            ]
-        )
-        print(MND1)
+    1. Providing: Ngauss and Nvars
+       In this case the class is instantiated with zero means, unitary dispersion and 
+       covariance matrix equal to Ngasus identity matrices Nvars x Nvars.
+        
+    2. Providing: params, Nvars
+       In this case you have a flatted version of the parametes (weights, mus, Sigmas)
+       and want to instantiate the system.  All parameters are set and no other action
+       is required.
 
-        params=[0.1,0.9,0,0,1,1,1,0.2,0.2,1,1,0,0,1]
-        MND2=ComposedMultiVariateNormal(params=params,2)        
-        print(MND2)
-    
+    3. Providing: stdcorr, Nvars
+       In this case you have a flatted version of the parametes (weights, mus, sigmas, rhos)
+       and want to instantiate the system.  All parameters are set and no other action
+       is required.
+        
+    4. Providing: weights, mus, Sigmas (optional)
+       In this case the basic properties of the CMND are set.
+            
+    Examples
+    --------
+    >>> mus = [[0, 0], [1, 1]]
+    >>> weights = [0.1, 0]
+    >>> MND1 = ComposedMultiVariateNormal(mus=mus, weights=weights)
+    >>> MND1.setSigmas([[[1, 0.2], [0, 1]], [[1, 0], [0, 1]]])
+    >>> print(MND1)
+
+    >>> params = [0.1, 0.9, 0, 0, 1, 1, 1, 0.2, 0.2, 1, 1, 0, 0, 1]
+    >>> MND2 = ComposedMultiVariateNormal(params=params, Nvars=2)        
+    >>> print(MND2)
     """
     
     #Control behavior
@@ -816,6 +843,11 @@ class ComposedMultiVariateNormal(object):
         Set the value of list of covariance matrices.
         
         After setting Sigmas it update params and stdcorr.
+        
+        Parameters
+        ----------
+        Sigmas : list or numpy.ndarray
+            Array of covariance matrices.
         """
         self.Sigmas=np.array(Sigmas)
         self._checkSigmas()
@@ -827,6 +859,13 @@ class ComposedMultiVariateNormal(object):
         Set the properties of the CMND from flatten params.
         
         After setting it generate flattend stdcorr and normalize weights.
+        
+        Parameters
+        ----------
+        params : list or numpy.ndarray
+            Flattened parameters.
+        Nvars : int
+            Number of variables.
         """
         if Nvars==0 or len(params)==0:
             raise ValueError(f"When setting from flat params, Nvars ({Nvars}) cannot be zero")
@@ -839,6 +878,13 @@ class ComposedMultiVariateNormal(object):
         Set the properties of the CMND from flatten stdcorr.
         
         After setting it generate flattened params and normalize weights.
+        
+        Parameters
+        ----------
+        stdcorr : list or numpy.ndarray
+            Flattened standard deviations and correlations.
+        Nvars : int
+            Number of variables.
         """
         if Nvars==0 or len(stdcorr)==0:
             raise ValueError(f"When setting from flat params, Nvars ({Nvars}) cannot be zero")
@@ -1007,11 +1053,15 @@ class ComposedMultiVariateNormal(object):
         """
         Compute the PDF.
         
-        Parameter:
-            X: point in the Nvar-dimensional space, numpy array (Nvar)
+        Parameters
+        ----------
+        X : numpy.ndarray
+            Point in the Nvar-dimensional space (Nvar).
         
-        Return:
-            p: pdf.
+        Returns
+        -------
+        p : float
+            PDF value at X.
         """
         self._checkParams(self.params)
         self._nerror=0
@@ -1031,11 +1081,15 @@ class ComposedMultiVariateNormal(object):
         """
         Generate a random sample of points following this Multivariate distribution.
         
-        Parameter:
-            Nsam: number of samples.
+        Parameters
+        ----------
+        Nsam : int, optional
+            Number of samples (default 1).
             
-        Return:
-            rs: samples, numpy array (Nsam x Nvars)
+        Returns
+        -------
+        rs : numpy.ndarray
+            Samples (Nsam x Nvars).
         """
         self._checkParams(self.params)
         
@@ -1049,26 +1103,30 @@ class ComposedMultiVariateNormal(object):
         """
         Compute the negative value of the logarithm of the likelihood of a sample.
         
-        Parameters:
-            uparams: Minimization parameters (unbound), array
+        Parameters
+        ----------
+        uparams : numpy.ndarray
+            Minimization parameters (unbound).
+        data : numpy.ndarray, optional
+            Data for which logL is computed.
+        pmap : function, optional
+            Routine to map from minparams to params or stdcorr.
+            Example:
+            >>> def pmap(minparams):
+            ...     stdcorr = np.array([1] + list(minparams))
+            ...     stdcorr[-1:] -= 1
+            ...     return stdcorr
+        tset : str, optional
+            Type of minimization parameters. Values "params", "stdcorr" (default "stdcorr").
+        scales : list, optional
+            List of scales for transforming uparams (unbound) in minparams (natural scale).
+        verbose : int, optional
+            Verbosity level (0, none, 1: input parameters, 2: full definition of the CMND) (default 0).
         
-        Optional parameters
-            data = None: data for which logL is computed.
-            
-            pmap = None: routine to map from minparams to params or stdcorr.
-            
-                Example:
-                    def pmap(minparams):
-                        stdcorr=np.array([1]+list(minparams))
-                        stdcorr[-1:]-=1
-                        return stdcorr
-            
-            tset = "stdcorr": type of minimization parameters. Values "params", "stdcorr"
-            
-            scales = []: list of scales for transforming uparams (unbound) in minparams (natural scale).
-            
-            verbose = 0: verbosity level (0, none, 1: input parameters, 2: full definition of the CMND)
-        
+        Returns
+        -------
+        logL : float
+            Negative log-likelihood.
         """
         #Map unbound minimization parameters into their right range
         minparams=np.array(Util.tIF(uparams,scales,Util.u2f))
@@ -1104,48 +1162,49 @@ class ComposedMultiVariateNormal(object):
         """
         Plot a sample of the CMND.
         
-        Parameters:
-            data = None: Data to plot.  If None it generate a sample.
+        Parameters
+        ----------
+        data : numpy.ndarray, optional
+            Data to plot. If None it generate a sample.
+        N : int, optional
+            Number of points to generate the sample (default 10000).
+        props : list, optional
+            Array with the name of the properties. Ex. props=["x","y"].
+        ranges : list, optional
+            Array of ranges of the properties. Ex. ranges=[-3,3],[-5,5].
+        figsize : int, optional
+            Size of each axis (default 2).
+        sargs : dict, optional
+            Dictionary with options for the scatter plot. Ex. sargs=dict(color='r').
+        hargs : dict, optional
+            Dictionary with options for the hist2d function. Ex. hargs=dict(bins=50).
+            
+        Returns
+        -------
+        G : matplotlib.figure.Figure or PlotGrid
+            Graphic handle. If Nvars = 2, it is a figure object, otherwise is a PlotGrid instance.
+            
+        Examples
+        --------
+        >>> G = CMND.plotSample(N=10000, sargs=dict(s=1, c='r'))
+        >>> G = CMND.plotSample(N=1000, sargs=dict(s=1, c='r'), hargs=dict(bins=20))
 
-            N = 10000: Number of points to generate the sample.
-            
-            props = None: Array with the name of the properties.  Ex. props=["x","y"]
-            
-            ranges = None: Array of ranges of the properties. Ex. ranges=[-3,3],[-5,5]
-            
-            figsize = 2: size of each axis. 
-            
-            hargs = None: Dictionary with options for the hist2d function.  Ex. hargs=dict(bins=50)
-            
-            sargs = dict(): Dictionary with options for the scatter plot.  Ex. sargs=dict(color='r')
-            
-        Returns: 
-            G: Graphic handle. If Nvars = 2, it is a figure object, otherwise is a PlotGrid instance.
-            
-            
-        Examples:
-        
-            G=CMND.plotSample(N=10000,sargs=dict(s=1,c='r'))
-            G=CMND.plotSample(N=1000,sargs=dict(s=1,c='r'),hargs=dict(bins=20))
+        >>> CMND = ComposedMultiVariateNormal(Ngauss=1, Nvars=2)
+        >>> fig = CMND.plotSample(N=1000, hargs=dict(bins=20), sargs=dict(s=1, c='r'))
 
-
-            CMND=ComposedMultiVariateNormal(Ngauss=1,Nvars=2)
-            fig=CMND.plotSample(N=1000,hargs=dict(bins=20),sargs=dict(s=1,c='r'));
-
-            CMND=ComposedMultiVariateNormal(Ngauss=2,Nvars=3)
-            print(CMND)
-            mus=[[0,0],[1,1]]
-            weights=[0.1,0.9]
-            Sigmas=[[[1,0.2],[0,1]],[[1,0],[0,1]]]
-            MND1=ComposedMultiVariateNormal(mus=mus,weights=weights,Sigmas=Sigmas)
-            #MND1=ComposedMultiVariateNormal(mus=mus,weights=weights);MND1.setSigmas(Sigmas)
-            print(MND1)
-            print(MND1.pdf([1,1]))
-            params=[0.1, 0.9, 0.0, 0.0, 1.0, 1.0, 1.0, 0.2, 1.0, 1.0, 0.0, 1.0]
-            MND2=ComposedMultiVariateNormal(params=params,Nvars=2)        
-            print(MND2)
-            print(MND2.pdf([1,1]))
-
+        >>> CMND = ComposedMultiVariateNormal(Ngauss=2, Nvars=3)
+        >>> print(CMND)
+        >>> mus = [[0, 0], [1, 1]]
+        >>> weights = [0.1, 0.9]
+        >>> Sigmas = [[[1, 0.2], [0, 1]], [[1, 0], [0, 1]]]
+        >>> MND1 = ComposedMultiVariateNormal(mus=mus, weights=weights, Sigmas=Sigmas)
+        >>> #MND1=ComposedMultiVariateNormal(mus=mus,weights=weights);MND1.setSigmas(Sigmas)
+        >>> print(MND1)
+        >>> print(MND1.pdf([1, 1]))
+        >>> params = [0.1, 0.9, 0.0, 0.0, 1.0, 1.0, 1.0, 0.2, 1.0, 1.0, 0.0, 1.0]
+        >>> MND2 = ComposedMultiVariateNormal(params=params, Nvars=2)        
+        >>> print(MND2)
+        >>> print(MND2.pdf([1, 1]))
         """
         if data is None:
             self.data=self.rvs(N)
@@ -1186,13 +1245,16 @@ class ComposedMultiVariateNormal(object):
         It also generate and aray with the bounds applicable to the stdcorr parameters for purposes
         of minimization.
         
-        Returns:
-            None.
+        Returns
+        -------
+        None
             
+        Notes
+        -----
             Set the value of:
-                str_params: list of properties in params, str
-                str_stdcorr: list of properties in stdcorr, str.
-                bnd_stdcorr: bounds of properties in stdcorr applicable for transforming to unbound.
+                - str_params: list of properties in params, str
+                - str_stdcorr: list of properties in stdcorr, str.
+                - bnd_stdcorr: bounds of properties in stdcorr applicable for transforming to unbound.
         """
         str_params="["
         bnd_stdcorr="["
@@ -1263,86 +1325,66 @@ class ComposedMultiVariateNormal(object):
 
 class FitCMND():
     """
-    CMND Fitting handler
+    CMND Fitting handler.
     
-    Attributes:
-        
-        Ngauss: Number of fitting MND, int.
-        
-        Nvars: Number of variables in each MND, int.
-        
-        cmnd: Fitting object of the class CMND, ComposedMultiVariateNormal
-              This object will have the result of the fitting procedure.
-        
-        solution: Once the fitting is completed the solution object is returned.
-        
-            Attributes of 'solution' include:
-                fun: value of the function in the minimum.
-                x: value of the minimization parameters in the minimum.
-                nit: number of iterations of the minimization algorithm.
-                nfev: number of evaluations of the function.
-                success: if True it implies that the minimization fullfills all the conditions.
-        
-    Secondary attributes:
+    Attributes
+    ----------
+    Ngauss : int
+        Number of fitting MND.
+    Nvars : int
+        Number of variables in each MND.
+    cmnd : ComposedMultiVariateNormal
+        Fitting object of the class CMND. This object will have the result of the fitting procedure.
+    solution : scipy.optimize.OptimizeResult
+        Once the fitting is completed the solution object is returned. Attributes include:
+            - fun: value of the function in the minimum.
+            - x: value of the minimization parameters in the minimum.
+            - nit: number of iterations of the minimization algorithm.
+            - nfev: number of evaluations of the function.
+            - success: if True it implies that the minimization fullfills all the conditions.
+    Ndim : int
+        Number of mus.
+    Ncorr : int
+        Number of correlations.
+    minparams : numpy.ndarray
+        Array of minimization parameters at any stage in minimization process.
+    scales : numpy.ndarray
+        Array of scales to convert minparams to uparams (unbound) and viceversa.
+    uparams : numpy.ndarray
+        Array of unbound minimization parameters.
     
-        Ndim: Number of mus, int.    
-        Ncorr: Number of correlations, int.
-        minparams: Array of minimization parameters at any stage in minimization process, array.
-        scales: Array of scales to convert minparams to uparams (unbound) and viceversa.
-        uparams: Array of unbound minimization parameters. 
-
-    Private attributes:
-        _sigmax = 10 : Maximum value of sigma parameter.
-        _ignoreWarnings = True : When matrix is singular or non-positive definite, no warning will be shown.
-        
-    Initialization:
-
-        Objects of this class must be always initialized with the number of gaussians and the number
-        of random variables.
-        
-        Example: FitCMND(1,3)
-        
-    Basic methods:
+    Notes
+    -----
+    Objects of this class must be always initialized with the number of gaussians and the number
+    of random variables.
     
-        setParams: set the value of the basic params (minparams, scales, etc.)
-            
-            Parameters:
-                mu=0.5 : Value of all initial mus.
-                sigma=1.0 : Value of all initial sigmas.
-                rho=0.5 : Value of all initial rhos.
-                
-            Returns: None
-            
-                It updates minparams, scales and uprams.
-
-    Examples:
-
-        np.random.seed(1)
-        weights=[[1.0]]
-        mus=[[1.0,0.5,-0.5]]
-        sigmas=[[1,1.2,2.3]]
-        angles=[[10*Angle.Deg,30*Angle.Deg,20*Angle.Deg]]
-        Sigmas=UtilStats.calcCovarianceFromRotation(sigmas,angles)
-        CMND=ComposedMultiVariateNormal(mus=mus,weights=weights,Sigmas=Sigmas)
-        data=CMND.rvs(10000)
-        F=FitCMND(Ngauss=CMND.Ngauss,Nvars=CMND.Nvars)
-        F.cmnd._fevfreq=200
-        bounds=None
-        #bounds=F.setBounds(boundw=(0.1,0.9))
-        #bounds=F.setBounds(boundr=(-0.9,0.9))
-        #bounds=F.setBounds(bounds=(0.1,0.9*F._sigmax))
-        #bounds=F.setBounds(boundsm=((-3,3),(-2,2),(-2,2)),boundw=(0.1,0.9),bounds=(0.1,0.9*F._sigmax),boundr=(-0.9,0.9))
-        print(bounds)
-        Util.elTime(0)
-        #F.fitData(data,verbose=0,tol=1e-3,options=dict(maxiter=100,disp=True),bounds=bounds)
-        F.fitData(data,verbose=0,tol=1e-3,options=dict(maxiter=100,disp=True),method=None,bounds=bounds)
-        T=Util.elTime()
-        print(F.cmnd)
-        G=F.plotFit(figsize=3,hargs=dict(bins=30,cmap='YlGn'),sargs=dict(s=0.5,edgecolor='None',color='r'))
-        F.saveFit("/tmp/fit.pkl",useprefix=False)
-        F._loadFit("/tmp/fit.pkl")
-        F.saveFit("/tmp/nuevo.pkl",useprefix=True,myprefix="test")
-
+    Examples
+    --------
+    >>> np.random.seed(1)
+    >>> weights = [[1.0]]
+    >>> mus = [[1.0, 0.5, -0.5]]
+    >>> sigmas = [[1, 1.2, 2.3]]
+    >>> angles = [[10*Angle.Deg, 30*Angle.Deg, 20*Angle.Deg]]
+    >>> Sigmas = UtilStats.calcCovarianceFromRotation(sigmas, angles)
+    >>> CMND = ComposedMultiVariateNormal(mus=mus, weights=weights, Sigmas=Sigmas)
+    >>> data = CMND.rvs(10000)
+    >>> F = FitCMND(Ngauss=CMND.Ngauss, Nvars=CMND.Nvars)
+    >>> F.cmnd._fevfreq = 200
+    >>> bounds = None
+    >>> # bounds = F.setBounds(boundw=(0.1, 0.9))
+    >>> # bounds = F.setBounds(boundr=(-0.9, 0.9))
+    >>> # bounds = F.setBounds(bounds=(0.1, 0.9*F._sigmax))
+    >>> # bounds = F.setBounds(boundsm=((-3, 3), (-2, 2), (-2, 2)), boundw=(0.1, 0.9), bounds=(0.1, 0.9*F._sigmax), boundr=(-0.9, 0.9))
+    >>> print(bounds)
+    >>> Util.elTime(0)
+    >>> # F.fitData(data, verbose=0, tol=1e-3, options=dict(maxiter=100, disp=True), bounds=bounds)
+    >>> F.fitData(data, verbose=0, tol=1e-3, options=dict(maxiter=100, disp=True), method=None, bounds=bounds)
+    >>> T = Util.elTime()
+    >>> print(F.cmnd)
+    >>> G = F.plotFit(figsize=3, hargs=dict(bins=30, cmap='YlGn'), sargs=dict(s=0.5, edgecolor='None', color='r'))
+    >>> F.saveFit("/tmp/fit.pkl", useprefix=False)
+    >>> F._loadFit("/tmp/fit.pkl")
+    >>> F.saveFit("/tmp/nuevo.pkl", useprefix=True, myprefix="test")
     """
     
     
@@ -1374,16 +1416,22 @@ class FitCMND():
         
     def setParams(self,mu=0.5,sigma=1.0,rho=0.5):
         """
-        Set the value of the basic params (minparams, scales, etc.)
+        Set the value of the basic params (minparams, scales, etc.).
         
-        Parameters:
-            mu=0.5 : Value of all initial mus.
-            sigma=1.0 : Value of all initial sigmas.
-            rho=0.5 : Value of all initial rhos.
+        It updates minparams, scales and uprams.
+        
+        Parameters
+        ----------
+        mu : float, optional
+            Value of all initial mus (default 0.5).
+        sigma : float, optional
+            Value of all initial sigmas (default 1.0).
+        rho : float, optional
+            Value of all initial rhos (default 0.5).
 
-        Returns: None
-
-            It updates minparams, scales and uprams.
+        Returns
+        -------
+        None
         """
         #Define the initial parameters
         #         mus             sigmas          correlations
@@ -1402,16 +1450,22 @@ class FitCMND():
         
     def pmap(self,minparams):
         """
-        Mapping routine used in sampleCMNDLikelihood.  Mapping may change depending on the 
-        complexity of the parameters to be minimized.  Here we assume that all parameters in
-        the stdcorr vector is susceptible to be minimized (with the exception of weights in the 
-        case of Ngauss=1 when this parameter should not be included.)
+        Mapping routine used in sampleCMNDLikelihood.
         
-        Parameters:
-            minparams: minimization parameters.
+        Mapping may change depending on the complexity of the parameters to be minimized.
+        Here we assume that all parameters in the stdcorr vector is susceptible to be minimized
+        (with the exception of weights in the case of Ngauss=1 when this parameter should not 
+        be included).
+        
+        Parameters
+        ----------
+        minparams : numpy.ndarray
+            Minimization parameters.
             
-        Return:
-            stdcorr: flatten parameters with correlations.
+        Returns
+        -------
+        stdcorr : numpy.ndarray
+            Flatten parameters with correlations.
         """
         stdcorr=np.array(self.extrap+list(minparams))
         stdcorr[-self.Ngauss*self.Ncorr:]-=1
@@ -1419,13 +1473,17 @@ class FitCMND():
     
     def logL(self,data):
         """
-        Value of the -log(Likeligood)
+        Value of the -log(Likelihood).
         
-        Parameters:
-            data: Array with data, array, Nsam x Nvars
+        Parameters
+        ----------
+        data : numpy.ndarray
+            Array with data (Nsam x Nvars).
             
-        Return: 
-            logL: value of the -log(Likelihood)
+        Returns
+        -------
+        logL : float
+            Value of the -log(Likelihood).
         """
         
         logL=self.cmnd.sampleCMNDLikelihood(self.uparams,
@@ -1437,28 +1495,34 @@ class FitCMND():
     
     def fitData(self,data,verbose=0,advance=0,**args):
         """
-        Minimization procedure
+        Minimization procedure.
         
-        Parameters:
-            data: Array with data, array, Nsam x Nvars
-            verbose=0 : verbosity level for the sampleCMNDLikelihood routine
-            advance=0 : If larger than 0 show advance each "advance" iterations.
-            **args: Options of the minimize routine (eg. tol=1e-6)
-                    A particularly interesting parameter is the minimization method:
-                        Available methods: 
-                            Slow but sure
-                                Powell
-                            Fast but unsure:
-                                CG, BFGS, COBYLA, SLSQP
-                                
-        Return: None
+        It updates the solution attribute.
         
-            It updates the solution attribute
+        Parameters
+        ----------
+        data : numpy.ndarray
+            Array with data (Nsam x Nvars).
+        verbose : int, optional
+            Verbosity level for the sampleCMNDLikelihood routine (default 0).
+        advance : int, optional
+            If larger than 0 show advance each "advance" iterations (default 0).
+        **args : dict
+            Options of the minimize routine (eg. tol=1e-6).
+            A particularly interesting parameter is the minimization method.
+            Available methods: 
             
-        Examples:
-            F=FitCMND(1,3)
-            F.fitData(data,verbose=0,tol=1e-3,options=dict(maxiter=100,disp=True))
-
+            * Slow but sure: Powell
+            * Fast but unsure: CG, BFGS, COBYLA, SLSQP
+                                
+        Returns
+        -------
+        None
+            
+        Examples
+        --------
+        >>> F = FitCMND(1, 3)
+        >>> F.fitData(data, verbose=0, tol=1e-3, options=dict(maxiter=100, disp=True))
         """
         if advance:
             advance=int(advance)
@@ -1499,22 +1563,33 @@ class FitCMND():
     
     def plotFit(self,N=10000,figsize=2,props=None,ranges=None,hargs=dict(),sargs=dict()):
         """
-        Plot the result of the fitting procedure
+        Plot the result of the fitting procedure.
         
-        Parameters:
+        Parameters
+        ----------
+        N : int, optional
+            number of points used to build a representation of the marginal distributions (default 10000).
+        figsize : int, optional
+            Size of each axis (default 2).
+        props : list, optional
+            Array with the name of the properties. Ex. props=["x","y"].
+        ranges : list, optional
+            Array of ranges of the properties. Ex. ranges=[-3,3],[-5,5].
+        hargs : dict, optional
+            Dictionary with options for the hist2d function. Ex. hargs=dict(bins=50).
+        sargs : dict, optional
+            Dictionary with options for the scatter plot. Ex. sargs=dict(color='r').
         
-            N = 10000: number of points used to build a representation of the marginal distributions.
-            props = None: Array with the name of the properties.  Ex. props=["x","y"]
-            ranges = None: Array of ranges of the properties. Ex. ranges=[-3,3],[-5,5]
-            figsize = 2: size of each axis. 
-            hargs = None: Dictionary with options for the hist2d function.  Ex. hargs=dict(bins=50)
-            sargs = dict(): Dictionary with options for the scatter plot.  Ex. sargs=dict(color='r')
+        Returns
+        -------
+        G : matplotlib.figure.Figure or PlotGrid
+            Graphic handle.
             
-        Examples:
-            F=FitCMND(1,3)
-            F.fitData(data,verbose=0,tol=1e-3,options=dict(maxiter=100,disp=True))
-            G=F.plotFit(figsize=3,hargs=dict(bins=30,cmap='YlGn'),sargs=dict(s=0.5,edgecolor='None',color='r'))
-            
+        Examples
+        --------
+        >>> F = FitCMND(1, 3)
+        >>> F.fitData(data, verbose=0, tol=1e-3, options=dict(maxiter=100, disp=True))
+        >>> G = F.plotFit(figsize=3, hargs=dict(bins=30, cmap='YlGn'), sargs=dict(s=0.5, edgecolor='None', color='r'))
         """
         Xfits=self.cmnd.rvs(N)
         properties=dict()
@@ -1558,17 +1633,17 @@ class FitCMND():
         
         Prefix has two parts: the number of gaussians used and a hash computed from the object.
         
-        Preffix change if:
+        Prefix change if:
             - Data change.
             - Initial minimization parameters change (e.g. if the fit is ran twice)
             - Minimization parameters are changed.
             - Bounds are changed.
 
         Alternative prefix:
-            self.hash=md5(pickle.dumps([self.Ngauss,self.data])).hexdigest()[:5]
-            self.hash=md5(pickle.dumps(self.__dict__)).hexdigest()[:5]
-            self.hash=md5(pickle.dumps(self.minparams)).hexdigest()[:5]
-            self.hash=md5(pickle.dumps(self.cmnd)).hexdigest()[:5]
+        >>> self.hash = md5(pickle.dumps([self.Ngauss, self.data])).hexdigest()[:5]
+        >>> self.hash = md5(pickle.dumps(self.__dict__)).hexdigest()[:5]
+        >>> self.hash = md5(pickle.dumps(self.minparams)).hexdigest()[:5]
+        >>> self.hash = md5(pickle.dumps(self.cmnd)).hexdigest()[:5]
         """
         self.hash=md5(pickle.dumps(self)).hexdigest()[:5]
         if myprefix is not None:
@@ -1577,16 +1652,22 @@ class FitCMND():
         
     def saveFit(self,objfile=None,useprefix=True,myprefix=None):
         """
-        Pickle the result of a fit
+        Pickle the result of a fit.
         
-        Parameteres:
-            objfile=None: name of the file where the fit will be stored, string.  If none the name is set 
-                          by the routine as FitCMND.pkl
-                          
-            useprefix=True: use a prefix in the filename of the pickle file.  The prefix is normally 
-                            {Ngauss}cmnd_{hash}
-                            
-                            Example: If objfile="fit.pkl" the final filename will be fit-1mnd_asa33.pkl
+        Parameters
+        ----------
+        objfile : str, optional
+            Name of the file where the fit will be stored. If None, the name is set 
+            by the routine as FitCMND.pkl.
+        useprefix : bool, optional
+            Use a prefix in the filename of the pickle file (default True). 
+            The prefix is normally {Ngauss}cmnd_{hash}.
+        myprefix : str, optional
+            Custom prefix.
+            
+        Examples
+        --------
+        If objfile="fit.pkl", the final filename will be fit-1mnd_asa33.pkl
         """
         self.fig=None
         self._updatePrefix(myprefix)
@@ -1599,26 +1680,27 @@ class FitCMND():
         
     def setBounds(self,boundw=None,bounds=None,boundr=None,boundsm=None):
         """
-        Set the minimization parameters
+        Set the minimization parameters.
         
-        Parameters:
-            boundw=None: bound of weights, tuple.  If None, boundw = (-np.inf,np.inf)
-            bounds=None: bound of weights, tuple.  If None, boundw = (-np.inf,np.inf)
-            boundr=None: bound of weights, tuple.  If None, boundw = (-np.inf,np.inf)
+        Parameters
+        ----------
+        boundw : tuple, optional
+            Bound of weights (default (-np.inf, np.inf)).
+        bounds : tuple or list, optional
+            Bounds of weights, mus, sigmas and rhos of each variable.
+        boundr : tuple, optional
+            Bound of rhos (default (-np.inf, np.inf)).
+        boundsm : tuple of tuples, optional
+            Bounds of averages (default (-np.inf, np.inf)).
+            Normally the bounds on averages must be expressed in this way:
+            boundsm = ((-min_1, max_1), (-min_2, max_2), ...)
+            Example for Nvars = 2:
+            boundsm = ((-2, 1), (-3, 0))
             
-            boundsm=None: bounds of averages, tuple of tuples (Nvars).  
-                          If None, boundsm = (-np.inf,np.inf)
-                          
-                          Normally the bounds on averages must be expressed in this way:
-                          
-                              boundsm=((-min_1,max_1),(-min_2,max_2),...)
-                              
-                          Example: for Nvars = 2:
-                          
-                              boundsm=((-2,1),(-3,0))
-
-            bounds: a list or tuple with the bounds of weights, mus, sigmas and rhos of each variable.
-                Examples: 
+        Returns
+        -------
+        bounds : tuple
+            Formatted bounds for minimization.
         """
         if boundsm is None:
             boundsm=((-np.inf,np.inf),)*self.Nvars
