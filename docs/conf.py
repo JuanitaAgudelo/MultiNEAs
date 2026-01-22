@@ -13,7 +13,8 @@ sys.path.insert(0, os.path.abspath('../src'))
 project = 'MultiNEAs'
 copyright = '2025, Jorge I. Zuluaga, Juanita A. Agudelo'
 author = 'Zuluaga & Agudelo'
-release = '0.1.0'
+from multineas.version import __version__
+release = __version__
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
