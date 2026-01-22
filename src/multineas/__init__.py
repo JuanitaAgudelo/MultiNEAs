@@ -34,7 +34,7 @@ import warnings
 warnings.filterwarnings('ignore')
 
 # Package metadata
-__version__ = '0.2.1'
+__version__ = '0.2.2'
 __author__ = 'Jorge I. Zuluaga, Juanita A. Agudelo'
 __email__ = 'jorge.zuluaga@udea.edu.co, juanita.agudelo@udea.edu.co'
 __license__ = 'AGPL-3.0-only'
@@ -77,7 +77,7 @@ class MultiNEAsBase:
 # Package initialization message (optional, can be removed in production)
 def _welcome_message():
     """Display welcome message on import (for development)."""
-    pass
+    print(f"Welcome to MultiNEAs v{__version__}")
 
 _welcome_message()
 

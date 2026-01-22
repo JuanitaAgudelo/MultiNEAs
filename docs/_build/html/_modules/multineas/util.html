@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>multineas.util &#8212; MultiNEAs 0.2.0 documentation</title>
+    <title>multineas.util &#8212; MultiNEAs 0.2.2 documentation</title>
   
   
   
@@ -37,9 +37,10 @@
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../_static/documentation_options.js?v=938c9ccc"></script>
+    <script src="../../_static/documentation_options.js?v=000c92bf"></script>
     <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/multineas/util';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -107,7 +108,7 @@
   
   
   
-    <p class="title logo__title">MultiNEAs 0.2.0 documentation</p>
+    <p class="title logo__title">MultiNEAs 0.2.2 documentation</p>
   
 </a></div>
     
@@ -138,6 +139,13 @@
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../../util.html">
     Utilities
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples.html">
+    Tutorials and Examples
   </a>
 </li>
 
@@ -241,6 +249,13 @@
 
 
 <li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples.html">
+    Tutorials and Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
   <a class="nav-link nav-external" href="https://github.com/seap-udea/MultiNEAs">
     Source
   </a>
@@ -328,6 +343,8 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">time</span><span class="w"> </span><span class="kn">import</span> <span class="n">time</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">spiceypy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">spy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">multineas</span><span class="w"> </span><span class="kn">import</span> <span class="n">ROOTDIR</span>
 
 <div class="viewcode-block" id="Util">
 <a class="viewcode-back" href="../../util.html#multineas.util.Util">[docs]</a>
@@ -355,8 +372,34 @@
     <span class="n">TIME</span><span class="o">=</span><span class="n">time</span><span class="p">()</span>
     <span class="c1">#Stores the duration between elTime consecutive calls </span>
     <span class="n">DTIME</span><span class="o">=-</span><span class="mi">1</span>
+    <span class="n">DTIME</span><span class="o">=-</span><span class="mi">1</span>
     <span class="n">DUTIME</span><span class="o">=</span><span class="p">[]</span>
     
+<div class="viewcode-block" id="Util.get_data">
+<a class="viewcode-back" href="../../util.html#multineas.util.Util.get_data">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_data</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the full path of the `filename` which is one of the datafiles provided with the package.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        filename : str</span>
+<span class="sd">            Name of the data file.</span>
+<span class="sd">            </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        path : str</span>
+<span class="sd">            Full path to package datafile.</span>
+<span class="sd">            </span>
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; from multineas.util import Util</span>
+<span class="sd">        &gt;&gt;&gt; path=Util.get_data(&quot;nea_extended.json.gz&quot;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ROOTDIR</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span></div>
+
+
 <div class="viewcode-block" id="Util.f2u">
 <a class="viewcode-back" href="../../util.html#multineas.util.Util.f2u">[docs]</a>
     <span class="nd">@staticmethod</span>
