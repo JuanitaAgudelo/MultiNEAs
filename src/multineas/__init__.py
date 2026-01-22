@@ -54,6 +54,10 @@ class MultiNEAsBase:
     
     All major classes in the package inherit from this base class,
     providing common functionality and attributes.
+
+    Attribution
+    -----------
+    [VC] This element was vibe coded using ChatGPT 5.2 in Antigravity.
     """
     def __init__(self):
         pass

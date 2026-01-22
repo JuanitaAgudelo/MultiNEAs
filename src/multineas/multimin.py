@@ -78,7 +78,7 @@ class ComposedMultiVariateNormal(object):
 
     Attribution
     -----------
-    [HC] This class was developed by a human.
+    [HC] This class was mostly developed by human intelligences.
     """
     
     #Control behavior
