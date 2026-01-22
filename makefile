@@ -2,7 +2,7 @@
 # MultiNEAs Makefile
 ##################################################################
 
-.PHONY: help install install-dev test clean build upload docs
+.PHONY: help install install-dev test clean build upload docs release
 
 help:
 	@echo "MultiNEAs Development Makefile"
@@ -16,6 +16,7 @@ help:
 	@echo "  upload       - Upload package to PyPI"
 	@echo "  upload-test  - Upload package to TestPyPI"
 	@echo "  docs         - Build documentation"
+	@echo "  release      - Release a new version (usage: make release RELMODE=release VERSION=x.y.z)"
 
 install:
 	pip install .
@@ -50,3 +51,8 @@ upload-test: build
 
 docs:
 	cd docs && make html
+
+#Example: make release RELMODE=release VERSION=0.2.0.2 
+release:
+	@echo "Releasing a new version..."
+	@bash bin/release.sh $(RELMODE) $(VERSION)

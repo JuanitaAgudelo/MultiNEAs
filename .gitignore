@@ -15,4 +15,5 @@ build/
 .coverage
 htmlcov/
 dev/
-pryngles
+contrib
+examples/products/*
