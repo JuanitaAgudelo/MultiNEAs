@@ -274,6 +274,62 @@ class Util(object):
             man=exp=0
         return man,exp
 
+class Angle(object):
+    """
+    Abstract class containing angle related data and methods.
+    
+    Attributes:
+        Deg: factor converting from degrees to radians.
+        Rad: factor converting from radians to degrees.
+        
+    Methods:
+        calcTrig: calculate the basic trigonometric function (cos, sin)
+        dms: convert from decimal to sexagesimal.
+        dec: convert from sexagesimal to decimal.
+    """
+    Deg=np.pi/180
+    Rad=1/Deg
+    
+    def calcTrig(angle):
+        """
+        Calculate the basic trigonometric function (cos, sin)
+
+        Parameters:
+            angle: angle, float, radians.
+        Return:
+            cos(angle), sin(angle): common trig. functions, tuple (2)
+        """
+        return Util.cos(angle),Util.sin(angle)
+
+    def dms(value):
+        """
+        Convert a decimal angle to the hexagesimal (d:m:s) format.
+        
+        Parameters:
+            dec: Angle in decimal, float, degrees
+        
+        Return:
+            dms: Angle in dms, tuple/list/array(4), (sign,deg,min,sec)
+        """
+        sgn=np.sign(value)
+        val=np.abs(value)
+        deg=np.floor(val)
+        rem=(val-deg)*60
+        min=np.floor(rem)
+        sec=(rem-min)*60
+        return (sgn,deg,min,sec)
+    
+    def dec(dms):
+        """
+        Convert an angle expressed in sexagesimal (d:m:s) to its decimal value.
+        
+        Parameters:
+            dms: Angle in dms, tuple/list/array(4), (sign,deg,min,sec)
+            
+        Return:
+            dec: Angle in decimal, float, degree
+        """
+        return dms[0]*(dms[1]+dms[2]/60.0+dms[3]/3600.0)
 class Stats(object):
     """
     Abstract class with useful routines
