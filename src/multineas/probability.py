@@ -8,7 +8,7 @@ integrating these PDFs over various regions.
 
 import numpy as np
 from typing import Union, Tuple, List
-from .orbit import OrbitalCoordinates
+#from .orbit import OrbitalCoordinates
 from .multimin import FitCMND
 from .util import Util
 
