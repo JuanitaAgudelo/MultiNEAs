@@ -50,10 +50,13 @@ def test_transformation_x_to_e_output_shape():
     elements = np.asarray(elements)
     assert elements.shape == (7,)
 
+
 def test_transformation_x_to_e_eccentricity_output_values():
 
     with pytest.raises(ValueError):
-        transformation_e_to_x(q=1.0, e=-0.1, i=0.0, Omega=0.0, w=0.0, M=0.0, mu=MU_SUN_AU)
+        transformation_e_to_x(
+            q=1.0, e=-0.1, i=0.0, Omega=0.0, w=0.0, M=0.0, mu=MU_SUN_AU
+        )
 
 
 def test_state_unit_conversion_roundtrip():
@@ -90,8 +93,16 @@ def test_compute_jacobian_x_to_e_shape():
 
 def test_orbit_from_state_vector_shapes():
     """Orbit built from state_vector has .state_vector (6,) and .elements (6 or 7)."""
-    vec = np.array([SAMPLE_STATE_VECTOR["x"], SAMPLE_STATE_VECTOR["y"], SAMPLE_STATE_VECTOR["z"],
-                    SAMPLE_STATE_VECTOR["vx"], SAMPLE_STATE_VECTOR["vy"], SAMPLE_STATE_VECTOR["vz"]])
+    vec = np.array(
+        [
+            SAMPLE_STATE_VECTOR["x"],
+            SAMPLE_STATE_VECTOR["y"],
+            SAMPLE_STATE_VECTOR["z"],
+            SAMPLE_STATE_VECTOR["vx"],
+            SAMPLE_STATE_VECTOR["vy"],
+            SAMPLE_STATE_VECTOR["vz"],
+        ]
+    )
     orb = Orbit(mu=MU_SUN_AU, state_vector=vec)
     assert orb.state_vector.shape == (6,)
     assert len(orb.elements) in (6, 7)
@@ -103,6 +114,7 @@ def test_orbit_validation_exactly_one_input():
     el = np.array([1.0, 0.1, 0.0, 0.0, 0.0, 0.0])
     with pytest.raises(ValueError, match="exactly one"):
         Orbit(mu=MU_SUN_AU, state_vector=vec, elements=el)
+
 
 # -----------------------------------------------------------------------------
 # Scientific test: specific energy
@@ -122,26 +134,31 @@ def test_specific_energy():
 
     assert np.isclose(specific_energy, expected_specific_energy, rtol=1e-10, atol=1e-10)
 
+
 # -----------------------------------------------------------------------------
 # Scientific test: Chelyabinsk impact orbit vs literature
 # -----------------------------------------------------------------------------
 # Chelyabinsk impact data (2013-02-15)
-CHELYABINSK_IMPACT_SITE = [60.09285, 55.07815, 178.4583]  # lon [deg], lat [deg], alt [km]
-CHELYABINSK_IMPACT_VELOCITY = [12.8, -13.3, -2.4]         # vx, vy, vz [km/s] Earth-fixed
-CHELYABINSK_IMPACT_DATE = "2013-02-15 03:20:33"           # UTC
+CHELYABINSK_IMPACT_SITE = [
+    60.09285,
+    55.07815,
+    178.4583,
+]  # lon [deg], lat [deg], alt [km]
+CHELYABINSK_IMPACT_VELOCITY = [12.8, -13.3, -2.4]  # vx, vy, vz [km/s] Earth-fixed
+CHELYABINSK_IMPACT_DATE = "2013-02-15 03:20:33"  # UTC
 
 # Literature ranges from Zuluaga & Ferrin (arXiv), Borovicka et al. (IAU), Zuluaga/Ferrin/Geens (arXiv)
 # Columns: Q/aphelion, q/perihelion, a, e, i [deg], Omega [deg], omega [deg]
-LIT_Q_AU = (0.71, 0.83)        # perihelion
-LIT_A_AU = (1.26, 1.75)        # semi-major axis
-LIT_E = (0.44, 0.57)           # eccentricity
-LIT_I_DEG = (2.98, 4.5)        # inclination
-LIT_OMEGA_DEG = (326.4, 326.8) # longitude of ascending node
+LIT_Q_AU = (0.71, 0.83)  # perihelion
+LIT_A_AU = (1.26, 1.75)  # semi-major axis
+LIT_E = (0.44, 0.57)  # eccentricity
+LIT_I_DEG = (2.98, 4.5)  # inclination
+LIT_OMEGA_DEG = (326.4, 326.8)  # longitude of ascending node
 LIT_OMEGA_ARG_DEG = (95.5, 121)  # argument of periapsis omega
 
 
 # Kernel path: src/multineas/data/kernels (relative to repo root)
-_KERNEL_DIR = os.path.join(os.path.dirname(__file__), "..", "examples", "data", "kernels")
+_KERNEL_DIR = os.path.join(os.path.dirname(__file__), "kernels")
 
 
 @pytest.mark.skipif(
@@ -155,6 +172,7 @@ def test_chelyabinsk_impact_orbit_vs_literature():
     Zuluaga/Ferrin/Geens). Loads SPICE kernels from src/multineas/data/kernels/.
     """
     import spiceypy as spy
+
     kernel_dir = _KERNEL_DIR
     kernels = [
         os.path.join(kernel_dir, "naif0012.tls"),
@@ -185,10 +203,16 @@ def test_chelyabinsk_impact_orbit_vs_literature():
         w_deg = np.rad2deg(w_rad)
 
         # Compare with literature ranges
-        assert LIT_Q_AU[0] <= q <= LIT_Q_AU[1], f"q={q:.3f} AU outside literature {LIT_Q_AU}"
-        assert LIT_A_AU[0] <= a <= LIT_A_AU[1], f"a={a:.3f} AU outside literature {LIT_A_AU}"
+        assert LIT_Q_AU[0] <= q <= LIT_Q_AU[1], (
+            f"q={q:.3f} AU outside literature {LIT_Q_AU}"
+        )
+        assert LIT_A_AU[0] <= a <= LIT_A_AU[1], (
+            f"a={a:.3f} AU outside literature {LIT_A_AU}"
+        )
         assert LIT_E[0] <= e <= LIT_E[1], f"e={e:.3f} outside literature {LIT_E}"
-        assert LIT_I_DEG[0] <= i_deg <= LIT_I_DEG[1], f"i={i_deg:.2f}° outside literature {LIT_I_DEG}"
+        assert LIT_I_DEG[0] <= i_deg <= LIT_I_DEG[1], (
+            f"i={i_deg:.2f}° outside literature {LIT_I_DEG}"
+        )
         assert LIT_OMEGA_DEG[0] <= Omega_deg <= LIT_OMEGA_DEG[1], (
             f"Omega={Omega_deg:.2f}° outside literature {LIT_OMEGA_DEG}"
         )

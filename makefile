@@ -31,7 +31,11 @@ install-dev:
 	pip install -r requirements-dev.txt
 
 test:
-	pytest
+	@if [ -d "tmp" ]; then \
+		pytest --cov-report=html:tmp/htmlcov; \
+	else \
+		pytest --cov-report=html:/tmp/htmlcov; \
+	fi
 
 verify:
 	@chmod +x bin/verify_installation.py
