@@ -61,6 +61,11 @@ setuptools.setup(
         "rebound>=3.0.0",
         "astropy>=5.0.0",
         "multimin",
+        "geopandas",
+        "pymcel",
+        "scikit-learn",
+        "folium",
+        "leafmap",
     ],
     python_requires=">=3.8",
     # ######################################################################

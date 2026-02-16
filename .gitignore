@@ -23,3 +23,4 @@ docs/_build/
 **/pymcel/
 **/kernels/
 docs/paper
+!src/multineas/data/kernels

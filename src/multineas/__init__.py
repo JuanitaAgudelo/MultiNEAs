@@ -12,7 +12,7 @@
 """
 MultiNEAs: Numerical Tools for Near-Earth Asteroid Dynamics and Population
 
-This package provides a comprehensive suite of tools for studying the dynamics 
+This package provides a comprehensive suite of tools for studying the dynamics
 and population of Near-Earth Asteroids (NEAs).
 
 Main Features:
@@ -31,14 +31,15 @@ For more information, visit: https://github.com/seap-udea/MultiNEAs
 """
 
 import warnings
-warnings.filterwarnings('ignore')
+
+warnings.filterwarnings("ignore")
 
 # Package metadata
-__version__ = '0.3.5'
-__author__ = 'Jorge I. Zuluaga, Juanita A. Agudelo'
-__email__ = 'jorge.zuluaga@udea.edu.co, juanita.agudelo@udea.edu.co'
-__license__ = 'AGPL-3.0-only'
-__url__ = 'https://github.com/seap-udea/MultiNEAs'
+__version__ = "0.3.5"
+__author__ = "Jorge I. Zuluaga, Juanita A. Agudelo"
+__email__ = "jorge.zuluaga@udea.edu.co, juanita.agudelo@udea.edu.co"
+__license__ = "AGPL-3.0-only"
+__url__ = "https://github.com/seap-udea/MultiNEAs"
 
 # Version information
 VERSION = __version__
@@ -46,12 +47,14 @@ AUTHOR = __author__
 EMAIL = __email__
 
 import os
+
 ROOTDIR = os.path.dirname(os.path.abspath(__file__))
+
 
 class MultiNEAsBase:
     """
     Base class for MultiNEAs package.
-    
+
     All major classes in the package inherit from this base class,
     providing common functionality and attributes.
 
@@ -59,13 +62,14 @@ class MultiNEAsBase:
     -----------
     [VC] This element was vibe coded using ChatGPT 5.2 in Antigravity.
     """
+
     def __init__(self):
         pass
-    
+
     def __str__(self):
         """String representation of the object."""
-        return str({k: v for k, v in self.__dict__.items() if not k.startswith('_')})
-    
+        return str({k: v for k, v in self.__dict__.items() if not k.startswith("_")})
+
     def __repr__(self):
         """Detailed representation of the object."""
         return f"{self.__class__.__name__}({self.__dict__})"
@@ -98,20 +102,26 @@ from .orbit import (
     get_orbit_impactor,
     # Main class
     Orbit,
+    Util,
 )
-#from .probability import (
+
+from . import constants
+
+# from .probability import (
 #    OrbitElementsPDF,
 #    PhaseSpacePDF,
 #    integrate,
 #    marginalize,
 #    compute_jacobian_qei_to_QEI
-#)
-#from .multimin import ComposedMultiVariateNormal, FitCMND
+# )
+# from .multimin import ComposedMultiVariateNormal, FitCMND
+
 
 # Package initialization message (optional, can be removed in production)
 def _welcome_message():
     """Display welcome message on import (for development)."""
     print(f"Welcome to MultiNEAs v{__version__}")
+
 
 _welcome_message()
 
