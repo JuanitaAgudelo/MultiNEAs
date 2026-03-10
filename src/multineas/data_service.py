@@ -11,6 +11,6 @@ def get_data(source: str, params: dict) -> DataTable:
     try:
         adapter = INPUT_ADAPTERS[source]()
     except KeyError:
-        raise ValueError(f"Unsupported source: {source}")
+        raise ValueError(f"Unsupported source: {source}, available sources: {INPUT_ADAPTERS.keys()}")
 
     return adapter.get_data(params)
